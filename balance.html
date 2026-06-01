@@ -3,76 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>PayFlow Pro | Smart Transactions</title>
+  <title>PayFlow Pro | Secure Banking Suite</title>
   <!-- Font Awesome 6 (Professional Icons) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts: Inter Modern Sans -->
+  <!-- Google Fonts: Inter Premium -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #f4f8fe;
-      color: #121826;
+      background: #f0f4f9;
+      color: #0b1a33;
       overflow-x: hidden;
     }
 
-    /* Premium Variables */
     :root {
-      --primary-blue: #0f3bdf;
-      --primary-dark: #0a2cbb;
-      --accent-gold: #f59e0b;
-      --success-emerald: #10b981;
-      --danger-rose: #ef4444;
-      --card-white: #ffffff;
-      --text-primary: #1f2a44;
-      --text-secondary: #5b6e8c;
-      --border-light: #eef2f8;
-      --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
-      --shadow-hover: 0 14px 32px rgba(0, 0, 0, 0.08);
+      --primary-blue: #0a3cbf;
+      --primary-dark: #052c8c;
+      --accent-gold: #f5a623;
+      --success: #0e9f6e;
+      --danger: #e53e3e;
+      --surface-white: #ffffff;
+      --surface-gray: #f8fafd;
+      --text-main: #111827;
+      --text-muted: #5b6e8c;
+      --border-light: #eef2f6;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      --shadow-lg: 0 20px 35px -8px rgba(0, 0, 0, 0.1);
+      --radius-xl: 32px;
+      --radius-2xl: 40px;
     }
 
-    /* Sticky header */
     .app-header {
       position: sticky;
       top: 0;
       z-index: 40;
       background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
       padding: 14px 20px;
       display: flex;
       align-items: center;
       gap: 14px;
       border-bottom: 1px solid var(--border-light);
     }
+
     .back-btn {
-      width: 40px;
-      height: 40px;
-      background: #f0f4fe;
+      width: 42px;
+      height: 42px;
+      background: #f0f4ff;
       border-radius: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: 0.2s;
+      transition: all 0.2s ease;
       color: var(--primary-blue);
     }
-    .back-btn:active { transform: scale(0.94); }
+
+    .back-btn:active {
+      transform: scale(0.92);
+      background: #e6edfe;
+    }
+
     .app-header h1 {
-      font-size: 1.45rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #0f3bdf, #1e4bd2);
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0a3cbf, #1f5ef0);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      letter-spacing: -0.3px;
     }
 
-    /* main container */
+    .app-header h1 i {
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      color: var(--primary-blue);
+      margin-right: 6px;
+    }
+
     .main-container {
       max-width: 560px;
       margin: 0 auto;
@@ -84,198 +101,290 @@
       align-items: center;
       gap: 10px;
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       margin: 8px 0 14px 0;
       color: #0c2a4b;
     }
 
-    /* Horizontal accounts */
     .accounts-scroll {
       display: flex;
-      gap: 14px;
+      gap: 16px;
       overflow-x: auto;
-      padding-bottom: 12px;
+      padding-bottom: 16px;
       margin-bottom: 20px;
       scrollbar-width: thin;
     }
+
     .bank-card {
-      min-width: 270px;
-      background: var(--card-white);
-      border-radius: 32px;
+      min-width: 280px;
+      background: var(--surface-white);
+      border-radius: var(--radius-xl);
       padding: 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: var(--shadow-card);
+      box-shadow: var(--shadow-md);
       border: 1px solid var(--border-light);
-      transition: all 0.2s;
+      transition: all 0.25s;
+      cursor: pointer;
     }
-    .bank-card.hdfc { border-top: 4px solid var(--primary-blue); }
-    .bank-card.upgb { border-top: 4px solid var(--accent-gold); }
-    .bank-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
-    .bank-acct { font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 12px; }
+
+    .bank-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .bank-card.hdfc {
+      border-left: 4px solid var(--primary-blue);
+    }
+
+    .bank-card.upgb {
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .bank-info h4 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .bank-acct {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
+    }
+
     .balance-btn {
       background: #eff3fc;
       border: none;
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 40px;
       font-size: 0.7rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--primary-blue);
       cursor: pointer;
+      transition: 0.15s;
     }
+
+    .balance-btn:active {
+      background: #e2e9fa;
+      transform: scale(0.96);
+    }
+
     .bank-icon {
-      width: 52px;
-      height: 52px;
-      background: #f8fafe;
+      width: 56px;
+      height: 56px;
+      background: #f7faff;
       border-radius: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       color: var(--primary-blue);
     }
 
     .add-txn-card {
-      min-width: 110px;
-      background: linear-gradient(145deg, #ffffff, #f9fcff);
-      border-radius: 32px;
+      min-width: 120px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(4px);
+      border-radius: var(--radius-xl);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      border: 1px dashed #bbd0f0;
+      gap: 10px;
+      border: 1.5px dashed #bbcdf0;
       cursor: pointer;
-      transition: 0.15s;
+      transition: 0.2s;
     }
-    .add-txn-card:active { transform: scale(0.96); background: white; }
+
+    .add-txn-card:active {
+      transform: scale(0.96);
+      background: white;
+    }
+
     .add-circle {
       background: var(--primary-blue);
-      width: 52px;
-      height: 52px;
-      border-radius: 30px;
+      width: 54px;
+      height: 54px;
+      border-radius: 35px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 14px rgba(15, 59, 223, 0.25);
+      box-shadow: 0 8px 18px rgba(10, 60, 191, 0.3);
     }
-    .add-circle i { font-size: 1.7rem; color: white; }
 
-    /* History Card */
+    .add-circle i {
+      font-size: 1.8rem;
+      color: white;
+    }
+
     .history-card {
-      background: var(--card-white);
-      border-radius: 36px;
-      box-shadow: var(--shadow-card);
-      padding: 20px 16px;
+      background: var(--surface-white);
+      border-radius: var(--radius-2xl);
+      box-shadow: var(--shadow-md);
+      padding: 22px 18px;
       margin-top: 6px;
     }
+
     .history-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
-    .history-header h2 { font-size: 1.3rem; font-weight: 700; }
+
+    .history-header h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+
     .action-icons i {
-      font-size: 1.1rem;
-      margin-left: 18px;
-      color: #7b8ba5;
+      font-size: 1.2rem;
+      margin-left: 20px;
+      color: #6c7e9e;
       cursor: pointer;
+      transition: 0.15s;
     }
+
+    .action-icons i:active {
+      transform: scale(0.92);
+      color: var(--primary-blue);
+    }
+
     .filter-chips {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       border-bottom: 1px solid var(--border-light);
-      padding-bottom: 12px;
+      padding-bottom: 14px;
     }
+
     .chip {
       background: #eff2f9;
-      padding: 6px 18px;
-      border-radius: 40px;
+      padding: 7px 20px;
+      border-radius: 60px;
       font-size: 0.75rem;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
+      transition: 0.15s;
     }
-    .chip.active { background: var(--primary-blue); color: white; }
+
+    .chip.active {
+      background: var(--primary-blue);
+      color: white;
+      box-shadow: 0 4px 8px rgba(10, 60, 191, 0.2);
+    }
 
     .summary-row {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       background: #fafdff;
-      padding: 10px 16px;
+      padding: 12px 18px;
       border-radius: 60px;
-      margin-bottom: 22px;
-    }
-    .total-badge {
-      background: #fee9e6;
-      padding: 4px 14px;
-      border-radius: 40px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      color: #c2410c;
+      margin-bottom: 24px;
+      border: 1px solid #eef2fa;
     }
 
-    /* Transaction List - latest on top */
+    .total-badge {
+      background: #f0f3fe;
+      padding: 5px 16px;
+      border-radius: 40px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      color: var(--primary-blue);
+    }
+
     .transaction-list {
       display: flex;
       flex-direction: column;
       gap: 14px;
-      max-height: 520px;
+      max-height: 540px;
       overflow-y: auto;
+      padding-right: 4px;
     }
+
     .txn-item {
-      background: white;
-      border-radius: 24px;
-      padding: 12px 14px;
+      background: var(--surface-white);
+      border-radius: 28px;
+      padding: 14px 16px;
       display: flex;
       align-items: center;
       gap: 14px;
       border: 1px solid #edeff6;
-      transition: 0.12s;
+      transition: all 0.2s;
       cursor: pointer;
+      box-shadow: var(--shadow-sm);
     }
-    .txn-item:active { background: #fafcff; transform: scale(0.99); }
+
+    .txn-item:active {
+      background: #fbfdff;
+      transform: scale(0.99);
+      border-color: #dce3ef;
+    }
+
     .txn-avatar {
-      width: 52px;
-      height: 52px;
-      background: linear-gradient(135deg, #eef2fc, #e9eff8);
-      border-radius: 30px;
+      width: 54px;
+      height: 54px;
+      background: linear-gradient(145deg, #ecf3ff, #e4ecfe);
+      border-radius: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 1.1rem;
       color: var(--primary-blue);
     }
-    .txn-details { flex: 1; }
-    .txn-name { font-weight: 700; font-size: 0.95rem; }
-    .txn-time { font-size: 0.6rem; color: #8895aa; margin-top: 4px; }
+
+    .txn-details {
+      flex: 1;
+    }
+
+    .txn-name {
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .txn-time {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
     .txn-cat {
       font-size: 0.6rem;
       background: #f2f5fa;
       display: inline-block;
-      padding: 2px 12px;
-      border-radius: 20px;
-      margin-top: 4px;
+      padding: 3px 12px;
+      border-radius: 30px;
+      margin-top: 6px;
+      font-weight: 500;
     }
+
     .txn-amount {
       text-align: right;
-      font-weight: 700;
-      color: #1f2a44;
+      font-weight: 800;
+      color: #1e2b48;
     }
+
     .delete-btn {
       background: none;
       border: none;
-      color: #cbd5e1;
+      color: #cbd5e0;
       font-size: 1rem;
       cursor: pointer;
-      padding: 6px;
+      padding: 8px;
+      transition: 0.1s;
     }
 
-    /* ------------------ ADVANCED FULLSCREEN DETAIL MODAL ------------------ */
+    .delete-btn:active {
+      color: var(--danger);
+      transform: scale(0.94);
+    }
+
     .fullscreen-detail {
       position: fixed;
       top: 0;
@@ -283,7 +392,7 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       z-index: 1000;
       display: flex;
       align-items: center;
@@ -292,53 +401,70 @@
       opacity: 0;
       transition: visibility 0.2s, opacity 0.2s;
     }
+
     .fullscreen-detail.active {
       visibility: visible;
       opacity: 1;
     }
+
     .detail-sheet {
       background: white;
-      width: 90%;
-      max-width: 420px;
-      border-radius: 48px;
+      width: 88%;
+      max-width: 440px;
+      border-radius: 52px;
       overflow: hidden;
-      animation: slideUp 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      box-shadow: 0 30px 40px rgba(0,0,0,0.3);
+      animation: slideUp 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
     }
+
     @keyframes slideUp {
-      from { transform: translateY(40px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
+
     .detail-header {
-      background: linear-gradient(135deg, #0f3bdf, #1447f0);
-      padding: 24px 20px;
+      background: linear-gradient(135deg, #0a3cbf, #1d4ed8);
+      padding: 28px 22px;
       text-align: center;
       color: white;
     }
+
     .detail-status {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
       padding: 6px 18px;
       border-radius: 60px;
       font-size: 0.75rem;
-      font-weight: 600;
-      margin-bottom: 12px;
+      font-weight: 700;
+      margin-bottom: 14px;
     }
+
     .detail-header h3 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 800;
       letter-spacing: -0.5px;
     }
+
     .detail-body {
-      padding: 24px 22px;
+      padding: 24px 24px;
     }
+
     .info-grid {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
     }
+
     .info-row {
       display: flex;
       justify-content: space-between;
@@ -346,53 +472,62 @@
       border-bottom: 1px solid #eff3f9;
       padding-bottom: 12px;
     }
+
     .info-label {
       font-size: 0.8rem;
-      font-weight: 500;
+      font-weight: 600;
       color: #5f7392;
-      letter-spacing: 0.3px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
+
     .info-value {
       font-weight: 700;
       font-size: 0.95rem;
-      color: #121826;
+      color: #111827;
       text-align: right;
-      word-break: break-word;
     }
+
     .badge-success {
-      background: #e9f9ef;
+      background: #e6f7ef;
       color: #0e7c3e;
       padding: 4px 12px;
-      border-radius: 40px;
+      border-radius: 60px;
       font-size: 0.7rem;
       font-weight: 700;
     }
+
     .detail-footer {
-      padding: 16px 22px 26px;
+      padding: 16px 24px 28px;
       border-top: 1px solid #edf2f8;
     }
+
     .close-detail-btn {
       width: 100%;
       background: var(--primary-blue);
       border: none;
-      padding: 14px;
-      border-radius: 60px;
+      padding: 15px;
+      border-radius: 80px;
       color: white;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 1rem;
+      transition: 0.15s;
     }
 
-    /* Add Transaction Modal */
+    .close-detail-btn:active {
+      transform: scale(0.97);
+      background: var(--primary-dark);
+    }
+
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -401,43 +536,114 @@
       opacity: 0;
       transition: 0.2s;
     }
+
     .modal-overlay.active {
       visibility: visible;
       opacity: 1;
     }
+
     .modal-card {
       background: white;
       width: 90%;
-      max-width: 380px;
-      border-radius: 44px;
-      padding: 24px 20px;
+      max-width: 400px;
+      border-radius: 48px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow-lg);
     }
-    .modal-card input, .modal-card select {
+
+    .modal-card h3 {
+      font-weight: 800;
+      margin-bottom: 18px;
+      font-size: 1.5rem;
+    }
+
+    .modal-card input,
+    .modal-card select {
       width: 100%;
-      padding: 12px 16px;
+      padding: 14px 18px;
       margin: 8px 0;
-      border: 1px solid #e2e8f0;
+      border: 1.5px solid #e2e8f0;
       border-radius: 60px;
+      font-size: 0.9rem;
+      background: white;
+      transition: 0.2s;
     }
+
+    .modal-card input:focus,
+    .modal-card select:focus {
+      border-color: var(--primary-blue);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(10, 60, 191, 0.1);
+    }
+
     .modal-actions {
       display: flex;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 14px;
+      margin-top: 24px;
     }
+
+    .cancel-modal-btn {
+      background: #eff2f9;
+      border: none;
+      flex: 1;
+      padding: 14px;
+      border-radius: 60px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
     .save-btn {
       background: var(--primary-blue);
       color: white;
       border: none;
       flex: 1;
-      padding: 12px;
+      padding: 14px;
       border-radius: 60px;
-      font-weight: 600;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.15s;
     }
+
+    .save-btn:active {
+      transform: scale(0.97);
+    }
+
     .footer-brand {
       text-align: center;
-      font-size: 0.65rem;
+      font-size: 0.7rem;
       color: #8d9bb0;
-      margin-top: 20px;
+      margin-top: 24px;
+      font-weight: 500;
+    }
+
+    .custom-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 16px;
+      right: 16px;
+      background: #1f2f4f;
+      backdrop-filter: blur(12px);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 60px;
+      font-weight: 600;
+      text-align: center;
+      z-index: 1000;
+      box-shadow: var(--shadow-lg);
+      font-size: 0.85rem;
+      animation: fadeInUp 0.2s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -449,33 +655,33 @@
 </header>
 
 <main class="main-container">
-  <div class="section-title"><i class="fas fa-wallet"></i> <span>My Accounts</span></div>
+  <div class="section-title"><i class="fas fa-wallet"></i> <span>Linked Accounts</span></div>
   <div class="accounts-scroll">
     <div class="bank-card hdfc">
       <div class="bank-info">
         <h4>HDFC Bank</h4>
-        <div class="bank-acct">**** 7753</div>
-        <button class="balance-btn" data-balance="₹48,920"><i class="fas fa-eye"></i> Check Balance</button>
+        <div class="bank-acct">XXXX XXXX 7753</div>
+        <button class="balance-btn" data-balance="48,920.00"><i class="fas fa-eye"></i> Check Balance</button>
       </div>
-      <div class="bank-icon"><i class="fas fa-building"></i></div>
+      <div class="bank-icon"><i class="fas fa-university"></i></div>
     </div>
     <div class="bank-card upgb">
       <div class="bank-info">
         <h4>UP Gramin Bank</h4>
-        <div class="bank-acct">**** 1842</div>
-        <button class="balance-btn" data-balance="₹22,450"><i class="fas fa-eye"></i> Check Balance</button>
+        <div class="bank-acct">XXXX XXXX 1842</div>
+        <button class="balance-btn" data-balance="22,450.50"><i class="fas fa-eye"></i> Check Balance</button>
       </div>
       <div class="bank-icon"><i class="fas fa-landmark"></i></div>
     </div>
     <div class="add-txn-card" id="openAddBtn">
       <div class="add-circle"><i class="fas fa-plus"></i></div>
-      <span>Send Money</span>
+      <span>Send Payment</span>
     </div>
   </div>
 
   <div class="history-card">
     <div class="history-header">
-      <h2><i class="fas fa-clock"></i> Payment History</h2>
+      <h2><i class="fas fa-history"></i> Transaction Log</h2>
       <div class="action-icons">
         <i class="fas fa-search" id="searchHistory"></i>
         <i class="fas fa-filter" id="clearFilters"></i>
@@ -493,39 +699,37 @@
     </div>
     <div id="transactionList" class="transaction-list"></div>
   </div>
-  <div class="footer-brand"><i class="fas fa-shield-alt"></i> Secure · Instant Transfers with UTR</div>
+  <div class="footer-brand"><i class="fas fa-shield-alt"></i> Secure · Instant UTR Settlement</div>
 </main>
 
-<!-- Add Transaction Modal -->
 <div class="modal-overlay" id="addModal">
   <div class="modal-card">
     <h3><i class="fas fa-paper-plane"></i> New Transfer</h3>
-    <input type="text" id="receiverName" placeholder="Receiver name" autocomplete="off">
-    <input type="number" id="amountValue" placeholder="Amount (₹)" autocomplete="off">
+    <input type="text" id="receiverName" placeholder="Beneficiary Name" autocomplete="off">
+    <input type="number" id="amountValue" placeholder="Amount (INR)" autocomplete="off">
     <select id="categorySelect">
-      <option value="Food & Dining">🍔 Food & Dining</option>
-      <option value="Medical">💊 Medical</option>
-      <option value="Shopping">🛍️ Shopping</option>
-      <option value="Bills & Recharge">⚡ Bills/Recharge</option>
-      <option value="Others">📌 Others</option>
+      <option value="Food & Dining">Food & Dining</option>
+      <option value="Medical">Medical & Healthcare</option>
+      <option value="Shopping">Retail & Shopping</option>
+      <option value="Bills & Recharge">Utilities & Recharge</option>
+      <option value="Others">General Transfer</option>
     </select>
     <input type="datetime-local" id="txnDatetime">
     <select id="bankSelect">
-      <option value="HDFC Bank - 7753">🏦 HDFC Bank - 7753</option>
-      <option value="Uttar Pradesh Gramin Bank - 1842">🏦 UP Gramin Bank - 1842</option>
+      <option value="HDFC Bank - 7753">HDFC Bank - 7753</option>
+      <option value="Uttar Pradesh Gramin Bank - 1842">UP Gramin Bank - 1842</option>
     </select>
     <div class="modal-actions">
-      <button id="cancelModalBtn" style="background:#eff2f9; flex:1;">Cancel</button>
+      <button id="cancelModalBtn" class="cancel-modal-btn">Cancel</button>
       <button id="confirmAddBtn" class="save-btn">Send & Save</button>
     </div>
   </div>
 </div>
 
-<!-- Advanced Fullscreen Detail Popup (Professional) -->
 <div class="fullscreen-detail" id="detailPopup">
   <div class="detail-sheet">
     <div class="detail-header">
-      <div class="detail-status"><i class="fas fa-check-circle"></i> Transaction Successful</div>
+      <div class="detail-status"><i class="fas fa-check-circle"></i> Transaction Completed</div>
       <h3 id="detailAmountLarge">₹0</h3>
     </div>
     <div class="detail-body">
@@ -535,7 +739,7 @@
         <div class="info-row"><span class="info-label"><i class="fas fa-calendar-alt"></i> Date & Time</span><span class="info-value" id="detailDateTimeVal">-</span></div>
         <div class="info-row"><span class="info-label"><i class="fas fa-university"></i> Debit Account</span><span class="info-value" id="detailBankVal">-</span></div>
         <div class="info-row"><span class="info-label"><i class="fas fa-fingerprint"></i> UTR Number</span><span class="info-value" id="detailUTR">-</span></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-exchange-alt"></i> Payment Mode</span><span class="info-value">UPI / IMPS</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-exchange-alt"></i> Payment Rail</span><span class="info-value">UPI / IMPS</span></div>
         <div class="info-row"><span class="info-label"><i class="fas fa-clock"></i> Settlement</span><span class="info-value badge-success">Instant</span></div>
       </div>
     </div>
@@ -545,112 +749,112 @@
   </div>
 </div>
 
+<audio id="successSound" preload="auto">
+  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+</audio>
+
 <script>
   (function() {
-    // ---------- ADVANCED DATA ----------
-    let transactions = [];  // id, receiver, amount, category, datetime, bankAccount, utr
+    let transactions = [];
     let currentFilter = "all";
     let searchKeyword = "";
 
-    // helper: generate UTR (unique transaction ref)
     function generateUTR() {
-      return "PFTX" + Date.now().toString().slice(-8) + Math.floor(Math.random() * 1000);
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+      let code = 'PF' + Date.now().toString().slice(-6) + Math.floor(Math.random() * 10000);
+      return code.toUpperCase();
     }
 
-    // play success audio
     function playSuccessBeep() {
-    const audio = document.getElementById("successSound");
+      const audio = document.getElementById("successSound");
+      if(audio) {
+        audio.currentTime = 0;
+        audio.play().catch(e => console.log("Audio interaction deferred"));
+      }
+    }
 
-    audio.currentTime = 0; // हर बार शुरू से बजे
-    audio.play().catch(err => {
-        console.log("Audio play failed:", err);
-    });
-}
+    function saveToStorage() {
+      localStorage.setItem("payflow_pro_adv", JSON.stringify(transactions));
+    }
 
-    // Load / save storage
     function loadData() {
-      const stored = localStorage.getItem("payflow_adv_txn");
+      const stored = localStorage.getItem("payflow_pro_adv");
       if(stored) {
         transactions = JSON.parse(stored);
-        transactions.sort((a,b) => new Date(b.datetime) - new Date(a.datetime));
+        transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
       } else {
-        const today = new Date();
-        const todayStr = today.toISOString().slice(0,16);
-        const yesterday = new Date(today); yesterday.setDate(yesterday.getDate()-1);
-        const yesterdayStr = yesterday.toISOString().slice(0,16);
+        const now = new Date();
+        const yesterday = new Date(now); yesterday.setDate(now.getDate() - 1);
+        const formatDT = (d) => d.toISOString().slice(0, 16);
         transactions = [
-          { id: Date.now()+101, receiver: "Rajesh Sharma", amount: 1890, category: "Shopping", datetime: todayStr, bankAccount: "HDFC Bank - 7753", utr: generateUTR() },
-          { id: Date.now()+102, receiver: "Dr. Anita Clinic", amount: 750, category: "Medical", datetime: yesterdayStr, bankAccount: "Uttar Pradesh Gramin Bank - 1842", utr: generateUTR() },
-          { id: Date.now()+103, receiver: "Metro Grocery", amount: 430, category: "Food & Dining", datetime: yesterdayStr, bankAccount: "HDFC Bank - 7753", utr: generateUTR() }
+          { id: Date.now() + 101, receiver: "Rajesh Sharma", amount: 1890, category: "Shopping", datetime: formatDT(now), bankAccount: "HDFC Bank - 7753", utr: generateUTR() },
+          { id: Date.now() + 102, receiver: "Dr. Anita Clinic", amount: 750, category: "Medical & Healthcare", datetime: formatDT(yesterday), bankAccount: "Uttar Pradesh Gramin Bank - 1842", utr: generateUTR() },
+          { id: Date.now() + 103, receiver: "Metro Grocery", amount: 430, category: "Food & Dining", datetime: formatDT(yesterday), bankAccount: "HDFC Bank - 7753", utr: generateUTR() }
         ];
-        transactions.sort((a,b) => new Date(b.datetime) - new Date(a.datetime));
+        transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
         saveToStorage();
       }
     }
-    function saveToStorage() { localStorage.setItem("payflow_adv_txn", JSON.stringify(transactions)); }
 
-    // formatting
-    function formatDateTime(dtStr) { 
-      if(!dtStr) return "Just now";
+    function formatDateTime(dtStr) {
+      if (!dtStr) return "Just now";
       let d = new Date(dtStr);
-      return `${d.toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric'})} · ${d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}`;
+      return `${d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })} · ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     }
 
     function getFiltered() {
       let filtered = [...transactions];
-      if(currentFilter !== "all") filtered = filtered.filter(t => t.bankAccount === currentFilter);
-      if(searchKeyword.trim()) {
-        let kw = searchKeyword.toLowerCase();
+      if (currentFilter !== "all") filtered = filtered.filter(t => t.bankAccount === currentFilter);
+      if (searchKeyword.trim()) {
+        const kw = searchKeyword.toLowerCase();
         filtered = filtered.filter(t => t.receiver.toLowerCase().includes(kw) || t.category.toLowerCase().includes(kw));
       }
-      filtered.sort((a,b) => new Date(b.datetime) - new Date(a.datetime));
+      filtered.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
       return filtered;
     }
 
-    function updateTotal() {
+    function updateTotalUI() {
       const filtered = getFiltered();
       const sum = filtered.reduce((acc, t) => acc + t.amount, 0);
-      document.getElementById('totalSpentLabel').innerHTML = `Total ₹${sum}`;
+      document.getElementById('totalSpentLabel').innerHTML = `Total ₹${sum.toLocaleString()}`;
     }
 
-    // Render with latest on top
     function renderTransactions() {
       const container = document.getElementById('transactionList');
       const filtered = getFiltered();
-      if(filtered.length === 0) {
-        container.innerHTML = `<div style="text-align:center; padding:50px 20px;"><i class="fas fa-receipt" style="font-size: 2.5rem; color:#cbd5e1;"></i><p style="margin-top:10px;">No transactions</p><small>Tap + to send money</small></div>`;
-        updateTotal();
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:60px 20px;"><i class="fas fa-receipt" style="font-size: 2.6rem; color:#cbd5e1;"></i><p style="margin-top:12px; font-weight:500;">No transactions found</p><small>Tap + to initiate a transfer</small></div>`;
+        updateTotalUI();
         return;
       }
       let html = '';
       filtered.forEach(txn => {
-        let initials = txn.receiver.substring(0,2).toUpperCase();
-        let bankShort = txn.bankAccount.includes("HDFC") ? "HDFC" : "UP Gramin";
+        let initials = txn.receiver.substring(0, 2).toUpperCase();
+        let bankShort = txn.bankAccount.includes("HDFC") ? "HDFC" : "UPGB";
         html += `
           <div class="txn-item" data-txn-id="${txn.id}">
-            <div class="txn-avatar">${initials}</div>
+            <div class="txn-avatar">${escapeHtml(initials)}</div>
             <div class="txn-details">
               <div class="txn-name">${escapeHtml(txn.receiver)}</div>
               <div class="txn-time">${formatDateTime(txn.datetime)}</div>
               <div class="txn-cat">${escapeHtml(txn.category)}</div>
             </div>
             <div class="txn-amount">
-              -₹${txn.amount}
-              <div style="font-size:0.55rem; color:#7e8cac;">${bankShort}</div>
+              -₹${txn.amount.toLocaleString()}
+              <div style="font-size:0.55rem; color:#6c7e9e;">${bankShort}</div>
             </div>
             <button class="delete-btn" data-id="${txn.id}"><i class="fas fa-trash-alt"></i></button>
           </div>
         `;
       });
       container.innerHTML = html;
-      updateTotal();
+      updateTotalUI();
 
-      // Attach delete events
       document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const id = parseInt(btn.getAttribute('data-id'));
-          if(confirm("Delete this transaction?")) {
+          if (confirm("Delete this transaction permanently?")) {
             transactions = transactions.filter(t => t.id !== id);
             saveToStorage();
             renderTransactions();
@@ -659,35 +863,32 @@
         });
       });
 
-      // Attach click for detailed fullscreen popup (advanced detail)
       document.querySelectorAll('.txn-item').forEach(item => {
         item.addEventListener('click', (e) => {
-          if(e.target.closest('.delete-btn')) return;
+          if (e.target.closest('.delete-btn')) return;
           const txnId = parseInt(item.getAttribute('data-txn-id'));
           const txn = transactions.find(t => t.id === txnId);
-          if(txn) showAdvancedDetail(txn);
+          if (txn) showAdvancedDetail(txn);
         });
       });
     }
 
-    // ADVANCED FULL DETAIL POPUP (UTR, bank, mode, instant status)
     function showAdvancedDetail(txn) {
-      document.getElementById('detailAmountLarge').innerHTML = `₹${txn.amount}`;
+      document.getElementById('detailAmountLarge').innerHTML = `₹${txn.amount.toLocaleString()}`;
       document.getElementById('detailBeneficiary').innerText = txn.receiver;
       document.getElementById('detailCategoryVal').innerText = txn.category;
       document.getElementById('detailDateTimeVal').innerHTML = formatDateTime(txn.datetime);
       document.getElementById('detailBankVal').innerText = txn.bankAccount;
-      let utrDisplay = txn.utr || generateUTR();
-      if(!txn.utr) { txn.utr = utrDisplay; saveToStorage(); }
+      let utrVal = txn.utr || generateUTR();
+      if (!txn.utr) { txn.utr = utrVal; saveToStorage(); }
       document.getElementById('detailUTR').innerText = txn.utr;
       document.getElementById('detailPopup').classList.add('active');
     }
 
-    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
 
-    // Add transaction with audio + advanced fields
     function addTransaction(receiver, amount, category, datetime, bankAccount) {
-      if(!receiver || amount <=0 || !datetime) return false;
+      if (!receiver || amount <= 0 || !datetime) return false;
       const newTxn = {
         id: Date.now(),
         receiver: receiver.trim(),
@@ -698,27 +899,23 @@
         utr: generateUTR()
       };
       transactions.unshift(newTxn);
-      transactions.sort((a,b) => new Date(b.datetime) - new Date(a.datetime));
+      transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
       saveToStorage();
       renderTransactions();
       playSuccessBeep();
-      // Success visual feedback
+
       const toast = document.createElement('div');
-      toast.innerText = `✅ ₹${amount} sent to ${receiver} · UTR: ${newTxn.utr}`;
-      toast.style.position = 'fixed'; toast.style.bottom = '24px'; toast.style.left = '16px'; toast.style.right = '16px';
-      toast.style.background = '#10b981'; toast.style.color = 'white'; toast.style.padding = '12px 18px';
-      toast.style.borderRadius = '60px'; toast.style.fontWeight = '600'; toast.style.textAlign = 'center';
-      toast.style.zIndex = '999'; toast.style.boxShadow = '0 6px 14px rgba(0,0,0,0.1)';
+      toast.className = 'custom-toast';
+      toast.innerHTML = `<i class="fas fa-check-circle" style="margin-right: 8px;"></i> ₹${amount.toLocaleString()} sent to ${receiver.substring(0, 18)} · UTR: ${newTxn.utr}`;
       document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 2600);
+      setTimeout(() => toast.remove(), 2800);
       return true;
     }
 
     function updateChipActive() {
       document.querySelectorAll('.chip').forEach(chip => {
         const val = chip.getAttribute('data-filter');
-        if(val === 'all' && currentFilter === 'all') chip.classList.add('active');
-        else if(val !== 'all' && currentFilter === val) chip.classList.add('active');
+        if ((val === 'all' && currentFilter === 'all') || (val !== 'all' && currentFilter === val)) chip.classList.add('active');
         else chip.classList.remove('active');
       });
       renderTransactions();
@@ -733,74 +930,67 @@
       });
     }
 
-    // UI Interactions
     document.getElementById('searchHistory')?.addEventListener('click', () => {
       let kw = prompt("Search by name or category:", searchKeyword);
-      if(kw !== null) { searchKeyword = kw; renderTransactions(); }
+      if (kw !== null) { searchKeyword = kw; renderTransactions(); }
     });
     document.getElementById('clearFilters')?.addEventListener('click', () => {
       currentFilter = "all"; searchKeyword = "";
       updateChipActive();
     });
     document.getElementById('exportData')?.addEventListener('click', () => {
-      let dataStr = JSON.stringify(transactions, null, 2);
-      let blob = new Blob([dataStr], {type:"application/json"});
-      let a = document.createElement('a');
+      const dataStr = JSON.stringify(transactions, null, 2);
+      const blob = new Blob([dataStr], { type: "application/json" });
+      const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `payflow_export.json`;
+      a.download = `payflow_export_${Date.now()}.json`;
       a.click();
       URL.revokeObjectURL(a.href);
     });
 
-    // Modal add
     const addModal = document.getElementById('addModal');
-    const openAdd = document.getElementById('openAddBtn');
-    const cancelAdd = document.getElementById('cancelModalBtn');
+    const openAddBtn = document.getElementById('openAddBtn');
+    const cancelModal = document.getElementById('cancelModalBtn');
     const confirmAdd = document.getElementById('confirmAddBtn');
-    openAdd.addEventListener('click', () => {
+    openAddBtn.addEventListener('click', () => {
       addModal.classList.add('active');
-      let nowLocal = new Date();
+      const nowLocal = new Date();
       nowLocal.setMinutes(nowLocal.getMinutes() - nowLocal.getTimezoneOffset());
-      document.getElementById('txnDatetime').value = nowLocal.toISOString().slice(0,16);
+      document.getElementById('txnDatetime').value = nowLocal.toISOString().slice(0, 16);
     });
-    cancelAdd.addEventListener('click', () => addModal.classList.remove('active'));
+    cancelModal.addEventListener('click', () => addModal.classList.remove('active'));
     confirmAdd.addEventListener('click', () => {
       const receiver = document.getElementById('receiverName').value.trim();
       const amount = document.getElementById('amountValue').value;
       const category = document.getElementById('categorySelect').value;
       let datetime = document.getElementById('txnDatetime').value;
       const bankAccount = document.getElementById('bankSelect').value;
-      if(!receiver) { alert("Receiver name required"); return; }
-      if(!amount || parseFloat(amount) <=0) { alert("Valid amount required"); return; }
-      if(!datetime) datetime = new Date().toISOString().slice(0,16);
+      if (!receiver) { alert("Beneficiary name required"); return; }
+      if (!amount || parseFloat(amount) <= 0) { alert("Valid amount required"); return; }
+      if (!datetime) datetime = new Date().toISOString().slice(0, 16);
       addTransaction(receiver, parseFloat(amount), category, datetime, bankAccount);
       document.getElementById('receiverName').value = '';
       document.getElementById('amountValue').value = '';
       addModal.classList.remove('active');
     });
 
-    // Close detail modal
-    document.getElementById('closeDetailPopup').addEventListener('click', () => {
-      document.getElementById('detailPopup').classList.remove('active');
-    });
-    window.addEventListener('click', (e) => {
-      const modalDiv = document.getElementById('detailPopup');
-      if(e.target === modalDiv) modalDiv.classList.remove('active');
-    });
+    const closeDetail = document.getElementById('closeDetailPopup');
+    const detailPopup = document.getElementById('detailPopup');
+    closeDetail.addEventListener('click', () => detailPopup.classList.remove('active'));
+    window.addEventListener('click', (e) => { if (e.target === detailPopup) detailPopup.classList.remove('active'); });
 
-    // Balance button
     document.querySelectorAll('.balance-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        const balance = btn.getAttribute('data-balance') || "₹42,000";
-        alert(`💰 Account Balance: ${balance}`);
+        e.stopPropagation();
+        const bal = btn.getAttribute('data-balance');
+        alert(`Available Balance: ₹${bal}`);
       });
     });
-    document.getElementById('backArrow').addEventListener('click', () => alert("← Dashboard"));
+    document.getElementById('backArrow').addEventListener('click', () => alert("Dashboard overview • Secure environment"));
 
-    // Set current month
-    const monthNamesFull = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    const curr = new Date();
-    document.getElementById('currentMonthDisplay').innerText = `${monthNamesFull[curr.getMonth()]} ${curr.getFullYear()}`;
+    const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const curDate = new Date();
+    document.getElementById('currentMonthDisplay').innerText = `${monthNames[curDate.getMonth()]} ${curDate.getFullYear()}`;
 
     loadData();
     renderTransactions();
@@ -809,10 +999,5 @@
     updateChipActive();
   })();
 </script>
-<audio id="successSound" preload="auto">
-    <source src="success.mp3" type="audio/mpeg">
-</audio>
-
-
 </body>
 </html>
