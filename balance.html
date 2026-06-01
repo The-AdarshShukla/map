@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>Paytm Clone | Balance & History</title>
-  <!-- Font Awesome 6 (free) -->
+  <title>PayFlow Pro | Smart Transactions</title>
+  <!-- Font Awesome 6 (Professional Icons) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Inter Modern Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* style.css */
     * {
       margin: 0;
       padding: 0;
@@ -18,364 +17,375 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f5f7fc;
-      color: #1e2a3e;
+      background: #f4f8fe;
+      color: #121826;
       overflow-x: hidden;
     }
 
-    /* CSS Variables - Paytm inspired */
+    /* Premium Variables */
     :root {
-      --primary-blue: #0F3BDF;
-      --primary-dark: #0a2bb3;
-      --light-bg-header: #eef3fc;
-      --soft-white: #ffffff;
-      --gray-text: #5e6873;
-      --border-light: #eef2f6;
-      --card-shadow: 0 4px 14px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-      --hover-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+      --primary-blue: #0f3bdf;
+      --primary-dark: #0a2cbb;
+      --accent-gold: #f59e0b;
+      --success-emerald: #10b981;
+      --danger-rose: #ef4444;
+      --card-white: #ffffff;
+      --text-primary: #1f2a44;
+      --text-secondary: #5b6e8c;
+      --border-light: #eef2f8;
+      --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
+      --shadow-hover: 0 14px 32px rgba(0, 0, 0, 0.08);
     }
 
-    /* sticky header */
-    .sticky-header {
+    /* Sticky header */
+    .app-header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: var(--light-bg-header);
-      padding: 16px 18px;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      padding: 14px 20px;
       display: flex;
       align-items: center;
-      gap: 16px;
-      backdrop-filter: blur(0px);
-      border-bottom: 1px solid rgba(15, 59, 223, 0.08);
+      gap: 14px;
+      border-bottom: 1px solid var(--border-light);
     }
-
-    .back-arrow {
-      font-size: 1.5rem;
-      color: var(--primary-blue);
-      cursor: pointer;
-      transition: transform 0.1s ease;
-    }
-
-    .back-arrow:active {
-      transform: scale(0.92);
-    }
-
-    .sticky-header h1 {
-      font-size: 1.45rem;
-      font-weight: 700;
-      color: #0c2a4b;
-      letter-spacing: -0.3px;
-    }
-
-    /* main container */
-    .app-container {
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 18px 16px 80px 16px;
-    }
-
-    /* Section heading */
-    .section-heading {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin: 12px 0 12px 0;
-      color: #141f33;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-
-    /* Horizontal scroll accounts - now includes the add button as well */
-    .accounts-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      overflow-x: auto;
-      scrollbar-width: thin;
-      padding-bottom: 8px;
-      margin-bottom: 20px;
-    }
-
-    .accounts-wrapper::-webkit-scrollbar {
-      height: 3px;
-    }
-
-    /* account card style */
-    .account-card {
-      min-width: 260px;
-      border-radius: 28px;
-      padding: 18px;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      transition: transform 0.1s ease;
-      flex-shrink: 0;
-    }
-
-    .card-blue {
-      background: linear-gradient(135deg, #0F3BDF, #1b4dff);
-    }
-
-    .card-orange {
-      background: linear-gradient(135deg, #f97316, #f59e0b);
-    }
-
-    .account-info h4 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .account-number {
-      font-size: 0.75rem;
-      opacity: 0.9;
-      letter-spacing: 0.5px;
-      margin-bottom: 14px;
-    }
-
-    .check-balance-btn {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      padding: 6px 14px;
-      border-radius: 40px;
-      color: white;
-      font-size: 0.7rem;
-      font-weight: 500;
-      backdrop-filter: blur(4px);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .bank-logo {
-      background: white;
-      width: 48px;
-      height: 48px;
+    .back-btn {
+      width: 40px;
+      height: 40px;
+      background: #f0f4fe;
       border-radius: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
       color: var(--primary-blue);
-      font-size: 1.6rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .back-btn:active { transform: scale(0.94); }
+    .app-header h1 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0f3bdf, #1e4bd2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    /* Add Transaction Card (circular plus button as a card) */
-    .add-transaction-card {
-      min-width: 100px;
-      background: linear-gradient(135deg, #ffffff, #f8faff);
-      border-radius: 28px;
-      padding: 18px 12px;
+    /* main container */
+    .main-container {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 18px 16px 90px 16px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin: 8px 0 14px 0;
+      color: #0c2a4b;
+    }
+
+    /* Horizontal accounts */
+    .accounts-scroll {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      scrollbar-width: thin;
+    }
+    .bank-card {
+      min-width: 270px;
+      background: var(--card-white);
+      border-radius: 32px;
+      padding: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-light);
+      transition: all 0.2s;
+    }
+    .bank-card.hdfc { border-top: 4px solid var(--primary-blue); }
+    .bank-card.upgb { border-top: 4px solid var(--accent-gold); }
+    .bank-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .bank-acct { font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 12px; }
+    .balance-btn {
+      background: #eff3fc;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--primary-blue);
+      cursor: pointer;
+    }
+    .bank-icon {
+      width: 52px;
+      height: 52px;
+      background: #f8fafe;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: var(--primary-blue);
+    }
+
+    .add-txn-card {
+      min-width: 110px;
+      background: linear-gradient(145deg, #ffffff, #f9fcff);
+      border-radius: 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      border: 1px solid #eef2ff;
+      gap: 8px;
+      border: 1px dashed #bbd0f0;
       cursor: pointer;
-      transition: all 0.2s ease;
-      flex-shrink: 0;
+      transition: 0.15s;
     }
-
-    .add-transaction-card:hover {
-      transform: scale(0.98);
-      background: #ffffff;
-    }
-
-    .add-transaction-card:active {
-      transform: scale(0.95);
-    }
-
-    .add-circle-icon {
+    .add-txn-card:active { transform: scale(0.96); background: white; }
+    .add-circle {
+      background: var(--primary-blue);
       width: 52px;
       height: 52px;
-      background: var(--primary-blue);
       border-radius: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 14px rgba(15,59,223,0.3);
+      box-shadow: 0 6px 14px rgba(15, 59, 223, 0.25);
     }
+    .add-circle i { font-size: 1.7rem; color: white; }
 
-    .add-circle-icon i {
-      font-size: 1.8rem;
-      color: white;
-    }
-
-    .add-transaction-card span {
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #1e2a3e;
-    }
-
-    /* Payment History Card */
+    /* History Card */
     .history-card {
-      background: var(--soft-white);
-      border-radius: 28px;
-      box-shadow: var(--card-shadow);
+      background: var(--card-white);
+      border-radius: 36px;
+      box-shadow: var(--shadow-card);
       padding: 20px 16px;
-      margin-top: 8px;
-      margin-bottom: 20px;
+      margin-top: 6px;
     }
-
     .history-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 18px;
-      flex-wrap: wrap;
     }
-
-    .history-header h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-    }
-
+    .history-header h2 { font-size: 1.3rem; font-weight: 700; }
     .action-icons i {
-      font-size: 1.2rem;
-      margin-left: 16px;
-      color: #5f6c80;
+      font-size: 1.1rem;
+      margin-left: 18px;
+      color: #7b8ba5;
       cursor: pointer;
-      transition: color 0.2s;
     }
-
-    /* filter chips */
     .filter-chips {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 24px;
-      border-bottom: 1px solid #eef2f6;
-      padding-bottom: 14px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 12px;
     }
-
-    .chip-filter {
-      background: #eff3f8;
-      padding: 6px 16px;
+    .chip {
+      background: #eff2f9;
+      padding: 6px 18px;
       border-radius: 40px;
       font-size: 0.75rem;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s;
     }
+    .chip.active { background: var(--primary-blue); color: white; }
 
-    .chip-filter.active {
-      background: var(--primary-blue);
-      color: white;
-    }
-
-    /* month & total spent row */
-    .month-summary {
+    .summary-row {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      margin: 16px 0 18px 0;
+      background: #fafdff;
+      padding: 10px 16px;
+      border-radius: 60px;
+      margin-bottom: 22px;
     }
-
-    .month {
+    .total-badge {
+      background: #fee9e6;
+      padding: 4px 14px;
+      border-radius: 40px;
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.8rem;
+      color: #c2410c;
     }
 
-    .total-spent {
-      font-weight: 700;
-      background: #f0f4fa;
-      padding: 5px 14px;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      color: #d32f2f;
-    }
-
-    /* transaction list */
+    /* Transaction List - latest on top */
     .transaction-list {
       display: flex;
       flex-direction: column;
       gap: 14px;
+      max-height: 520px;
+      overflow-y: auto;
     }
-
-    .transaction-item {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 12px;
+    .txn-item {
+      background: white;
+      border-radius: 24px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-      border: 1px solid #edeff4;
-      transition: all 0.15s;
+      gap: 14px;
+      border: 1px solid #edeff6;
+      transition: 0.12s;
+      cursor: pointer;
     }
-
-    .profile-icon {
-      width: 48px;
-      height: 48px;
-      background: #eef2ff;
+    .txn-item:active { background: #fafcff; transform: scale(0.99); }
+    .txn-avatar {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, #eef2fc, #e9eff8);
       border-radius: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
       color: var(--primary-blue);
-      font-size: 1.2rem;
-      font-weight: 600;
     }
-
-    .transaction-details {
-      flex: 1;
-    }
-
-    .receiver-name {
-      font-weight: 700;
-      font-size: 0.95rem;
-    }
-
-    .date-time {
-      font-size: 0.65rem;
-      color: #7e8b9e;
-      margin: 4px 0 2px;
-    }
-
-    .category-badge {
+    .txn-details { flex: 1; }
+    .txn-name { font-weight: 700; font-size: 0.95rem; }
+    .txn-time { font-size: 0.6rem; color: #8895aa; margin-top: 4px; }
+    .txn-cat {
       font-size: 0.6rem;
-      background: #f0f2f5;
+      background: #f2f5fa;
       display: inline-block;
-      padding: 2px 10px;
+      padding: 2px 12px;
       border-radius: 20px;
-      font-weight: 500;
-    }
-
-    .amount-bank {
-      text-align: right;
-    }
-
-    .amount {
-      font-weight: 700;
-      font-size: 1rem;
-      color: #1f2b48;
-    }
-
-    .bank-source {
-      font-size: 0.6rem;
-      color: #6c7a91;
       margin-top: 4px;
     }
-
-    .delete-txn {
-      color: #dc2626;
-      font-size: 1rem;
+    .txn-amount {
+      text-align: right;
+      font-weight: 700;
+      color: #1f2a44;
+    }
+    .delete-btn {
       background: none;
       border: none;
+      color: #cbd5e1;
+      font-size: 1rem;
       cursor: pointer;
       padding: 6px;
-      opacity: 0.6;
-      transition: opacity 0.2s;
     }
 
-    .delete-txn:hover {
+    /* ------------------ ADVANCED FULLSCREEN DETAIL MODAL ------------------ */
+    .fullscreen-detail {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.2s, opacity 0.2s;
+    }
+    .fullscreen-detail.active {
+      visibility: visible;
       opacity: 1;
     }
+    .detail-sheet {
+      background: white;
+      width: 90%;
+      max-width: 420px;
+      border-radius: 48px;
+      overflow: hidden;
+      animation: slideUp 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 30px 40px rgba(0,0,0,0.3);
+    }
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .detail-header {
+      background: linear-gradient(135deg, #0f3bdf, #1447f0);
+      padding: 24px 20px;
+      text-align: center;
+      color: white;
+    }
+    .detail-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.2);
+      padding: 6px 18px;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .detail-header h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .detail-body {
+      padding: 24px 22px;
+    }
+    .info-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid #eff3f9;
+      padding-bottom: 12px;
+    }
+    .info-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #5f7392;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .info-value {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #121826;
+      text-align: right;
+      word-break: break-word;
+    }
+    .badge-success {
+      background: #e9f9ef;
+      color: #0e7c3e;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .detail-footer {
+      padding: 16px 22px 26px;
+      border-top: 1px solid #edf2f8;
+    }
+    .close-detail-btn {
+      width: 100%;
+      background: var(--primary-blue);
+      border: none;
+      padding: 14px;
+      border-radius: 60px;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+    }
 
-    /* Modal overlay */
+    /* Add Transaction Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -386,427 +396,423 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 300;
+      z-index: 200;
       visibility: hidden;
       opacity: 0;
       transition: 0.2s;
     }
-
     .modal-overlay.active {
       visibility: visible;
       opacity: 1;
     }
-
-    .modal-content {
+    .modal-card {
       background: white;
       width: 90%;
       max-width: 380px;
-      border-radius: 32px;
+      border-radius: 44px;
       padding: 24px 20px;
-      box-shadow: 0 20px 35px rgba(0,0,0,0.2);
     }
-
-    .modal-content h3 {
-      margin-bottom: 18px;
-    }
-
-    .modal-content input, .modal-content select {
+    .modal-card input, .modal-card select {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 40px;
-      font-family: inherit;
+      padding: 12px 16px;
+      margin: 8px 0;
+      border: 1px solid #e2e8f0;
+      border-radius: 60px;
     }
-
     .modal-actions {
       display: flex;
-      justify-content: flex-end;
       gap: 12px;
       margin-top: 20px;
     }
-
-    .modal-actions button {
-      padding: 8px 18px;
-      border-radius: 40px;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
     .save-btn {
       background: var(--primary-blue);
       color: white;
+      border: none;
+      flex: 1;
+      padding: 12px;
+      border-radius: 60px;
+      font-weight: 600;
     }
-
-    /* footer */
     .footer-brand {
       text-align: center;
-      font-size: 0.7rem;
-      color: #8e9aaf;
-      padding: 20px 0 10px;
-      border-top: 1px solid #eef2f6;
+      font-size: 0.65rem;
+      color: #8d9bb0;
       margin-top: 20px;
-    }
-
-    @media (max-width: 480px) {
-      .app-container {
-        padding: 12px 14px 80px 14px;
-      }
-      .account-card {
-        min-width: 240px;
-      }
-      .add-transaction-card {
-        min-width: 90px;
-      }
     }
   </style>
 </head>
 <body>
 
-<header class="sticky-header">
-  <div class="back-arrow" id="backArrowBtn"><i class="fas fa-arrow-left"></i></div>
-  <h1>Balance & History</h1>
+<header class="app-header">
+  <div class="back-btn" id="backArrow"><i class="fas fa-arrow-left"></i></div>
+  <h1><i class="fas fa-bolt"></i> PayFlow Pro</h1>
 </header>
 
-<main class="app-container">
-  <!-- Your Accounts Section -->
-  <div class="section-heading">Your Accounts</div>
-  
-  <!-- Horizontal scroll wrapper containing two bank cards + add transaction card -->
-  <div class="accounts-wrapper">
-    <!-- Account 1: HDFC Bank -->
-    <div class="account-card card-blue">
-      <div class="account-info">
+<main class="main-container">
+  <div class="section-title"><i class="fas fa-wallet"></i> <span>My Accounts</span></div>
+  <div class="accounts-scroll">
+    <div class="bank-card hdfc">
+      <div class="bank-info">
         <h4>HDFC Bank</h4>
-        <div class="account-number">A/c No: 7753</div>
-        <button class="check-balance-btn" data-bank="HDFC">Check Balance <i class="fas fa-eye"></i></button>
+        <div class="bank-acct">**** 7753</div>
+        <button class="balance-btn" data-balance="₹48,920"><i class="fas fa-eye"></i> Check Balance</button>
       </div>
-      <div class="bank-logo"><i class="fas fa-university"></i></div>
+      <div class="bank-icon"><i class="fas fa-building"></i></div>
     </div>
-    
-    <!-- Account 2: Uttar Pradesh Gramin Bank -->
-    <div class="account-card card-orange">
-      <div class="account-info">
-        <h4>Uttar Pradesh Gramin Bank</h4>
-        <div class="account-number">A/c No: 1842</div>
-        <button class="check-balance-btn" data-bank="UPGB">Check Balance <i class="fas fa-eye"></i></button>
+    <div class="bank-card upgb">
+      <div class="bank-info">
+        <h4>UP Gramin Bank</h4>
+        <div class="bank-acct">**** 1842</div>
+        <button class="balance-btn" data-balance="₹22,450"><i class="fas fa-eye"></i> Check Balance</button>
       </div>
-      <div class="bank-logo"><i class="fas fa-landmark"></i></div>
+      <div class="bank-icon"><i class="fas fa-landmark"></i></div>
     </div>
-    
-    <!-- ADD TRANSACTION CARD (Plus Icon) - appears after both bank cards -->
-    <div class="add-transaction-card" id="addTxnUpperBtn">
-      <div class="add-circle-icon">
-        <i class="fas fa-plus"></i>
-      </div>
-      <span>Add Transaction</span>
+    <div class="add-txn-card" id="openAddBtn">
+      <div class="add-circle"><i class="fas fa-plus"></i></div>
+      <span>Send Money</span>
     </div>
   </div>
 
-  <!-- Payment History section -->
   <div class="history-card">
     <div class="history-header">
-      <h2>Payment History</h2>
+      <h2><i class="fas fa-clock"></i> Payment History</h2>
       <div class="action-icons">
-        <i class="fas fa-search" id="searchIcon"></i>
-        <i class="fas fa-filter" id="filterIcon"></i>
-        <i class="fas fa-download" id="downloadIcon"></i>
+        <i class="fas fa-search" id="searchHistory"></i>
+        <i class="fas fa-filter" id="clearFilters"></i>
+        <i class="fas fa-download" id="exportData"></i>
       </div>
     </div>
-    
-    <!-- Filter chips -->
     <div class="filter-chips" id="filterChipsContainer">
-      <div class="chip-filter active" data-filter="all">All Accounts</div>
-      <div class="chip-filter" data-filter="HDFC Bank - 7753">HDFC Bank - 7753</div>
-      <div class="chip-filter" data-filter="Uttar Pradesh Gramin Bank - 1842">Uttar Pradesh Gramin Bank - 1842</div>
+      <div class="chip active" data-filter="all">All Accounts</div>
+      <div class="chip" data-filter="HDFC Bank - 7753">HDFC Bank</div>
+      <div class="chip" data-filter="Uttar Pradesh Gramin Bank - 1842">UP Gramin Bank</div>
     </div>
-
-    <!-- month summary & total spent -->
-    <div class="month-summary">
-      <span class="month" id="currentMonth">June 2026</span>
-      <span class="total-spent" id="totalSpentDisplay">Total Spent ₹0</span>
+    <div class="summary-row">
+      <span id="currentMonthDisplay">June 2026</span>
+      <span class="total-badge" id="totalSpentLabel">Total ₹0</span>
     </div>
-
-    <!-- Transaction list container -->
-    <div id="transactionListContainer" class="transaction-list">
-      <!-- dynamic transactions will be injected here -->
-    </div>
+    <div id="transactionList" class="transaction-list"></div>
   </div>
-  <div class="footer-brand">
-    <i class="fas fa-rupee-sign"></i> Paytm | Secure UPI Payments
-  </div>
+  <div class="footer-brand"><i class="fas fa-shield-alt"></i> Secure · Instant Transfers with UTR</div>
 </main>
 
-<!-- Modal for adding transaction -->
-<div class="modal-overlay" id="transactionModal">
-  <div class="modal-content">
-    <h3>Add New Transaction</h3>
-    <input type="text" id="receiverName" placeholder="Receiver Name (e.g. Manoj Kumar)" autocomplete="off">
-    <input type="number" id="amountInput" placeholder="Amount (₹)" autocomplete="off">
+<!-- Add Transaction Modal -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal-card">
+    <h3><i class="fas fa-paper-plane"></i> New Transfer</h3>
+    <input type="text" id="receiverName" placeholder="Receiver name" autocomplete="off">
+    <input type="number" id="amountValue" placeholder="Amount (₹)" autocomplete="off">
     <select id="categorySelect">
-      <option value="Food">Food</option>
-      <option value="Medical">Medical</option>
-      <option value="Groceries">Groceries</option>
-      <option value="Shopping">Shopping</option>
-      <option value="Recharge">Recharge</option>
-      <option value="Miscellaneous">Miscellaneous</option>
+      <option value="Food & Dining">🍔 Food & Dining</option>
+      <option value="Medical">💊 Medical</option>
+      <option value="Shopping">🛍️ Shopping</option>
+      <option value="Bills & Recharge">⚡ Bills/Recharge</option>
+      <option value="Others">📌 Others</option>
     </select>
-    <input type="datetime-local" id="datetimeInput">
+    <input type="datetime-local" id="txnDatetime">
     <select id="bankSelect">
-      <option value="HDFC Bank - 7753">HDFC Bank - 7753</option>
-      <option value="Uttar Pradesh Gramin Bank - 1842">Uttar Pradesh Gramin Bank - 1842</option>
+      <option value="HDFC Bank - 7753">🏦 HDFC Bank - 7753</option>
+      <option value="Uttar Pradesh Gramin Bank - 1842">🏦 UP Gramin Bank - 1842</option>
     </select>
     <div class="modal-actions">
-      <button id="cancelModalBtn" style="background:#eef2f6;">Cancel</button>
-      <button id="confirmSaveBtn" class="save-btn">Save</button>
+      <button id="cancelModalBtn" style="background:#eff2f9; flex:1;">Cancel</button>
+      <button id="confirmAddBtn" class="save-btn">Send & Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Advanced Fullscreen Detail Popup (Professional) -->
+<div class="fullscreen-detail" id="detailPopup">
+  <div class="detail-sheet">
+    <div class="detail-header">
+      <div class="detail-status"><i class="fas fa-check-circle"></i> Transaction Successful</div>
+      <h3 id="detailAmountLarge">₹0</h3>
+    </div>
+    <div class="detail-body">
+      <div class="info-grid">
+        <div class="info-row"><span class="info-label"><i class="fas fa-user"></i> Beneficiary</span><span class="info-value" id="detailBeneficiary">-</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-tag"></i> Category</span><span class="info-value" id="detailCategoryVal">-</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-calendar-alt"></i> Date & Time</span><span class="info-value" id="detailDateTimeVal">-</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-university"></i> Debit Account</span><span class="info-value" id="detailBankVal">-</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-fingerprint"></i> UTR Number</span><span class="info-value" id="detailUTR">-</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-exchange-alt"></i> Payment Mode</span><span class="info-value">UPI / IMPS</span></div>
+        <div class="info-row"><span class="info-label"><i class="fas fa-clock"></i> Settlement</span><span class="info-value badge-success">Instant</span></div>
+      </div>
+    </div>
+    <div class="detail-footer">
+      <button class="close-detail-btn" id="closeDetailPopup">Close</button>
     </div>
   </div>
 </div>
 
 <script>
-  // script.js - full transaction management with localStorage
   (function() {
-    // ---------- DATA MODEL ----------
-    let transactions = [];  // each: { id, receiver, amount, category, datetime, bankAccount }
-    let currentFilter = "all";   // 'all', 'HDFC Bank - 7753', 'Uttar Pradesh Gramin Bank - 1842'
-    let searchKeyword = "";     // for search modal
-    
-    // Helper: get current month string
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const now = new Date();
-    const currentMonthYear = `${monthNames[now.getMonth()]} ${now.getFullYear()}`;
-    document.getElementById('currentMonth').innerText = currentMonthYear;
-    
-    // Load from localStorage
-    function loadTransactionsFromStorage() {
-      const stored = localStorage.getItem("paytm_txn_history");
+    // ---------- ADVANCED DATA ----------
+    let transactions = [];  // id, receiver, amount, category, datetime, bankAccount, utr
+    let currentFilter = "all";
+    let searchKeyword = "";
+
+    // helper: generate UTR (unique transaction ref)
+    function generateUTR() {
+      return "PFTX" + Date.now().toString().slice(-8) + Math.floor(Math.random() * 1000);
+    }
+
+    // play success audio
+    function playSuccessBeep() {
+    const audio = document.getElementById("successSound");
+
+    audio.currentTime = 0; // हर बार शुरू से बजे
+    audio.play().catch(err => {
+        console.log("Audio play failed:", err);
+    });
+}
+
+    // Load / save storage
+    function loadData() {
+      const stored = localStorage.getItem("payflow_adv_txn");
       if(stored) {
         transactions = JSON.parse(stored);
+        transactions.sort((a,b) => new Date(b.datetime) - new Date(a.datetime));
       } else {
-        // seed default transactions matching screenshot style
+        const today = new Date();
+        const todayStr = today.toISOString().slice(0,16);
+        const yesterday = new Date(today); yesterday.setDate(yesterday.getDate()-1);
+        const yesterdayStr = yesterday.toISOString().slice(0,16);
         transactions = [
-          { id: Date.now()+1, receiver: "Manoj Kumar", amount: 6, category: "Miscellaneous", datetime: getCustomDateTime(2026,5,31,13,7), bankAccount: "HDFC Bank - 7753" },
-          { id: Date.now()+2, receiver: "Ram lal ram", amount: 12, category: "Groceries", datetime: getCustomDateTime(2026,5,31,11,56), bankAccount: "HDFC Bank - 7753" },
-          { id: Date.now()+3, receiver: "Shashi Bala", amount: 6, category: "Food", datetime: getCustomDateTime(2026,5,31,10,58), bankAccount: "Uttar Pradesh Gramin Bank - 1842" },
-          { id: Date.now()+4, receiver: "Super Enterprises", amount: 157, category: "Medical", datetime: getCustomDateTime(2026,5,31,10,31), bankAccount: "Uttar Pradesh Gramin Bank - 1842" }
+          { id: Date.now()+101, receiver: "Rajesh Sharma", amount: 1890, category: "Shopping", datetime: todayStr, bankAccount: "HDFC Bank - 7753", utr: generateUTR() },
+          { id: Date.now()+102, receiver: "Dr. Anita Clinic", amount: 750, category: "Medical", datetime: yesterdayStr, bankAccount: "Uttar Pradesh Gramin Bank - 1842", utr: generateUTR() },
+          { id: Date.now()+103, receiver: "Metro Grocery", amount: 430, category: "Food & Dining", datetime: yesterdayStr, bankAccount: "HDFC Bank - 7753", utr: generateUTR() }
         ];
-        saveToLocalStorage();
+        transactions.sort((a,b) => new Date(b.datetime) - new Date(a.datetime));
+        saveToStorage();
       }
     }
-    
-    function getCustomDateTime(year, month, day, hour, minute) {
-      let d = new Date(year, month, day, hour, minute);
-      return d.toISOString().slice(0, 16);
+    function saveToStorage() { localStorage.setItem("payflow_adv_txn", JSON.stringify(transactions)); }
+
+    // formatting
+    function formatDateTime(dtStr) { 
+      if(!dtStr) return "Just now";
+      let d = new Date(dtStr);
+      return `${d.toLocaleDateString('en-IN', {day:'numeric', month:'short', year:'numeric'})} · ${d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}`;
     }
-    
-    function saveToLocalStorage() {
-      localStorage.setItem("paytm_txn_history", JSON.stringify(transactions));
-    }
-    
-    // Helper to format display date/time
-    function formatDateTime(datetimeStr) {
-      if(!datetimeStr) return "Just now";
-      let d = new Date(datetimeStr);
-      return `${d.toLocaleDateString('en-IN', {day:'numeric', month:'short'})}, ${d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}`;
-    }
-    
-    // compute total spent based on filter + search
-    function computeTotalSpent() {
-      let filtered = getFilteredTransactions();
-      let total = filtered.reduce((sum, t) => sum + t.amount, 0);
-      document.getElementById('totalSpentDisplay').innerHTML = `Total Spent ₹${total}`;
-      return total;
-    }
-    
-    // get filtered transactions: search, account filter
-    function getFilteredTransactions() {
+
+    function getFiltered() {
       let filtered = [...transactions];
-      if(currentFilter !== "all") {
-        filtered = filtered.filter(t => t.bankAccount === currentFilter);
-      }
-      if(searchKeyword.trim() !== "") {
+      if(currentFilter !== "all") filtered = filtered.filter(t => t.bankAccount === currentFilter);
+      if(searchKeyword.trim()) {
         let kw = searchKeyword.toLowerCase();
         filtered = filtered.filter(t => t.receiver.toLowerCase().includes(kw) || t.category.toLowerCase().includes(kw));
       }
-      // sort by datetime descending (latest first)
       filtered.sort((a,b) => new Date(b.datetime) - new Date(a.datetime));
       return filtered;
     }
-    
-    // render transaction list
+
+    function updateTotal() {
+      const filtered = getFiltered();
+      const sum = filtered.reduce((acc, t) => acc + t.amount, 0);
+      document.getElementById('totalSpentLabel').innerHTML = `Total ₹${sum}`;
+    }
+
+    // Render with latest on top
     function renderTransactions() {
-      const container = document.getElementById('transactionListContainer');
-      const filtered = getFilteredTransactions();
+      const container = document.getElementById('transactionList');
+      const filtered = getFiltered();
       if(filtered.length === 0) {
-        container.innerHTML = `<div style="text-align:center; padding:30px;">No transactions found</div>`;
-        computeTotalSpent();
+        container.innerHTML = `<div style="text-align:center; padding:50px 20px;"><i class="fas fa-receipt" style="font-size: 2.5rem; color:#cbd5e1;"></i><p style="margin-top:10px;">No transactions</p><small>Tap + to send money</small></div>`;
+        updateTotal();
         return;
       }
       let html = '';
       filtered.forEach(txn => {
+        let initials = txn.receiver.substring(0,2).toUpperCase();
         let bankShort = txn.bankAccount.includes("HDFC") ? "HDFC" : "UP Gramin";
-        let initials = txn.receiver.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
         html += `
-          <div class="transaction-item" data-id="${txn.id}">
-            <div class="profile-icon">${initials || '<i class="fas fa-user"></i>'}</div>
-            <div class="transaction-details">
-              <div class="receiver-name">${escapeHtml(txn.receiver)}</div>
-              <div class="date-time">${formatDateTime(txn.datetime)}</div>
-              <div class="category-badge">${escapeHtml(txn.category)}</div>
+          <div class="txn-item" data-txn-id="${txn.id}">
+            <div class="txn-avatar">${initials}</div>
+            <div class="txn-details">
+              <div class="txn-name">${escapeHtml(txn.receiver)}</div>
+              <div class="txn-time">${formatDateTime(txn.datetime)}</div>
+              <div class="txn-cat">${escapeHtml(txn.category)}</div>
             </div>
-            <div class="amount-bank">
-              <div class="amount">-₹${txn.amount}</div>
-              <div class="bank-source">${bankShort}</div>
+            <div class="txn-amount">
+              -₹${txn.amount}
+              <div style="font-size:0.55rem; color:#7e8cac;">${bankShort}</div>
             </div>
-            <button class="delete-txn" data-id="${txn.id}"><i class="fas fa-trash-alt"></i></button>
+            <button class="delete-btn" data-id="${txn.id}"><i class="fas fa-trash-alt"></i></button>
           </div>
         `;
       });
       container.innerHTML = html;
-      computeTotalSpent();
-      // attach delete events
-      document.querySelectorAll('.delete-txn').forEach(btn => {
+      updateTotal();
+
+      // Attach delete events
+      document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const id = parseInt(btn.getAttribute('data-id'));
-          deleteTransactionById(id);
+          if(confirm("Delete this transaction?")) {
+            transactions = transactions.filter(t => t.id !== id);
+            saveToStorage();
+            renderTransactions();
+            updateChipActive();
+          }
+        });
+      });
+
+      // Attach click for detailed fullscreen popup (advanced detail)
+      document.querySelectorAll('.txn-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          if(e.target.closest('.delete-btn')) return;
+          const txnId = parseInt(item.getAttribute('data-txn-id'));
+          const txn = transactions.find(t => t.id === txnId);
+          if(txn) showAdvancedDetail(txn);
         });
       });
     }
-    
-    function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;});}
-    
-    function deleteTransactionById(id) {
-      transactions = transactions.filter(t => t.id !== id);
-      saveToLocalStorage();
-      renderTransactions();
-      updateFilterChipsActive();
+
+    // ADVANCED FULL DETAIL POPUP (UTR, bank, mode, instant status)
+    function showAdvancedDetail(txn) {
+      document.getElementById('detailAmountLarge').innerHTML = `₹${txn.amount}`;
+      document.getElementById('detailBeneficiary').innerText = txn.receiver;
+      document.getElementById('detailCategoryVal').innerText = txn.category;
+      document.getElementById('detailDateTimeVal').innerHTML = formatDateTime(txn.datetime);
+      document.getElementById('detailBankVal').innerText = txn.bankAccount;
+      let utrDisplay = txn.utr || generateUTR();
+      if(!txn.utr) { txn.utr = utrDisplay; saveToStorage(); }
+      document.getElementById('detailUTR').innerText = txn.utr;
+      document.getElementById('detailPopup').classList.add('active');
     }
-    
+
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+    // Add transaction with audio + advanced fields
     function addTransaction(receiver, amount, category, datetime, bankAccount) {
-      if(!receiver || !amount || amount <=0 || !datetime) return false;
+      if(!receiver || amount <=0 || !datetime) return false;
       const newTxn = {
         id: Date.now(),
         receiver: receiver.trim(),
         amount: parseFloat(amount),
         category: category,
         datetime: datetime,
-        bankAccount: bankAccount
+        bankAccount: bankAccount,
+        utr: generateUTR()
       };
-      transactions.unshift(newTxn); // add to top (latest)
-      saveToLocalStorage();
+      transactions.unshift(newTxn);
+      transactions.sort((a,b) => new Date(b.datetime) - new Date(a.datetime));
+      saveToStorage();
       renderTransactions();
+      playSuccessBeep();
+      // Success visual feedback
+      const toast = document.createElement('div');
+      toast.innerText = `✅ ₹${amount} sent to ${receiver} · UTR: ${newTxn.utr}`;
+      toast.style.position = 'fixed'; toast.style.bottom = '24px'; toast.style.left = '16px'; toast.style.right = '16px';
+      toast.style.background = '#10b981'; toast.style.color = 'white'; toast.style.padding = '12px 18px';
+      toast.style.borderRadius = '60px'; toast.style.fontWeight = '600'; toast.style.textAlign = 'center';
+      toast.style.zIndex = '999'; toast.style.boxShadow = '0 6px 14px rgba(0,0,0,0.1)';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2600);
       return true;
     }
-    
-    // filter chip logic
-    function updateFilterChipsActive() {
-      document.querySelectorAll('.chip-filter').forEach(chip => {
-        const filterVal = chip.getAttribute('data-filter');
-        if(filterVal === 'all' && currentFilter === 'all') chip.classList.add('active');
-        else if(filterVal !== 'all' && currentFilter === filterVal) chip.classList.add('active');
+
+    function updateChipActive() {
+      document.querySelectorAll('.chip').forEach(chip => {
+        const val = chip.getAttribute('data-filter');
+        if(val === 'all' && currentFilter === 'all') chip.classList.add('active');
+        else if(val !== 'all' && currentFilter === val) chip.classList.add('active');
         else chip.classList.remove('active');
       });
       renderTransactions();
     }
-    
-    // event listeners for filter chips
-    function bindFilterChips() {
-      document.querySelectorAll('.chip-filter').forEach(chip => {
-        chip.addEventListener('click', (e) => {
-          const filterVal = chip.getAttribute('data-filter');
-          if(filterVal === 'all') currentFilter = 'all';
-          else currentFilter = filterVal;
-          updateFilterChipsActive();
+
+    function bindFilters() {
+      document.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          currentFilter = chip.getAttribute('data-filter');
+          updateChipActive();
         });
       });
     }
-    
-    // search modal simple (prompt)
-    const searchIcon = document.getElementById('searchIcon');
-    if(searchIcon) {
-      searchIcon.addEventListener('click', () => {
-        let kw = prompt("Search by receiver name or category:");
-        if(kw !== null) { searchKeyword = kw; renderTransactions(); }
-      });
-    }
-    // filter icon: reset all filters
-    const filterIcon = document.getElementById('filterIcon');
-    if(filterIcon) {
-      filterIcon.addEventListener('click', () => {
-        currentFilter = "all";
-        searchKeyword = "";
-        updateFilterChipsActive();
-        alert("All filters cleared");
-      });
-    }
-    const downloadIcon = document.getElementById('downloadIcon');
-    if(downloadIcon) {
-      downloadIcon.addEventListener('click', () => {
-        let dataStr = JSON.stringify(transactions, null, 2);
-        let blob = new Blob([dataStr], {type: "application/json"});
-        let url = URL.createObjectURL(blob);
-        let a = document.createElement('a');
-        a.href = url;
-        a.download = "paytm_history.json";
-        a.click();
-        URL.revokeObjectURL(url);
-      });
-    }
-    
-    // modal handling - shared between upper add button and any future buttons
-    const modal = document.getElementById('transactionModal');
-    const upperAddBtn = document.getElementById('addTxnUpperBtn');
-    const cancelBtn = document.getElementById('cancelModalBtn');
-    const saveBtn = document.getElementById('confirmSaveBtn');
-    
-    function openModal() { modal.classList.add('active'); }
-    function closeModal() { modal.classList.remove('active'); }
-    
-    upperAddBtn.addEventListener('click', openModal);
-    cancelBtn.addEventListener('click', closeModal);
-    saveBtn.addEventListener('click', () => {
+
+    // UI Interactions
+    document.getElementById('searchHistory')?.addEventListener('click', () => {
+      let kw = prompt("Search by name or category:", searchKeyword);
+      if(kw !== null) { searchKeyword = kw; renderTransactions(); }
+    });
+    document.getElementById('clearFilters')?.addEventListener('click', () => {
+      currentFilter = "all"; searchKeyword = "";
+      updateChipActive();
+    });
+    document.getElementById('exportData')?.addEventListener('click', () => {
+      let dataStr = JSON.stringify(transactions, null, 2);
+      let blob = new Blob([dataStr], {type:"application/json"});
+      let a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `payflow_export.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    // Modal add
+    const addModal = document.getElementById('addModal');
+    const openAdd = document.getElementById('openAddBtn');
+    const cancelAdd = document.getElementById('cancelModalBtn');
+    const confirmAdd = document.getElementById('confirmAddBtn');
+    openAdd.addEventListener('click', () => {
+      addModal.classList.add('active');
+      let nowLocal = new Date();
+      nowLocal.setMinutes(nowLocal.getMinutes() - nowLocal.getTimezoneOffset());
+      document.getElementById('txnDatetime').value = nowLocal.toISOString().slice(0,16);
+    });
+    cancelAdd.addEventListener('click', () => addModal.classList.remove('active'));
+    confirmAdd.addEventListener('click', () => {
       const receiver = document.getElementById('receiverName').value.trim();
-      const amount = document.getElementById('amountInput').value;
+      const amount = document.getElementById('amountValue').value;
       const category = document.getElementById('categorySelect').value;
-      let datetime = document.getElementById('datetimeInput').value;
+      let datetime = document.getElementById('txnDatetime').value;
       const bankAccount = document.getElementById('bankSelect').value;
       if(!receiver) { alert("Receiver name required"); return; }
       if(!amount || parseFloat(amount) <=0) { alert("Valid amount required"); return; }
-      if(!datetime) {
-        // default now
-        datetime = new Date().toISOString().slice(0,16);
-      }
+      if(!datetime) datetime = new Date().toISOString().slice(0,16);
       addTransaction(receiver, parseFloat(amount), category, datetime, bankAccount);
-      // reset fields
       document.getElementById('receiverName').value = '';
-      document.getElementById('amountInput').value = '';
-      document.getElementById('datetimeInput').value = '';
-      closeModal();
+      document.getElementById('amountValue').value = '';
+      addModal.classList.remove('active');
     });
-    
-    // check balance button alert
-    document.querySelectorAll('.check-balance-btn').forEach(btn => {
+
+    // Close detail modal
+    document.getElementById('closeDetailPopup').addEventListener('click', () => {
+      document.getElementById('detailPopup').classList.remove('active');
+    });
+    window.addEventListener('click', (e) => {
+      const modalDiv = document.getElementById('detailPopup');
+      if(e.target === modalDiv) modalDiv.classList.remove('active');
+    });
+
+    // Balance button
+    document.querySelectorAll('.balance-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        const bank = btn.getAttribute('data-bank');
-        alert(`💰 ${bank === 'HDFC' ? 'HDFC Bank' : 'Uttar Pradesh Gramin Bank'} Account balance: ₹24,850 (demo)`);
+        const balance = btn.getAttribute('data-balance') || "₹42,000";
+        alert(`💰 Account Balance: ${balance}`);
       });
     });
-    
-    // back arrow simulates go back
-    document.getElementById('backArrowBtn').addEventListener('click', () => {
-      alert("Navigate back to home (simulated)");
-    });
-    
-    // init data
-    loadTransactionsFromStorage();
+    document.getElementById('backArrow').addEventListener('click', () => alert("← Dashboard"));
+
+    // Set current month
+    const monthNamesFull = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const curr = new Date();
+    document.getElementById('currentMonthDisplay').innerText = `${monthNamesFull[curr.getMonth()]} ${curr.getFullYear()}`;
+
+    loadData();
     renderTransactions();
-    bindFilterChips();
-    // set default filter
+    bindFilters();
     currentFilter = "all";
-    updateFilterChipsActive();
+    updateChipActive();
   })();
 </script>
+<audio id="successSound" preload="auto">
+    <source src="success.mp3" type="audio/mpeg">
+</audio>
+
+
 </body>
 </html>
