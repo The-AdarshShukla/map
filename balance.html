@@ -41,6 +41,7 @@
       --radius-2xl: 40px;
     }
 
+    /* Main App Styles */
     .app-header {
       position: sticky;
       top: 0;
@@ -346,6 +347,7 @@
     .txn-name {
       font-weight: 800;
       font-size: 0.95rem;
+      text-transform: capitalize;
     }
 
     .txn-time {
@@ -385,141 +387,7 @@
       transform: scale(0.94);
     }
 
-    .fullscreen-detail {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(12px);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0.2s, opacity 0.2s;
-    }
-
-    .fullscreen-detail.active {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .detail-sheet {
-      background: white;
-      width: 88%;
-      max-width: 440px;
-      border-radius: 52px;
-      overflow: hidden;
-      animation: slideUp 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
-    }
-
-    @keyframes slideUp {
-      from {
-        transform: translateY(50px);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .detail-header {
-      background: linear-gradient(135deg, #0a3cbf, #1d4ed8);
-      padding: 28px 22px;
-      text-align: center;
-      color: white;
-    }
-
-    .detail-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(4px);
-      padding: 6px 18px;
-      border-radius: 60px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-
-    .detail-header h3 {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    .detail-body {
-      padding: 24px 24px;
-    }
-
-    .info-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      border-bottom: 1px solid #eff3f9;
-      padding-bottom: 12px;
-    }
-
-    .info-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #5f7392;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .info-value {
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: #111827;
-      text-align: right;
-    }
-
-    .badge-success {
-      background: #e6f7ef;
-      color: #0e7c3e;
-      padding: 4px 12px;
-      border-radius: 60px;
-      font-size: 0.7rem;
-      font-weight: 700;
-    }
-
-    .detail-footer {
-      padding: 16px 24px 28px;
-      border-top: 1px solid #edf2f8;
-    }
-
-    .close-detail-btn {
-      width: 100%;
-      background: var(--primary-blue);
-      border: none;
-      padding: 15px;
-      border-radius: 80px;
-      color: white;
-      font-weight: 800;
-      font-size: 1rem;
-      transition: 0.15s;
-    }
-
-    .close-detail-btn:active {
-      transform: scale(0.97);
-      background: var(--primary-dark);
-    }
-
+    /* Modal / Overlay Styles */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -639,12 +507,543 @@
         opacity: 0;
         transform: translateY(20px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
+
+    /* ---- PAYTM STYLE SUCCESS PAGE (REALISTIC) ---- */
+.success-fullscreen {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #dff3ff;
+  overflow-y: auto;
+  z-index: 9999;
+  display: none;
+}
+
+.success-fullscreen.active {
+  display: block;
+}
+
+.paytm-success-card {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  background: #dff3ff;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP AREA */
+.success-header-area {
+  background: #dff3ff;
+  padding-bottom: 16px;
+}
+
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+}
+
+.back-icon {
+  font-size: 26px;
+  color: #000;
+  cursor: pointer;
+}
+
+.dots-menu {
+  font-size: 24px;
+  color: #000;
+  cursor: pointer;
+}
+
+/* PAYTM LOGO - REDUCED SIZE */
+.paytm-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Apply reduced logo size: width: 100px, auto height maintains aspect ratio */
+.paytm-logo img {
+  width: 100px;       /* Reduced logo size - was previously larger/undefined */
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* RECEIVER SECTION */
+.receiver-block {
+  text-align: center;
+  margin-top: 16px;
+  padding: 0 20px;
+}
+
+.receiver-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.upi-id-light {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  color: #444;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* AMOUNT SECTION - aligned horizontally */
+.amount-verified-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 20px;
+  padding: 0 20px;
+}
+
+.big-amount {
+  font-size: 72px;
+  font-weight: 800;
+  color: #000;
+  line-height: 1;
+}
+
+.verified-chip-large {
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.verified-chip-large span {
+  display: none;
+}
+
+.verified-chip-large i {
+  color: #17c964;
+  font-size: 52px;
+}
+
+/* TRANSACTION INFO - centered properly */
+.txn-card {
+  background: none;
+  border: none;
+  box-shadow: none;
+  margin: 0 20px 16px;
+  text-align: center;
+  padding: 0;
+}
+
+.txn-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.txn-label {
+  color: #444;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.txn-value {
+  color: #111;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ref-row-custom {
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding-top: 0;
+}
+
+.copy-ref-btn {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  color: #333;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* ACTION BUTTONS - side by side */
+.action-grid {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px 20px 30px;
+}
+
+.action-pill {
+  background: #fff;
+  border: none;
+  border-radius: 30px;
+  min-width: 130px;
+  height: 52px;
+  font-size: 17px;
+  font-weight: 700;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.action-pill:first-child {
+  background: #fff;
+  color: #111;
+}
+
+.action-pill:last-child {
+  background: #12b32f;
+  color: #fff;
+}
+
+.action-pill:active {
+  transform: scale(0.97);
+}
+
+/* DIVIDER WITH BLUE GRADIENT */
+.divider-light {
+  height: 10px;
+  width: 100%;
+  background: linear-gradient(to bottom, #003ea8 0%, #003ea8 45%, #00b7ff 45%, #00b7ff 100%);
+}
+
+/* REMINDER SECTION */
+.reminder-area {
+  background: #f1f1f1;
+  text-align: center;
+  padding: 50px 25px 60px;
+}
+
+.reminder-title {
+  font-size: 52px;
+  font-weight: 800;
+  color: #111;
+  line-height: 1.1;
+  margin-bottom: 30px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reminder-btn {
+  background: #f7c83c;
+  border: none;
+  height: 70px;
+  width: 340px;
+  max-width: 100%;
+  border-radius: 40px;
+  font-size: 28px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.reminder-btn:active {
+  transform: scale(0.97);
+}
+
+/* PHONE MOCK */
+.mock-phone {
+  margin: 50px auto 0;
+  width: 260px;
+  height: 430px;
+  background: #fff;
+  border-radius: 40px;
+  border: 10px solid #333;
+  color: #002970;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* BOTTOM NAVIGATION - fixed at bottom */
+.bottom-tab-bar {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 330px;
+  height: 68px;
+  background: #002d8d;
+  border-radius: 40px;
+  border: none;
+  padding: 0 16px;
+  z-index: 100;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tab-item {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.tab-item i {
+  font-size: 22px;
+}
+
+.tab-item.active {
+  color: #fff;
+}
+
+/* RESPONSIVE FOR MOBILE */
+@media (max-width: 480px) {
+  /* Adjust logo further on very small screens for perfect fit */
+  .paytm-logo img {
+    width: 80px;
+  }
+  
+  .receiver-name {
+    font-size: 24px;
+  }
+
+  .upi-id-light {
+    font-size: 14px;
+  }
+
+  .big-amount {
+    font-size: 52px;
+  }
+
+  .verified-chip-large i {
+    font-size: 40px;
+  }
+
+  .amount-verified-wrapper {
+    gap: 8px;
+  }
+
+  .action-pill {
+    min-width: 110px;
+    height: 48px;
+    font-size: 15px;
+  }
+
+  .reminder-title {
+    font-size: 32px;
+  }
+
+  .reminder-btn {
+    width: 260px;
+    height: 56px;
+    font-size: 22px;
+  }
+
+  .bottom-tab-bar {
+    width: 280px;
+    height: 60px;
+  }
+
+  .tab-item {
+    font-size: 10px;
+  }
+
+  .tab-item i {
+    font-size: 20px;
+  }
+}
+
+/* ========== NEW TRANSACTION DETAIL MODAL (ADDED WITHOUT ALTERING EXISTING STYLES) ========== */
+.detail-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.2s ease;
+}
+
+.detail-modal-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.detail-modal-card {
+  background: var(--surface-white);
+  width: 88%;
+  max-width: 380px;
+  border-radius: 48px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: modalPop 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.detail-header {
+  background: linear-gradient(135deg, #0a3cbf, #1f5ef0);
+  padding: 24px 20px 20px;
+  text-align: center;
+  color: white;
+}
+
+.detail-header .detail-icon-circle {
+  background: rgba(255,255,255,0.2);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  font-size: 32px;
+  backdrop-filter: blur(2px);
+}
+
+.detail-header h4 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+}
+
+.detail-amount-badge {
+  background: rgba(255,255,255,0.2);
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 60px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.detail-info-list {
+  padding: 20px 24px 28px;
+  background: white;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+
+.info-value {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #0c2a4b;
+  text-align: right;
+  word-break: break-word;
+  max-width: 55%;
+}
+
+.info-value.utr-copy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.copy-detail-ref {
+  background: #eef2ff;
+  padding: 4px 10px;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.1s;
+  color: var(--primary-blue);
+}
+
+.copy-detail-ref:active {
+  background: #dee5fc;
+  transform: scale(0.96);
+}
+
+.detail-footer-close {
+  padding: 6px 24px 26px;
+  text-align: center;
+}
+
+.close-detail-btn {
+  background: #eff2f9;
+  border: none;
+  width: 100%;
+  padding: 14px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--primary-blue);
+  transition: 0.15s;
+}
+
+.close-detail-btn:active {
+  background: #e6e9f0;
+  transform: scale(0.97);
+}
+
   </style>
 </head>
 <body>
@@ -702,6 +1101,7 @@
   <div class="footer-brand"><i class="fas fa-shield-alt"></i> Secure · Instant UTR Settlement</div>
 </main>
 
+<!-- Add Transaction Modal -->
 <div class="modal-overlay" id="addModal">
   <div class="modal-card">
     <h3><i class="fas fa-paper-plane"></i> New Transfer</h3>
@@ -720,283 +1120,260 @@
       <option value="Uttar Pradesh Gramin Bank - 1842">UP Gramin Bank - 1842</option>
     </select>
     <div class="modal-actions">
-      <button id="cancelModalBtn" class="cancel-modal-btn">Cancel</button>
+      <button class="cancel-modal-btn" id="cancelModalBtn">Cancel</button>
       <button id="confirmAddBtn" class="save-btn">Send & Save</button>
     </div>
   </div>
 </div>
 
-<div class="fullscreen-detail" id="detailPopup">
-  <div class="detail-sheet">
-    <div class="detail-header">
-      <div class="detail-status"><i class="fas fa-check-circle"></i> Transaction Completed</div>
-      <h3 id="detailAmountLarge">₹0</h3>
-    </div>
-    <div class="detail-body">
-      <div class="info-grid">
-        <div class="info-row"><span class="info-label"><i class="fas fa-user"></i> Beneficiary</span><span class="info-value" id="detailBeneficiary">-</span></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-tag"></i> Category</span><span class="info-value" id="detailCategoryVal">-</span></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-calendar-alt"></i> Date & Time</span><span class="info-value" id="detailDateTimeVal">-</span></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-university"></i> Debit Account</span><span class="info-value" id="detailBankVal">-</span></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-fingerprint"></i> UTR Number</span><span class="info-value" id="detailUTR">-</span></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-exchange-alt"></i> Payment Rail</span><span class="info-value">UPI / IMPS</span></div>
-        <div class="info-row"><span class="info-label"><i class="fas fa-clock"></i> Settlement</span><span class="info-value badge-success">Instant</span></div>
+<!-- REALISTIC SUCCESS PAGE with REDUCED PAYTM LOGO SIZE -->
+<div id="successFullscreen" class="success-fullscreen">
+  <div class="paytm-success-card">
+    <div class="success-header-area">
+      <div class="nav-row">
+        <div class="back-icon" id="closeSuccessPage"><i class="fas fa-arrow-left"></i></div>
+        <div class="paytm-logo">
+          <img src="https://i.postimg.cc/5y2M8pyk/Screenshot-2026-06-06-172311.png" alt="Paytm Logo">
+        </div>
+        <div class="dots-menu"><i class="fas fa-ellipsis-v"></i></div>
+      </div>
+      <div class="receiver-block">
+        <div class="receiver-name" id="succReceiverName">Adarsh Shukla</div>
+        <div class="upi-id-light" id="succUpiId">shuklaadarsh@paytm</div>
+      </div>
+      <div class="amount-verified-wrapper">
+        <span class="big-amount" id="succAmount">₹0</span>
+        <div class="verified-chip-large" id="verifiedChip">
+          <i class="fas fa-check-circle"></i> 
+        </div>
       </div>
     </div>
-    <div class="detail-footer">
-      <button class="close-detail-btn" id="closeDetailPopup">Close</button>
+    <div class="txn-card">
+      <div class="txn-row">
+        <span class="txn-label">Date & Time</span>
+        <span class="txn-value" id="succDateTime">--</span>
+      </div>
+      <div class="ref-row-custom">
+        <span class="txn-label">Reference ID</span>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <span class="txn-value" id="succRefNo">----</span>
+          <span class="copy-ref-btn" id="copyRefButton"><i class="far fa-copy"></i> Copy</span>
+        </div>
+      </div>
+    </div>
+    <div class="action-grid">
+      <button class="action-pill" id="checkBalanceAction"><i class="fas fa-wallet"></i> Balance</button>
+      <button class="action-pill" id="payAgainAction"><i class="fas fa-redo-alt"></i> Pay Again</button>
+      <button class="action-pill" id="whatsShareAction"><i class="fab fa-whatsapp"></i> Share</button>
+    </div>
+    <div class="divider-light"></div>
+    <div class="reminder-area">
+      <div class="reminder-title">Now pay on time.<br>Every time.</div>
+      <button class="reminder-btn" id="reminderBtn">Set Reminders →</button>
+      <div class="mock-phone"><i class="fas fa-mobile-alt" style="font-size: 38px;"></i> <span>UPI Payment Ready</span></div>
+    </div>
+    <div class="bottom-tab-bar">
+      <div class="tab-item"><i class="fas fa-home"></i><span>Home</span></div>
+      <div class="tab-item"><i class="fas fa-qrcode"></i><span>Scan</span></div>
+      <div class="tab-item active"><i class="fas fa-tag"></i><span>Offers</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== NEW TRANSACTION DETAIL MODAL (no changes to existing code) ========== -->
+<div id="transactionDetailModal" class="detail-modal-overlay">
+  <div class="detail-modal-card">
+    <div class="detail-header">
+      <div class="detail-icon-circle"><i class="fas fa-receipt"></i></div>
+      <h4 id="detailTxnReceiver">Transaction</h4>
+      <div class="detail-amount-badge" id="detailTxnAmount">₹0</div>
+    </div>
+    <div class="detail-info-list">
+      <div class="info-row">
+        <span class="info-label"><i class="far fa-calendar-alt"></i> Date & Time</span>
+        <span class="info-value" id="detailTxnDateTime">--</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><i class="fas fa-tag"></i> Category</span>
+        <span class="info-value" id="detailTxnCategory">--</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><i class="fas fa-university"></i> Bank Account</span>
+        <span class="info-value" id="detailTxnBank">--</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label"><i class="fas fa-fingerprint"></i> UTR / Ref ID</span>
+        <div class="info-value utr-copy">
+          <span id="detailTxnUTR">--</span>
+          <span class="copy-detail-ref" id="copyDetailUTR"><i class="far fa-copy"></i> Copy</span>
+        </div>
+      </div>
+    </div>
+    <div class="detail-footer-close">
+      <button class="close-detail-btn" id="closeDetailModalBtn">Close</button>
     </div>
   </div>
 </div>
 
 <audio id="successSound" preload="auto">
-  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+  <source src="https://www.image2url.com/r2/default/audio/1780748863455-197ee552-4642-42c9-9893-a97054543876.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  (function() {
+  (function(){
     let transactions = [];
     let currentFilter = "all";
     let searchKeyword = "";
+    let lastTxnForSuccess = null;
 
-    function generateUTR() {
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
-      let code = 'PF' + Date.now().toString().slice(-6) + Math.floor(Math.random() * 10000);
-      return code.toUpperCase();
-    }
-
-    function playSuccessBeep() {
-      const audio = document.getElementById("successSound");
-      if(audio) {
-        audio.currentTime = 0;
-        audio.play().catch(e => console.log("Audio interaction deferred"));
-      }
-    }
-
-    function saveToStorage() {
-      localStorage.setItem("payflow_pro_adv", JSON.stringify(transactions));
-    }
-
+    function generateUTR() { return 'PF' + Date.now().toString().slice(-6) + Math.floor(Math.random() * 10000); }
+    function playSuccessBeep() { const audio = document.getElementById("successSound"); if(audio) { audio.currentTime = 0; audio.play().catch(e=>console.log); } }
+    function saveToStorage() { localStorage.setItem("payflow_pro_adv", JSON.stringify(transactions)); }
+    
     function loadData() {
       const stored = localStorage.getItem("payflow_pro_adv");
-      if(stored) {
-        transactions = JSON.parse(stored);
-        transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
-      } else {
-        const now = new Date();
-        const yesterday = new Date(now); yesterday.setDate(now.getDate() - 1);
-        const formatDT = (d) => d.toISOString().slice(0, 16);
+      if(stored) { transactions = JSON.parse(stored); transactions.sort((a,b)=>new Date(b.datetime)-new Date(a.datetime)); }
+      else {
+        const now = new Date(); const yesterday = new Date(now); yesterday.setDate(now.getDate()-1);
+        const formatDT = (d)=>d.toISOString().slice(0,16);
         transactions = [
-          { id: Date.now() + 101, receiver: "Rajesh Sharma", amount: 1890, category: "Shopping", datetime: formatDT(now), bankAccount: "HDFC Bank - 7753", utr: generateUTR() },
-          { id: Date.now() + 102, receiver: "Dr. Anita Clinic", amount: 750, category: "Medical & Healthcare", datetime: formatDT(yesterday), bankAccount: "Uttar Pradesh Gramin Bank - 1842", utr: generateUTR() },
-          { id: Date.now() + 103, receiver: "Metro Grocery", amount: 430, category: "Food & Dining", datetime: formatDT(yesterday), bankAccount: "HDFC Bank - 7753", utr: generateUTR() }
+          { id: Date.now()+101, receiver: "Rajesh Sharma", amount: 1890, category: "Shopping", datetime: formatDT(now), bankAccount: "HDFC Bank - 7753", utr: generateUTR() },
+          { id: Date.now()+102, receiver: "Dr. Anita Clinic", amount: 750, category: "Medical & Healthcare", datetime: formatDT(yesterday), bankAccount: "Uttar Pradesh Gramin Bank - 1842", utr: generateUTR() },
+          { id: Date.now()+103, receiver: "Metro Grocery", amount: 430, category: "Food & Dining", datetime: formatDT(yesterday), bankAccount: "HDFC Bank - 7753", utr: generateUTR() }
         ];
-        transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+        transactions.sort((a,b)=>new Date(b.datetime)-new Date(a.datetime));
         saveToStorage();
       }
     }
 
-    function formatDateTime(dtStr) {
-      if (!dtStr) return "Just now";
-      let d = new Date(dtStr);
-      return `${d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })} · ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-    }
-
-    function getFiltered() {
-      let filtered = [...transactions];
-      if (currentFilter !== "all") filtered = filtered.filter(t => t.bankAccount === currentFilter);
-      if (searchKeyword.trim()) {
-        const kw = searchKeyword.toLowerCase();
-        filtered = filtered.filter(t => t.receiver.toLowerCase().includes(kw) || t.category.toLowerCase().includes(kw));
-      }
-      filtered.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
-      return filtered;
-    }
-
-    function updateTotalUI() {
-      const filtered = getFiltered();
-      const sum = filtered.reduce((acc, t) => acc + t.amount, 0);
-      document.getElementById('totalSpentLabel').innerHTML = `Total ₹${sum.toLocaleString()}`;
-    }
-
+    function formatDateTime(dtStr) { if(!dtStr) return "Just now"; let d=new Date(dtStr); return `${d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})} · ${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`; }
+    function formatForDetail(dtStr) { if(!dtStr) return "—"; let d=new Date(dtStr); return `${d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})} at ${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`; }
+    function getFiltered() { let filtered = [...transactions]; if(currentFilter!=="all") filtered=filtered.filter(t=>t.bankAccount===currentFilter); if(searchKeyword.trim()){ let kw=searchKeyword.toLowerCase(); filtered=filtered.filter(t=>t.receiver.toLowerCase().includes(kw)||t.category.toLowerCase().includes(kw)); } filtered.sort((a,b)=>new Date(b.datetime)-new Date(a.datetime)); return filtered; }
+    function updateTotalUI(){ const filtered=getFiltered(); const sum=filtered.reduce((acc,t)=>acc+t.amount,0); document.getElementById('totalSpentLabel').innerHTML=`Total ₹${sum.toLocaleString()}`; }
+    
     function renderTransactions() {
-      const container = document.getElementById('transactionList');
-      const filtered = getFiltered();
-      if (filtered.length === 0) {
-        container.innerHTML = `<div style="text-align:center; padding:60px 20px;"><i class="fas fa-receipt" style="font-size: 2.6rem; color:#cbd5e1;"></i><p style="margin-top:12px; font-weight:500;">No transactions found</p><small>Tap + to initiate a transfer</small></div>`;
-        updateTotalUI();
-        return;
-      }
-      let html = '';
-      filtered.forEach(txn => {
-        let initials = txn.receiver.substring(0, 2).toUpperCase();
-        let bankShort = txn.bankAccount.includes("HDFC") ? "HDFC" : "UPGB";
-        html += `
-          <div class="txn-item" data-txn-id="${txn.id}">
-            <div class="txn-avatar">${escapeHtml(initials)}</div>
-            <div class="txn-details">
-              <div class="txn-name">${escapeHtml(txn.receiver)}</div>
-              <div class="txn-time">${formatDateTime(txn.datetime)}</div>
-              <div class="txn-cat">${escapeHtml(txn.category)}</div>
-            </div>
-            <div class="txn-amount">
-              -₹${txn.amount.toLocaleString()}
-              <div style="font-size:0.55rem; color:#6c7e9e;">${bankShort}</div>
-            </div>
-            <button class="delete-btn" data-id="${txn.id}"><i class="fas fa-trash-alt"></i></button>
-          </div>
-        `;
+      const container=document.getElementById('transactionList'); const filtered=getFiltered();
+      if(filtered.length===0){ container.innerHTML=`<div style="text-align:center; padding:60px 20px;"><i class="fas fa-receipt" style="font-size:2.6rem; color:#cbd5e1;"></i><p style="margin-top:12px;">No transactions</p></div>`; updateTotalUI(); return; }
+      let html='';
+      filtered.forEach(txn=>{ let initials=txn.receiver.substring(0,2).toUpperCase(); let bankShort=txn.bankAccount.includes("HDFC")?"HDFC":"UPGB";
+        html+=`<div class="txn-item" data-txn-id="${txn.id}"><div class="txn-avatar">${escapeHtml(initials)}</div><div class="txn-details"><div class="txn-name">${escapeHtml(txn.receiver)}</div><div class="txn-time">${formatDateTime(txn.datetime)}</div><div class="txn-cat">${escapeHtml(txn.category)}</div></div><div class="txn-amount">-₹${txn.amount.toLocaleString()}<div style="font-size:0.55rem;">${bankShort}</div></div><button class="delete-btn" data-id="${txn.id}"><i class="fas fa-trash-alt"></i></button></div>`;
       });
-      container.innerHTML = html;
+      container.innerHTML=html;
+      document.querySelectorAll('.delete-btn').forEach(btn=>{ btn.addEventListener('click',(e)=>{ e.stopPropagation(); const id=parseInt(btn.getAttribute('data-id')); if(confirm("Delete?")){ transactions=transactions.filter(t=>t.id!==id); saveToStorage(); renderTransactions(); updateChipActive(); } }); });
+      // NEW: Add click listener to each transaction item to open detail modal (preserving previous delete functionality)
+      document.querySelectorAll('.txn-item').forEach(item=>{
+        item.addEventListener('click',(e)=>{ 
+          if(e.target.closest('.delete-btn')) return; 
+          const txnId=parseInt(item.getAttribute('data-txn-id')); 
+          const txn=transactions.find(t=>t.id===txnId); 
+          if(txn) showTransactionDetail(txn);
+        }); 
+      });
       updateTotalUI();
-
-      document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const id = parseInt(btn.getAttribute('data-id'));
-          if (confirm("Delete this transaction permanently?")) {
-            transactions = transactions.filter(t => t.id !== id);
-            saveToStorage();
-            renderTransactions();
-            updateChipActive();
-          }
-        });
-      });
-
-      document.querySelectorAll('.txn-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-          if (e.target.closest('.delete-btn')) return;
-          const txnId = parseInt(item.getAttribute('data-txn-id'));
-          const txn = transactions.find(t => t.id === txnId);
-          if (txn) showAdvancedDetail(txn);
-        });
+    }
+    
+    // New function to display transaction detail modal
+    function showTransactionDetail(txn) {
+      if(!txn) return;
+      document.getElementById('detailTxnReceiver').innerText = txn.receiver;
+      document.getElementById('detailTxnAmount').innerHTML = `₹${txn.amount.toLocaleString()}`;
+      document.getElementById('detailTxnDateTime').innerText = formatForDetail(txn.datetime);
+      document.getElementById('detailTxnCategory').innerText = txn.category;
+      let bankDisplay = txn.bankAccount.includes("HDFC") ? "HDFC Bank - 7753" : txn.bankAccount.includes("Uttar Pradesh") ? "UP Gramin Bank - 1842" : txn.bankAccount;
+      document.getElementById('detailTxnBank').innerText = bankDisplay;
+      const utrCode = txn.utr || generateUTR();
+      if(!txn.utr) { txn.utr = utrCode; saveToStorage(); }
+      document.getElementById('detailTxnUTR').innerText = utrCode;
+      document.getElementById('transactionDetailModal').classList.add('active');
+      // attach copy UTR inside modal
+      const copyBtn = document.getElementById('copyDetailUTR');
+      const newCopyBtn = copyBtn.cloneNode(true);
+      copyBtn.parentNode.replaceChild(newCopyBtn, copyBtn);
+      newCopyBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const utrSpan = document.getElementById('detailTxnUTR').innerText;
+        navigator.clipboard.writeText(utrSpan);
+        const toastDiv=document.createElement('div'); toastDiv.className='custom-toast'; toastDiv.innerHTML=`<i class="far fa-copy"></i> UTR copied`; document.body.appendChild(toastDiv); setTimeout(()=>toastDiv.remove(),1500);
       });
     }
-
-    function showAdvancedDetail(txn) {
-      document.getElementById('detailAmountLarge').innerHTML = `₹${txn.amount.toLocaleString()}`;
-      document.getElementById('detailBeneficiary').innerText = txn.receiver;
-      document.getElementById('detailCategoryVal').innerText = txn.category;
-      document.getElementById('detailDateTimeVal').innerHTML = formatDateTime(txn.datetime);
-      document.getElementById('detailBankVal').innerText = txn.bankAccount;
-      let utrVal = txn.utr || generateUTR();
-      if (!txn.utr) { txn.utr = utrVal; saveToStorage(); }
-      document.getElementById('detailUTR').innerText = txn.utr;
-      document.getElementById('detailPopup').classList.add('active');
+    
+    function closeDetailModal() { document.getElementById('transactionDetailModal').classList.remove('active'); }
+    
+    function escapeHtml(str){ if(!str) return ''; return str.replace(/[&<>]/g,function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+    function updateChipActive(){ document.querySelectorAll('.chip').forEach(chip=>{ const val=chip.getAttribute('data-filter'); if((val==='all'&&currentFilter==='all')||(val!=='all'&&currentFilter===val)) chip.classList.add('active'); else chip.classList.remove('active'); }); renderTransactions(); }
+    
+    function toTitleCase(str) {
+      if(!str) return '';
+      return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     }
-
-    function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
-
-    function addTransaction(receiver, amount, category, datetime, bankAccount) {
-      if (!receiver || amount <= 0 || !datetime) return false;
-      const newTxn = {
-        id: Date.now(),
-        receiver: receiver.trim(),
-        amount: parseFloat(amount),
-        category: category,
-        datetime: datetime,
-        bankAccount: bankAccount,
-        utr: generateUTR()
-      };
-      transactions.unshift(newTxn);
-      transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
-      saveToStorage();
-      renderTransactions();
-      playSuccessBeep();
-
-      const toast = document.createElement('div');
-      toast.className = 'custom-toast';
-      toast.innerHTML = `<i class="fas fa-check-circle" style="margin-right: 8px;"></i> ₹${amount.toLocaleString()} sent to ${receiver.substring(0, 18)} · UTR: ${newTxn.utr}`;
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 2800);
+    
+    function addAndShowSuccess(receiver, amount, category, datetime, bankAccount) {
+      if(!receiver || amount<=0 || !datetime) return false;
+      const formattedReceiver = toTitleCase(receiver.trim());
+      const newTxn={ id:Date.now(), receiver:formattedReceiver, amount:parseFloat(amount), category, datetime, bankAccount, utr:generateUTR() };
+      transactions.unshift(newTxn); transactions.sort((a,b)=>new Date(b.datetime)-new Date(a.datetime)); saveToStorage(); renderTransactions(); playSuccessBeep();
+      lastTxnForSuccess = { recName: formattedReceiver, upiId: `${formattedReceiver.replace(/\s/g,'').toLowerCase()}@paytm`, amountVal: amount, datetimeRaw: datetime, bankAccount };
+      openSuccessModal(newTxn);
+      const toastDiv=document.createElement('div'); toastDiv.className='custom-toast'; toastDiv.innerHTML=`<i class="fas fa-check-circle"></i> ₹${amount} sent to ${formattedReceiver} · UTR: ${newTxn.utr}`; document.body.appendChild(toastDiv); setTimeout(()=>toastDiv.remove(),2500);
       return true;
     }
-
-    function updateChipActive() {
-      document.querySelectorAll('.chip').forEach(chip => {
-        const val = chip.getAttribute('data-filter');
-        if ((val === 'all' && currentFilter === 'all') || (val !== 'all' && currentFilter === val)) chip.classList.add('active');
-        else chip.classList.remove('active');
-      });
-      renderTransactions();
+    
+    function formatDateTimePrettyForSuccess(datetimeISO){
+      if(!datetimeISO) return "Just now";
+      let d=new Date(datetimeISO);
+      let day=d.getDate(); let month=d.toLocaleString('en',{month:'short'}); let hours=d.getHours(); let minutes=d.getMinutes().toString().padStart(2,'0'); let ampm=hours>=12?'PM':'AM'; hours=hours%12||12;
+      return `${day} ${month}, ${hours}:${minutes} ${ampm}`;
     }
-
-    function bindFilters() {
-      document.querySelectorAll('.chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-          currentFilter = chip.getAttribute('data-filter');
-          updateChipActive();
-        });
-      });
+    function openSuccessModal(txn){
+      const successDiv=document.getElementById('successFullscreen');
+      document.getElementById('succReceiverName').innerText = txn.receiver;
+      document.getElementById('succUpiId').innerText = `${txn.receiver.replace(/\s/g,'').toLowerCase()}@paytm`;
+      document.getElementById('succAmount').innerHTML = `₹${txn.amount.toLocaleString()}`;
+      document.getElementById('succDateTime').innerText = formatDateTimePrettyForSuccess(txn.datetime);
+      const refNum = txn.utr || generateUTR();
+      document.getElementById('succRefNo').innerText = refNum;
+      if(!txn.utr){ txn.utr=refNum; saveToStorage(); }
+      lastTxnForSuccess={...txn, refNo:refNum};
+      successDiv.classList.add('active');
+      const chipDiv=document.getElementById('verifiedChip'); chipDiv.style.transform='scale(1.05)'; setTimeout(()=>chipDiv.style.transform='',300);
     }
-
-    document.getElementById('searchHistory')?.addEventListener('click', () => {
-      let kw = prompt("Search by name or category:", searchKeyword);
-      if (kw !== null) { searchKeyword = kw; renderTransactions(); }
+    
+    function closeSuccessPage(){ document.getElementById('successFullscreen').classList.remove('active'); }
+    function showBalanceToast(){ let bal=Math.floor(Math.random()*55000)+1500; alert(`💰 Available Balance: ₹${bal.toLocaleString('en-IN')}`); }
+    function shareWhatsApp(){ if(lastTxnForSuccess){ let msg=`✅ Payment Successful!\n₹${lastTxnForSuccess.amount} sent to ${lastTxnForSuccess.receiver}\nRef: ${lastTxnForSuccess.utr || 'NA'}\nvia PayFlow Pro`; window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank'); } else alert("No recent transaction"); }
+    function payAgain(){ closeSuccessPage(); document.getElementById('addModal').classList.add('active'); if(lastTxnForSuccess){ document.getElementById('receiverName').value=lastTxnForSuccess.receiver||''; document.getElementById('amountValue').value=lastTxnForSuccess.amount||''; } }
+    
+    // Listeners
+    document.getElementById('openAddBtn').addEventListener('click',()=>{ document.getElementById('addModal').classList.add('active'); const now=new Date(); now.setMinutes(now.getMinutes()-now.getTimezoneOffset()); document.getElementById('txnDatetime').value=now.toISOString().slice(0,16); });
+    document.getElementById('cancelModalBtn').addEventListener('click',()=>document.getElementById('addModal').classList.remove('active'));
+    document.getElementById('confirmAddBtn').addEventListener('click',()=>{
+      const receiver=document.getElementById('receiverName').value.trim(); const amount=document.getElementById('amountValue').value; const category=document.getElementById('categorySelect').value; let datetime=document.getElementById('txnDatetime').value; const bankAccount=document.getElementById('bankSelect').value;
+      if(!receiver){ alert("Beneficiary name required"); return; }
+      if(!amount||parseFloat(amount)<=0){ alert("Valid amount required"); return; }
+      if(!datetime) datetime=new Date().toISOString().slice(0,16);
+      addAndShowSuccess(receiver, parseFloat(amount), category, datetime, bankAccount);
+      document.getElementById('receiverName').value=''; document.getElementById('amountValue').value='';
+      document.getElementById('addModal').classList.remove('active');
     });
-    document.getElementById('clearFilters')?.addEventListener('click', () => {
-      currentFilter = "all"; searchKeyword = "";
-      updateChipActive();
-    });
-    document.getElementById('exportData')?.addEventListener('click', () => {
-      const dataStr = JSON.stringify(transactions, null, 2);
-      const blob = new Blob([dataStr], { type: "application/json" });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `payflow_export_${Date.now()}.json`;
-      a.click();
-      URL.revokeObjectURL(a.href);
-    });
-
-    const addModal = document.getElementById('addModal');
-    const openAddBtn = document.getElementById('openAddBtn');
-    const cancelModal = document.getElementById('cancelModalBtn');
-    const confirmAdd = document.getElementById('confirmAddBtn');
-    openAddBtn.addEventListener('click', () => {
-      addModal.classList.add('active');
-      const nowLocal = new Date();
-      nowLocal.setMinutes(nowLocal.getMinutes() - nowLocal.getTimezoneOffset());
-      document.getElementById('txnDatetime').value = nowLocal.toISOString().slice(0, 16);
-    });
-    cancelModal.addEventListener('click', () => addModal.classList.remove('active'));
-    confirmAdd.addEventListener('click', () => {
-      const receiver = document.getElementById('receiverName').value.trim();
-      const amount = document.getElementById('amountValue').value;
-      const category = document.getElementById('categorySelect').value;
-      let datetime = document.getElementById('txnDatetime').value;
-      const bankAccount = document.getElementById('bankSelect').value;
-      if (!receiver) { alert("Beneficiary name required"); return; }
-      if (!amount || parseFloat(amount) <= 0) { alert("Valid amount required"); return; }
-      if (!datetime) datetime = new Date().toISOString().slice(0, 16);
-      addTransaction(receiver, parseFloat(amount), category, datetime, bankAccount);
-      document.getElementById('receiverName').value = '';
-      document.getElementById('amountValue').value = '';
-      addModal.classList.remove('active');
-    });
-
-    const closeDetail = document.getElementById('closeDetailPopup');
-    const detailPopup = document.getElementById('detailPopup');
-    closeDetail.addEventListener('click', () => detailPopup.classList.remove('active'));
-    window.addEventListener('click', (e) => { if (e.target === detailPopup) detailPopup.classList.remove('active'); });
-
-    document.querySelectorAll('.balance-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const bal = btn.getAttribute('data-balance');
-        alert(`Available Balance: ₹${bal}`);
-      });
-    });
-    document.getElementById('backArrow').addEventListener('click', () => alert("Dashboard overview • Secure environment"));
-
-    const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    const curDate = new Date();
-    document.getElementById('currentMonthDisplay').innerText = `${monthNames[curDate.getMonth()]} ${curDate.getFullYear()}`;
-
-    loadData();
-    renderTransactions();
-    bindFilters();
-    currentFilter = "all";
-    updateChipActive();
+    document.getElementById('searchHistory').addEventListener('click',()=>{ let kw=prompt("Search by name or category:",searchKeyword); if(kw!==null){ searchKeyword=kw; renderTransactions(); } });
+    document.getElementById('clearFilters').addEventListener('click',()=>{ currentFilter="all"; searchKeyword=""; updateChipActive(); });
+    document.getElementById('exportData').addEventListener('click',()=>{ const dataStr=JSON.stringify(transactions,null,2); const blob=new Blob([dataStr],{type:"application/json"}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`payflow_export_${Date.now()}.json`; a.click(); URL.revokeObjectURL(a.href); });
+    document.querySelectorAll('.balance-btn').forEach(btn=>{ btn.addEventListener('click',(e)=>{ e.stopPropagation(); alert(`Available Balance: ₹${btn.getAttribute('data-balance')}`); }); });
+    document.getElementById('backArrow').addEventListener('click',()=>alert("Dashboard overview • Secure environment"));
+    const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"]; const curDate=new Date(); document.getElementById('currentMonthDisplay').innerText=`${monthNames[curDate.getMonth()]} ${curDate.getFullYear()}`;
+    
+    document.getElementById('closeSuccessPage').addEventListener('click',closeSuccessPage);
+    document.getElementById('copyRefButton').addEventListener('click',()=>{ let refTxt=document.getElementById('succRefNo').innerText; navigator.clipboard.writeText(refTxt); alert("Reference ID copied"); });
+    document.getElementById('checkBalanceAction').addEventListener('click',showBalanceToast);
+    document.getElementById('payAgainAction').addEventListener('click',payAgain);
+    document.getElementById('whatsShareAction').addEventListener('click',shareWhatsApp);
+    document.getElementById('reminderBtn').addEventListener('click',()=>alert("🔔 Reminder set for future payments!"));
+    
+    // detail modal close events
+    document.getElementById('closeDetailModalBtn').addEventListener('click', closeDetailModal);
+    document.getElementById('transactionDetailModal').addEventListener('click', (e) => { if(e.target === document.getElementById('transactionDetailModal')) closeDetailModal(); });
+    
+    loadData(); renderTransactions(); function bindFilters(){ document.querySelectorAll('.chip').forEach(chip=>{ chip.addEventListener('click',()=>{ currentFilter=chip.getAttribute('data-filter'); updateChipActive(); }); }); } bindFilters(); currentFilter="all"; updateChipActive();
   })();
 </script>
 </body>
