@@ -1,1380 +1,1681 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>PayFlow Pro | Secure Banking Suite</title>
-  <!-- Font Awesome 6 (Professional Icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts: Inter Premium -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>PayFlow Pro • QR Scan & Pay</title>
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- QR Scanner Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f0f4f9;
-      color: #0b1a33;
-      overflow-x: hidden;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f4f9;
+            color: #0b1a33;
+            overflow-x: hidden;
+        }
 
-    :root {
-      --primary-blue: #0a3cbf;
-      --primary-dark: #052c8c;
-      --accent-gold: #f5a623;
-      --success: #0e9f6e;
-      --danger: #e53e3e;
-      --surface-white: #ffffff;
-      --surface-gray: #f8fafd;
-      --text-main: #111827;
-      --text-muted: #5b6e8c;
-      --border-light: #eef2f6;
-      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
-      --shadow-lg: 0 20px 35px -8px rgba(0, 0, 0, 0.1);
-      --radius-xl: 32px;
-      --radius-2xl: 40px;
-    }
+        :root {
+            --primary-blue: #0a3cbf;
+            --primary-dark: #052c8c;
+            --accent-gold: #f5a623;
+            --success: #0e9f6e;
+            --danger: #e53e3e;
+            --surface-white: #ffffff;
+            --surface-gray: #f8fafd;
+            --text-main: #111827;
+            --text-muted: #5b6e8c;
+            --border-light: #eef2f6;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 20px 35px -8px rgba(0, 0, 0, 0.1);
+            --radius-xl: 32px;
+            --radius-2xl: 40px;
+        }
 
-    /* Main App Styles */
-    .app-header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(12px);
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      border-bottom: 1px solid var(--border-light);
-    }
+        .app-header {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-bottom: 1px solid var(--border-light);
+        }
 
-    .back-btn {
-      width: 42px;
-      height: 42px;
-      background: #f0f4ff;
-      border-radius: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      color: var(--primary-blue);
-    }
+        .back-btn {
+            width: 42px;
+            height: 42px;
+            background: #f0f4ff;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--primary-blue);
+        }
 
-    .back-btn:active {
-      transform: scale(0.92);
-      background: #e6edfe;
-    }
+        .back-btn:active {
+            transform: scale(0.92);
+            background: #e6edfe;
+        }
 
-    .app-header h1 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #0a3cbf, #1f5ef0);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.3px;
-    }
+        .app-header h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0a3cbf, #1f5ef0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
 
-    .app-header h1 i {
-      background: none;
-      -webkit-background-clip: unset;
-      background-clip: unset;
-      color: var(--primary-blue);
-      margin-right: 6px;
-    }
+        .app-header h1 i {
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: var(--primary-blue);
+            margin-right: 6px;
+        }
 
-    .main-container {
-      max-width: 560px;
-      margin: 0 auto;
-      padding: 18px 16px 90px 16px;
-    }
+        .main-container {
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 18px 16px 90px 16px;
+        }
 
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 1.25rem;
-      margin: 8px 0 14px 0;
-      color: #0c2a4b;
-    }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin: 8px 0 14px 0;
+            color: #0c2a4b;
+        }
 
-    .accounts-scroll {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding-bottom: 16px;
-      margin-bottom: 20px;
-      scrollbar-width: thin;
-    }
+        .accounts-scroll {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+            scrollbar-width: thin;
+        }
 
-    .bank-card {
-      min-width: 280px;
-      background: var(--surface-white);
-      border-radius: var(--radius-xl);
-      padding: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: var(--shadow-md);
-      border: 1px solid var(--border-light);
-      transition: all 0.25s;
-      cursor: pointer;
-    }
+        .bank-card {
+            min-width: 280px;
+            background: var(--surface-white);
+            border-radius: var(--radius-xl);
+            padding: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            transition: all 0.25s;
+            cursor: pointer;
+        }
 
-    .bank-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
+        .bank-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
 
-    .bank-card.hdfc {
-      border-left: 4px solid var(--primary-blue);
-    }
+        .bank-card.hdfc {
+            border-left: 4px solid var(--primary-blue);
+        }
 
-    .bank-card.upgb {
-      border-left: 4px solid var(--accent-gold);
-    }
+        .bank-card.upgb {
+            border-left: 4px solid var(--accent-gold);
+        }
 
-    .bank-info h4 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
+        .bank-info h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
 
-    .bank-acct {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-      letter-spacing: 0.3px;
-    }
+        .bank-acct {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
 
-    .balance-btn {
-      background: #eff3fc;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--primary-blue);
-      cursor: pointer;
-      transition: 0.15s;
-    }
+        .balance-btn {
+            background: #eff3fc;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            cursor: pointer;
+            transition: 0.15s;
+        }
 
-    .balance-btn:active {
-      background: #e2e9fa;
-      transform: scale(0.96);
-    }
+        .balance-btn:active {
+            background: #e2e9fa;
+            transform: scale(0.96);
+        }
 
-    .bank-icon {
-      width: 56px;
-      height: 56px;
-      background: #f7faff;
-      border-radius: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      color: var(--primary-blue);
-    }
+        .bank-icon {
+            width: 56px;
+            height: 56px;
+            background: #f7faff;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+        }
 
-    .add-txn-card {
-      min-width: 120px;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(4px);
-      border-radius: var(--radius-xl);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      border: 1.5px dashed #bbcdf0;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+        .add-txn-card {
+            min-width: 120px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            border-radius: var(--radius-xl);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 1.5px dashed #bbcdf0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
 
-    .add-txn-card:active {
-      transform: scale(0.96);
-      background: white;
-    }
+        .add-txn-card:active {
+            transform: scale(0.96);
+            background: white;
+        }
 
-    .add-circle {
-      background: var(--primary-blue);
-      width: 54px;
-      height: 54px;
-      border-radius: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 18px rgba(10, 60, 191, 0.3);
-    }
+        .add-circle {
+            background: var(--primary-blue);
+            width: 54px;
+            height: 54px;
+            border-radius: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 18px rgba(10, 60, 191, 0.3);
+        }
 
-    .add-circle i {
-      font-size: 1.8rem;
-      color: white;
-    }
+        .add-circle i {
+            font-size: 1.8rem;
+            color: white;
+        }
 
-    .history-card {
-      background: var(--surface-white);
-      border-radius: var(--radius-2xl);
-      box-shadow: var(--shadow-md);
-      padding: 22px 18px;
-      margin-top: 6px;
-    }
+        .history-card {
+            background: var(--surface-white);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-md);
+            padding: 22px 18px;
+            margin-top: 6px;
+        }
 
-    .history-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-    .history-header h2 {
-      font-size: 1.35rem;
-      font-weight: 800;
-    }
+        .history-header h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
 
-    .action-icons i {
-      font-size: 1.2rem;
-      margin-left: 20px;
-      color: #6c7e9e;
-      cursor: pointer;
-      transition: 0.15s;
-    }
+        .action-icons i {
+            font-size: 1.2rem;
+            margin-left: 20px;
+            color: #6c7e9e;
+            cursor: pointer;
+            transition: 0.15s;
+        }
 
-    .action-icons i:active {
-      transform: scale(0.92);
-      color: var(--primary-blue);
-    }
+        .action-icons i:active {
+            transform: scale(0.92);
+            color: var(--primary-blue);
+        }
 
-    .filter-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 22px;
-      border-bottom: 1px solid var(--border-light);
-      padding-bottom: 14px;
-    }
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 14px;
+        }
 
-    .chip {
-      background: #eff2f9;
-      padding: 7px 20px;
-      border-radius: 60px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.15s;
-    }
+        .chip {
+            background: #eff2f9;
+            padding: 7px 20px;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.15s;
+        }
 
-    .chip.active {
-      background: var(--primary-blue);
-      color: white;
-      box-shadow: 0 4px 8px rgba(10, 60, 191, 0.2);
-    }
+        .chip.active {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 8px rgba(10, 60, 191, 0.2);
+        }
 
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #fafdff;
-      padding: 12px 18px;
-      border-radius: 60px;
-      margin-bottom: 24px;
-      border: 1px solid #eef2fa;
-    }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fafdff;
+            padding: 12px 18px;
+            border-radius: 60px;
+            margin-bottom: 24px;
+            border: 1px solid #eef2fa;
+        }
 
-    .total-badge {
-      background: #f0f3fe;
-      padding: 5px 16px;
-      border-radius: 40px;
-      font-weight: 800;
-      font-size: 0.8rem;
-      color: var(--primary-blue);
-    }
+        .total-badge {
+            background: #f0f3fe;
+            padding: 5px 16px;
+            border-radius: 40px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+        }
 
-    .transaction-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      max-height: 540px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
+        .transaction-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            max-height: 540px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
 
-    .txn-item {
-      background: var(--surface-white);
-      border-radius: 28px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      border: 1px solid #edeff6;
-      transition: all 0.2s;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-    }
+        .txn-item {
+            background: var(--surface-white);
+            border-radius: 28px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid #edeff6;
+            transition: all 0.2s;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
 
-    .txn-item:active {
-      background: #fbfdff;
-      transform: scale(0.99);
-      border-color: #dce3ef;
-    }
+        .txn-item:active {
+            background: #fbfdff;
+            transform: scale(0.99);
+            border-color: #dce3ef;
+        }
 
-    .txn-avatar {
-      width: 54px;
-      height: 54px;
-      background: linear-gradient(145deg, #ecf3ff, #e4ecfe);
-      border-radius: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: var(--primary-blue);
-    }
+        .txn-avatar {
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(145deg, #ecf3ff, #e4ecfe);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+        }
 
-    .txn-details {
-      flex: 1;
-    }
+        .txn-details {
+            flex: 1;
+        }
 
-    .txn-name {
-      font-weight: 800;
-      font-size: 0.95rem;
-      text-transform: capitalize;
-    }
+        .txn-name {
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: capitalize;
+        }
 
-    .txn-time {
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
+        .txn-time {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
 
-    .txn-cat {
-      font-size: 0.6rem;
-      background: #f2f5fa;
-      display: inline-block;
-      padding: 3px 12px;
-      border-radius: 30px;
-      margin-top: 6px;
-      font-weight: 500;
-    }
+        .txn-cat {
+            font-size: 0.6rem;
+            background: #f2f5fa;
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 30px;
+            margin-top: 6px;
+            font-weight: 500;
+        }
 
-    .txn-amount {
-      text-align: right;
-      font-weight: 800;
-      color: #1e2b48;
-    }
+        .txn-amount {
+            text-align: right;
+            font-weight: 800;
+            color: #1e2b48;
+        }
 
-    .delete-btn {
-      background: none;
-      border: none;
-      color: #cbd5e0;
-      font-size: 1rem;
-      cursor: pointer;
-      padding: 8px;
-      transition: 0.1s;
-    }
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #cbd5e0;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 8px;
+            transition: 0.1s;
+        }
 
-    .delete-btn:active {
-      color: var(--danger);
-      transform: scale(0.94);
-    }
+        .delete-btn:active {
+            color: var(--danger);
+            transform: scale(0.94);
+        }
 
-    /* Modal / Overlay Styles */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 200;
-      visibility: hidden;
-      opacity: 0;
-      transition: 0.2s;
-    }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+        }
 
-    .modal-overlay.active {
-      visibility: visible;
-      opacity: 1;
-    }
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
 
-    .modal-card {
-      background: white;
-      width: 90%;
-      max-width: 400px;
-      border-radius: 48px;
-      padding: 28px 24px;
-      box-shadow: var(--shadow-lg);
-    }
+        .modal-card {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 48px;
+            padding: 28px 24px;
+            box-shadow: var(--shadow-lg);
+        }
 
-    .modal-card h3 {
-      font-weight: 800;
-      margin-bottom: 18px;
-      font-size: 1.5rem;
-    }
+        .modal-card h3 {
+            font-weight: 800;
+            margin-bottom: 18px;
+            font-size: 1.5rem;
+        }
 
-    .modal-card input,
-    .modal-card select {
-      width: 100%;
-      padding: 14px 18px;
-      margin: 8px 0;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 60px;
-      font-size: 0.9rem;
-      background: white;
-      transition: 0.2s;
-    }
+        .modal-card input,
+        .modal-card select {
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            background: white;
+            transition: 0.2s;
+        }
 
-    .modal-card input:focus,
-    .modal-card select:focus {
-      border-color: var(--primary-blue);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(10, 60, 191, 0.1);
-    }
+        .modal-card input:focus,
+        .modal-card select:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(10, 60, 191, 0.1);
+        }
 
-    .modal-actions {
-      display: flex;
-      gap: 14px;
-      margin-top: 24px;
-    }
+        .modal-actions {
+            display: flex;
+            gap: 14px;
+            margin-top: 24px;
+        }
 
-    .cancel-modal-btn {
-      background: #eff2f9;
-      border: none;
-      flex: 1;
-      padding: 14px;
-      border-radius: 60px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+        .cancel-modal-btn {
+            background: #eff2f9;
+            border: none;
+            flex: 1;
+            padding: 14px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+        }
 
-    .save-btn {
-      background: var(--primary-blue);
-      color: white;
-      border: none;
-      flex: 1;
-      padding: 14px;
-      border-radius: 60px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.15s;
-    }
+        .save-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            flex: 1;
+            padding: 14px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.15s;
+        }
 
-    .save-btn:active {
-      transform: scale(0.97);
-    }
+        .save-btn:active {
+            transform: scale(0.97);
+        }
 
-    .footer-brand {
-      text-align: center;
-      font-size: 0.7rem;
-      color: #8d9bb0;
-      margin-top: 24px;
-      font-weight: 500;
-    }
+        .footer-brand {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8d9bb0;
+            margin-top: 24px;
+            font-weight: 500;
+        }
 
-    .custom-toast {
-      position: fixed;
-      bottom: 28px;
-      left: 16px;
-      right: 16px;
-      background: #1f2f4f;
-      backdrop-filter: blur(12px);
-      color: white;
-      padding: 14px 20px;
-      border-radius: 60px;
-      font-weight: 600;
-      text-align: center;
-      z-index: 1000;
-      box-shadow: var(--shadow-lg);
-      font-size: 0.85rem;
-      animation: fadeInUp 0.2s ease;
-    }
+        .custom-toast {
+            position: fixed;
+            bottom: 28px;
+            left: 16px;
+            right: 16px;
+            background: #1f2f4f;
+            backdrop-filter: blur(12px);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 60px;
+            font-weight: 600;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+            font-size: 0.85rem;
+            animation: fadeInUp 0.2s ease;
+        }
 
-    @keyframes fadeInUp {
-      from {
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-fullscreen {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: #dff3ff;
+            overflow-y: auto;
+            z-index: 9999;
+            display: none;
+        }
+
+        .success-fullscreen.active {
+            display: block;
+        }
+
+        .paytm-success-card {
+            width: 100%;
+            max-width: 100%;
+            min-height: 100vh;
+            background: #dff3ff;
+            border-radius: 0;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .success-header-area {
+            background: #dff3ff;
+            padding-bottom: 16px;
+        }
+
+        .nav-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+        }
+
+        .back-icon {
+            font-size: 26px;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .dots-menu {
+            font-size: 24px;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .paytm-logo img {
+            width: 100px;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .receiver-block {
+            text-align: center;
+            margin-top: 16px;
+            padding: 0 20px;
+        }
+
+        .receiver-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 6px;
+        }
+
+        .upi-id-light {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            color: #444;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .amount-verified-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin: 28px 0 20px;
+            padding: 0 20px;
+        }
+
+        .big-amount {
+            font-size: 72px;
+            font-weight: 800;
+            color: #000;
+            line-height: 1;
+        }
+
+        .verified-chip-large {
+            background: none;
+            padding: 0;
+            box-shadow: none;
+            border-radius: 0;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .verified-chip-large i {
+            color: #17c964;
+            font-size: 52px;
+        }
+
+        .txn-card {
+            background: none;
+            border: none;
+            box-shadow: none;
+            margin: 0 20px 16px;
+            text-align: center;
+            padding: 0;
+        }
+
+        .txn-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .txn-label {
+            color: #444;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .txn-value {
+            color: #111;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .ref-row-custom {
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+            padding-top: 0;
+        }
+
+        .copy-ref-btn {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            color: #333;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .action-grid {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            padding: 20px 20px 30px;
+            flex-wrap: wrap;
+        }
+
+        .action-pill {
+            background: #fff;
+            border: none;
+            border-radius: 30px;
+            min-width: 130px;
+            height: 52px;
+            font-size: 17px;
+            font-weight: 700;
+            box-shadow: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .action-pill:first-child {
+            background: #fff;
+            color: #111;
+        }
+
+        .action-pill:last-child {
+            background: #12b32f;
+            color: #fff;
+        }
+
+        .action-pill:active {
+            transform: scale(0.97);
+        }
+
+        .divider-light {
+            height: 10px;
+            width: 100%;
+            background: linear-gradient(to bottom, #003ea8 0%, #003ea8 45%, #00b7ff 45%, #00b7ff 100%);
+        }
+
+        .reminder-area {
+            background: #f1f1f1;
+            text-align: center;
+            padding: 50px 25px 60px;
+        }
+
+        .reminder-title {
+            font-size: 52px;
+            font-weight: 800;
+            color: #111;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .reminder-btn {
+            background: #f7c83c;
+            border: none;
+            height: 70px;
+            width: 340px;
+            max-width: 100%;
+            border-radius: 40px;
+            font-size: 28px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .reminder-btn:active {
+            transform: scale(0.97);
+        }
+
+        .mock-phone {
+            margin: 50px auto 0;
+            width: 260px;
+            height: 430px;
+            background: #fff;
+            border-radius: 40px;
+            border: 10px solid #333;
+            color: #002970;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .bottom-tab-bar {
+            position: fixed;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 330px;
+            height: 68px;
+            background: #002d8d;
+            border-radius: 40px;
+            border: none;
+            padding: 0 16px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .tab-item {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .tab-item i {
+            font-size: 22px;
+        }
+
+        .tab-item.active {
+            color: #fff;
+        }
+
+        @media (max-width: 480px) {
+            .paytm-logo img {
+                width: 80px;
+            }
+
+            .receiver-name {
+                font-size: 24px;
+            }
+
+            .upi-id-light {
+                font-size: 14px;
+            }
+
+            .big-amount {
+                font-size: 52px;
+            }
+
+            .verified-chip-large i {
+                font-size: 40px;
+            }
+
+            .amount-verified-wrapper {
+                gap: 8px;
+            }
+
+            .action-pill {
+                min-width: 110px;
+                height: 48px;
+                font-size: 15px;
+            }
+
+            .reminder-title {
+                font-size: 32px;
+            }
+
+            .reminder-btn {
+                width: 260px;
+                height: 56px;
+                font-size: 22px;
+            }
+
+            .bottom-tab-bar {
+                width: 280px;
+                height: 60px;
+            }
+
+            .tab-item {
+                font-size: 10px;
+            }
+
+            .tab-item i {
+                font-size: 20px;
+            }
+        }
+
+        .detail-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 300;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.2s ease;
+        }
+
+        .detail-modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .detail-modal-card {
+            background: var(--surface-white);
+            width: 88%;
+            max-width: 380px;
+            border-radius: 48px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            animation: modalPop 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: scale(0.96) translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .detail-header {
+            background: linear-gradient(135deg, #0a3cbf, #1f5ef0);
+            padding: 24px 20px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .detail-header .detail-icon-circle {
+            background: rgba(255, 255, 255, 0.2);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 32px;
+            backdrop-filter: blur(2px);
+        }
+
+        .detail-header h4 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            margin-bottom: 6px;
+        }
+
+        .detail-amount-badge {
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        .detail-info-list {
+            padding: 20px 24px 28px;
+            background: white;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+        }
+
+        .info-value {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0c2a4b;
+            text-align: right;
+            word-break: break-word;
+            max-width: 55%;
+        }
+
+        .info-value.utr-copy {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-detail-ref {
+            background: #eef2ff;
+            padding: 4px 10px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.1s;
+            color: var(--primary-blue);
+        }
+
+        .copy-detail-ref:active {
+            background: #dee5fc;
+            transform: scale(0.96);
+        }
+
+        .detail-footer-close {
+            padding: 6px 24px 26px;
+            text-align: center;
+        }
+
+        .close-detail-btn {
+            background: #eff2f9;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            color: var(--primary-blue);
+            transition: 0.15s;
+        }
+
+        .close-detail-btn:active {
+            background: #e6e9f0;
+            transform: scale(0.97);
+        }
+
+        .pin-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 400;
+        }
+
+        .pin-modal.active {
+            display: flex;
+        }
+
+        .pin-card {
+            background: white;
+            border-radius: 48px;
+            padding: 32px 24px;
+            width: 90%;
+            max-width: 340px;
+            text-align: center;
+        }
+
+        .pin-card h3 {
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .pin-card input {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.2rem;
+            text-align: center;
+            letter-spacing: 8px;
+            border: 2px solid #e2e8f0;
+            border-radius: 60px;
+            margin: 16px 0;
+        }
+
+        .pin-card .pin-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .pin-card .pin-actions button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .pin-cancel {
+            background: #eff2f9;
+        }
+
+        .pin-confirm {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .balance-display {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin: 10px 0;
+        }
+
+        /* QR scanner overlay style - FULLSCREEN */
+        .qr-fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 500;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .qr-fullscreen-overlay.active {
+            display: flex;
+        }
+
+        .qr-fullscreen-overlay #qr-reader-full {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .qr-fullscreen-overlay #qr-reader-full video {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+        }
+
+        .qr-close-full {
+            position: absolute;
+            top: 40px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(6px);
+            border: none;
+            color: white;
+            font-size: 32px;
+            padding: 12px 20px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.15s;
+            font-weight: 700;
+        }
+
+        .qr-close-full:active {
+            transform: scale(0.94);
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .qr-hint {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            margin-top: 20px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .qr-hint i {
+            margin-right: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .qr-close-full {
+                top: 20px;
+                right: 16px;
+                font-size: 24px;
+                padding: 8px 16px;
+            }
+
+            .qr-hint {
+                font-size: 0.85rem;
+            }
+        }
+
+       /* Simple QR Wrapper */
+.qr-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0 16px 0;
+}
+
+.qr-wrapper .qr-scan-btn {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(10, 60, 191, 0.2);
+    width: 100%;
+    justify-content: center;
+}
+
+.qr-wrapper .qr-scan-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 6px rgba(10, 60, 191, 0.15);
+}
+
+.qr-wrapper .qr-scan-btn i {
+    font-size: 1.1rem;
+}
+
+/* QR Reader */
+#qr-reader {
+    width: 100%;
+    max-width: 360px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: 2px solid #e2e8f0;
+    background: #f8fafd;
+    display: none;
+}
+
+#qr-reader.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+#qr-reader video {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+}
+
+/* Small hint text */
+.qr-hint {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
         opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
+        transform: translateY(-8px);
+    }
+    to {
         opacity: 1;
         transform: translateY(0);
-      }
     }
-
-    /* ---- PAYTM STYLE SUCCESS PAGE (REALISTIC) ---- */
-.success-fullscreen {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background: #dff3ff;
-  overflow-y: auto;
-  z-index: 9999;
-  display: none;
 }
 
-.success-fullscreen.active {
-  display: block;
-}
-
-.paytm-success-card {
-  width: 100%;
-  max-width: 100%;
-  min-height: 100vh;
-  background: #dff3ff;
-  border-radius: 0;
-  box-shadow: none;
-  display: flex;
-  flex-direction: column;
-}
-
-/* TOP AREA */
-.success-header-area {
-  background: #dff3ff;
-  padding-bottom: 16px;
-}
-
-.nav-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-}
-
-.back-icon {
-  font-size: 26px;
-  color: #000;
-  cursor: pointer;
-}
-
-.dots-menu {
-  font-size: 24px;
-  color: #000;
-  cursor: pointer;
-}
-
-/* PAYTM LOGO - REDUCED SIZE */
-.paytm-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Apply reduced logo size: width: 100px, auto height maintains aspect ratio */
-.paytm-logo img {
-  width: 100px;       /* Reduced logo size - was previously larger/undefined */
-  height: auto;
-  display: block;
-  object-fit: contain;
-}
-
-/* RECEIVER SECTION */
-.receiver-block {
-  text-align: center;
-  margin-top: 16px;
-  padding: 0 20px;
-}
-
-.receiver-name {
-  font-size: 28px;
-  font-weight: 700;
-  color: #111;
-  margin-bottom: 6px;
-}
-
-.upi-id-light {
-  background: none;
-  padding: 0;
-  border-radius: 0;
-  color: #444;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-/* AMOUNT SECTION - aligned horizontally */
-.amount-verified-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin: 28px 0 20px;
-  padding: 0 20px;
-}
-
-.big-amount {
-  font-size: 72px;
-  font-weight: 800;
-  color: #000;
-  line-height: 1;
-}
-
-.verified-chip-large {
-  background: none;
-  padding: 0;
-  box-shadow: none;
-  border-radius: 0;
-  display: inline-flex;
-  align-items: center;
-}
-
-.verified-chip-large span {
-  display: none;
-}
-
-.verified-chip-large i {
-  color: #17c964;
-  font-size: 52px;
-}
-
-/* TRANSACTION INFO - centered properly */
-.txn-card {
-  background: none;
-  border: none;
-  box-shadow: none;
-  margin: 0 20px 16px;
-  text-align: center;
-  padding: 0;
-}
-
-.txn-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.txn-label {
-  color: #444;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.txn-value {
-  color: #111;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.ref-row-custom {
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 8px;
-  padding-top: 0;
-}
-
-.copy-ref-btn {
-  background: none;
-  padding: 0;
-  border-radius: 0;
-  color: #333;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-
-/* ACTION BUTTONS - side by side */
-.action-grid {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  padding: 20px 20px 30px;
-}
-
-.action-pill {
-  background: #fff;
-  border: none;
-  border-radius: 30px;
-  min-width: 130px;
-  height: 52px;
-  font-size: 17px;
-  font-weight: 700;
-  box-shadow: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: 0.1s;
-}
-
-.action-pill:first-child {
-  background: #fff;
-  color: #111;
-}
-
-.action-pill:last-child {
-  background: #12b32f;
-  color: #fff;
-}
-
-.action-pill:active {
-  transform: scale(0.97);
-}
-
-/* DIVIDER WITH BLUE GRADIENT */
-.divider-light {
-  height: 10px;
-  width: 100%;
-  background: linear-gradient(to bottom, #003ea8 0%, #003ea8 45%, #00b7ff 45%, #00b7ff 100%);
-}
-
-/* REMINDER SECTION */
-.reminder-area {
-  background: #f1f1f1;
-  text-align: center;
-  padding: 50px 25px 60px;
-}
-
-.reminder-title {
-  font-size: 52px;
-  font-weight: 800;
-  color: #111;
-  line-height: 1.1;
-  margin-bottom: 30px;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.reminder-btn {
-  background: #f7c83c;
-  border: none;
-  height: 70px;
-  width: 340px;
-  max-width: 100%;
-  border-radius: 40px;
-  font-size: 28px;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
-
-.reminder-btn:active {
-  transform: scale(0.97);
-}
-
-/* PHONE MOCK */
-.mock-phone {
-  margin: 50px auto 0;
-  width: 260px;
-  height: 430px;
-  background: #fff;
-  border-radius: 40px;
-  border: 10px solid #333;
-  color: #002970;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-/* BOTTOM NAVIGATION - fixed at bottom */
-.bottom-tab-bar {
-  position: fixed;
-  bottom: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 330px;
-  height: 68px;
-  background: #002d8d;
-  border-radius: 40px;
-  border: none;
-  padding: 0 16px;
-  z-index: 100;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.tab-item {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 12px;
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-}
-
-.tab-item i {
-  font-size: 22px;
-}
-
-.tab-item.active {
-  color: #fff;
-}
-
-/* RESPONSIVE FOR MOBILE */
+/* Mobile */
 @media (max-width: 480px) {
-  /* Adjust logo further on very small screens for perfect fit */
-  .paytm-logo img {
-    width: 80px;
-  }
-  
-  .receiver-name {
-    font-size: 24px;
-  }
-
-  .upi-id-light {
-    font-size: 14px;
-  }
-
-  .big-amount {
-    font-size: 52px;
-  }
-
-  .verified-chip-large i {
-    font-size: 40px;
-  }
-
-  .amount-verified-wrapper {
-    gap: 8px;
-  }
-
-  .action-pill {
-    min-width: 110px;
-    height: 48px;
-    font-size: 15px;
-  }
-
-  .reminder-title {
-    font-size: 32px;
-  }
-
-  .reminder-btn {
-    width: 260px;
-    height: 56px;
-    font-size: 22px;
-  }
-
-  .bottom-tab-bar {
-    width: 280px;
-    height: 60px;
-  }
-
-  .tab-item {
-    font-size: 10px;
-  }
-
-  .tab-item i {
-    font-size: 20px;
-  }
+    .qr-wrapper .qr-scan-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    #qr-reader {
+        max-width: 300px;
+    }
 }
-
-/* ========== NEW TRANSACTION DETAIL MODAL (ADDED WITHOUT ALTERING EXISTING STYLES) ========== */
-.detail-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 300;
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.2s, opacity 0.2s ease;
-}
-
-.detail-modal-overlay.active {
-  visibility: visible;
-  opacity: 1;
-}
-
-.detail-modal-card {
-  background: var(--surface-white);
-  width: 88%;
-  max-width: 380px;
-  border-radius: 48px;
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  animation: modalPop 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-}
-
-@keyframes modalPop {
-  from {
-    opacity: 0;
-    transform: scale(0.96) translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.detail-header {
-  background: linear-gradient(135deg, #0a3cbf, #1f5ef0);
-  padding: 24px 20px 20px;
-  text-align: center;
-  color: white;
-}
-
-.detail-header .detail-icon-circle {
-  background: rgba(255,255,255,0.2);
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 12px;
-  font-size: 32px;
-  backdrop-filter: blur(2px);
-}
-
-.detail-header h4 {
-  font-size: 1.3rem;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  margin-bottom: 6px;
-}
-
-.detail-amount-badge {
-  background: rgba(255,255,255,0.2);
-  display: inline-block;
-  padding: 6px 18px;
-  border-radius: 60px;
-  font-size: 1rem;
-  font-weight: 700;
-  margin-top: 8px;
-}
-
-.detail-info-list {
-  padding: 20px 24px 28px;
-  background: white;
-}
-
-.info-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border-light);
-}
-
-.info-row:last-child {
-  border-bottom: none;
-}
-
-.info-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  letter-spacing: 0.3px;
-}
-
-.info-value {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: #0c2a4b;
-  text-align: right;
-  word-break: break-word;
-  max-width: 55%;
-}
-
-.info-value.utr-copy {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.copy-detail-ref {
-  background: #eef2ff;
-  padding: 4px 10px;
-  border-radius: 40px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.1s;
-  color: var(--primary-blue);
-}
-
-.copy-detail-ref:active {
-  background: #dee5fc;
-  transform: scale(0.96);
-}
-
-.detail-footer-close {
-  padding: 6px 24px 26px;
-  text-align: center;
-}
-
-.close-detail-btn {
-  background: #eff2f9;
-  border: none;
-  width: 100%;
-  padding: 14px;
-  border-radius: 50px;
-  font-weight: 800;
-  font-size: 1rem;
-  cursor: pointer;
-  color: var(--primary-blue);
-  transition: 0.15s;
-}
-
-.close-detail-btn:active {
-  background: #e6e9f0;
-  transform: scale(0.97);
-}
-
-  </style>
+    </style>
 </head>
+
 <body>
+    <header class="app-header">
+        <div class="back-btn" id="backArrow"><i class="fas fa-arrow-left"></i></div>
+        <h1><i class="fas fa-bolt"></i> PayFlow Pro</h1>
+    </header>
 
-<header class="app-header">
-  <div class="back-btn" id="backArrow"><i class="fas fa-arrow-left"></i></div>
-  <h1><i class="fas fa-bolt"></i> PayFlow Pro</h1>
-</header>
+    <main class="main-container">
+        <div class="section-title"><i class="fas fa-wallet"></i> <span>Linked Accounts</span></div>
+        <div class="accounts-scroll">
+            <div class="bank-card hdfc" id="hdfcCard">
+                <div class="bank-info">
+                    <h4>HDFC Bank</h4>
+                    <div class="bank-acct">XXXX XXXX 7753</div><button class="balance-btn" id="hdfcBalanceBtn"><i
+                            class="fas fa-eye"></i> Check Balance</button>
+                </div>
+                <div class="bank-icon"><i class="fas fa-university"></i></div>
+            </div>
+            <div class="bank-card upgb" id="upgbCard">
+                <div class="bank-info">
+                    <h4>UP Gramin Bank</h4>
+                    <div class="bank-acct">XXXX XXXX 1842</div><button class="balance-btn" id="upgbBalanceBtn"><i
+                            class="fas fa-eye"></i> Check Balance</button>
+                </div>
+                <div class="bank-icon"><i class="fas fa-landmark"></i></div>
+            </div>
+            <div class="add-txn-card" id="openAddBtn">
+                <div class="add-circle"><i class="fas fa-plus"></i></div>
+                <span>Send Payment</span>
+            </div>
+        </div>
 
-<main class="main-container">
-  <div class="section-title"><i class="fas fa-wallet"></i> <span>Linked Accounts</span></div>
-  <div class="accounts-scroll">
-    <div class="bank-card hdfc">
-      <div class="bank-info">
-        <h4>HDFC Bank</h4>
-        <div class="bank-acct">XXXX XXXX 7753</div>
-        <button class="balance-btn" data-balance="48,920.00"><i class="fas fa-eye"></i> Check Balance</button>
-      </div>
-      <div class="bank-icon"><i class="fas fa-university"></i></div>
-    </div>
-    <div class="bank-card upgb">
-      <div class="bank-info">
-        <h4>UP Gramin Bank</h4>
-        <div class="bank-acct">XXXX XXXX 1842</div>
-        <button class="balance-btn" data-balance="22,450.50"><i class="fas fa-eye"></i> Check Balance</button>
-      </div>
-      <div class="bank-icon"><i class="fas fa-landmark"></i></div>
-    </div>
-    <div class="add-txn-card" id="openAddBtn">
-      <div class="add-circle"><i class="fas fa-plus"></i></div>
-      <span>Send Payment</span>
-    </div>
-  </div>
+        <div class="history-card">
+            <div class="history-header">
+                <h2><i class="fas fa-history"></i> Transaction Log</h2>
+                <div class="action-icons"><i class="fas fa-search" id="searchHistory"></i><i class="fas fa-filter"
+                        id="clearFilters"></i><i class="fas fa-download" id="exportData"></i></div>
+            </div>
+            <div class="filter-chips" id="filterChipsContainer">
+                <div class="chip active" data-filter="all">All Accounts</div>
+                <div class="chip" data-filter="HDFC Bank - 7753">HDFC Bank</div>
+                <div class="chip" data-filter="Uttar Pradesh Gramin Bank - 1842">UP Gramin Bank</div>
+            </div>
+            <div class="summary-row"><span id="currentMonthDisplay">June 2026</span><span class="total-badge"
+                    id="totalSpentLabel">Total ₹0</span></div>
+            <div id="transactionList" class="transaction-list"></div>
+        </div>
+        <div class="footer-brand"><i class="fas fa-shield-alt"></i> Secure · Instant UTR Settlement</div>
+    </main>
 
-  <div class="history-card">
-    <div class="history-header">
-      <h2><i class="fas fa-history"></i> Transaction Log</h2>
-      <div class="action-icons">
-        <i class="fas fa-search" id="searchHistory"></i>
-        <i class="fas fa-filter" id="clearFilters"></i>
-        <i class="fas fa-download" id="exportData"></i>
-      </div>
+    <!-- Add Transaction Modal -->
+    <div class="modal-overlay" id="addModal">
+        <div class="modal-card">
+            <h3><i class="fas fa-paper-plane"></i> New Transfer</h3>
+            <div class="qr-wrapper">
+    <button class="qr-scan-btn" id="scanQrBtn">
+        <i class="fas fa-qrcode"></i> Scan QR
+    </button>
+    <div id="qr-reader" style="display:none;"></div>
+    <div class="qr-hint-text">
+        <i class="fas fa-camera"></i> 
+        <span>Scan any UPI QR code </span>
     </div>
-    <div class="filter-chips" id="filterChipsContainer">
-      <div class="chip active" data-filter="all">All Accounts</div>
-      <div class="chip" data-filter="HDFC Bank - 7753">HDFC Bank</div>
-      <div class="chip" data-filter="Uttar Pradesh Gramin Bank - 1842">UP Gramin Bank</div>
-    </div>
-    <div class="summary-row">
-      <span id="currentMonthDisplay">June 2026</span>
-      <span class="total-badge" id="totalSpentLabel">Total ₹0</span>
-    </div>
-    <div id="transactionList" class="transaction-list"></div>
-  </div>
-  <div class="footer-brand"><i class="fas fa-shield-alt"></i> Secure · Instant UTR Settlement</div>
-</main>
-
-<!-- Add Transaction Modal -->
-<div class="modal-overlay" id="addModal">
-  <div class="modal-card">
-    <h3><i class="fas fa-paper-plane"></i> New Transfer</h3>
-    <input type="text" id="receiverName" placeholder="Beneficiary Name" autocomplete="off">
-    <input type="number" id="amountValue" placeholder="Amount (INR)" autocomplete="off">
-    <select id="categorySelect">
-      <option value="Food & Dining">Food & Dining</option>
-      <option value="Medical">Medical & Healthcare</option>
-      <option value="Shopping">Retail & Shopping</option>
-      <option value="Bills & Recharge">Utilities & Recharge</option>
-      <option value="Others">General Transfer</option>
-    </select>
-    <input type="datetime-local" id="txnDatetime">
-    <select id="bankSelect">
-      <option value="HDFC Bank - 7753">HDFC Bank - 7753</option>
-      <option value="Uttar Pradesh Gramin Bank - 1842">UP Gramin Bank - 1842</option>
-    </select>
-    <div class="modal-actions">
-      <button class="cancel-modal-btn" id="cancelModalBtn">Cancel</button>
-      <button id="confirmAddBtn" class="save-btn">Send & Save</button>
-    </div>
-  </div>
 </div>
-
-<!-- REALISTIC SUCCESS PAGE with REDUCED PAYTM LOGO SIZE -->
-<div id="successFullscreen" class="success-fullscreen">
-  <div class="paytm-success-card">
-    <div class="success-header-area">
-      <div class="nav-row">
-        <div class="back-icon" id="closeSuccessPage"><i class="fas fa-arrow-left"></i></div>
-        <div class="paytm-logo">
-          <img src="https://i.postimg.cc/5y2M8pyk/Screenshot-2026-06-06-172311.png" alt="Paytm Logo">
+            <input type="text" id="receiverName" placeholder="Beneficiary Name (auto-filled)" autocomplete="off">
+            <input type="number" id="amountValue" placeholder="Amount (INR)" autocomplete="off">
+            <select id="categorySelect">
+                <option value="Food & Dining">Food & Dining</option>
+                <option value="Medical">Medical & Healthcare</option>
+                <option value="Shopping">Retail & Shopping</option>
+                <option value="Bills & Recharge">Utilities & Recharge</option>
+                <option value="Others">General Transfer</option>
+            </select>
+            <input type="datetime-local" id="txnDatetime">
+            <select id="bankSelect">
+                <option value="HDFC Bank - 7753">HDFC Bank - 7753</option>
+                <option value="Uttar Pradesh Gramin Bank - 1842">UP Gramin Bank - 1842</option>
+            </select>
+            <div class="modal-actions">
+                <button class="cancel-modal-btn" id="cancelModalBtn">Cancel</button>
+                <button id="confirmAddBtn" class="save-btn">Send & Save</button>
+            </div>
         </div>
-        <div class="dots-menu"><i class="fas fa-ellipsis-v"></i></div>
-      </div>
-      <div class="receiver-block">
-        <div class="receiver-name" id="succReceiverName">Adarsh Shukla</div>
-        <div class="upi-id-light" id="succUpiId">shuklaadarsh@paytm</div>
-      </div>
-      <div class="amount-verified-wrapper">
-        <span class="big-amount" id="succAmount">₹0</span>
-        <div class="verified-chip-large" id="verifiedChip">
-          <i class="fas fa-check-circle"></i> 
+    </div>
+
+    <!-- FULLSCREEN QR OVERLAY -->
+    <div class="qr-fullscreen-overlay" id="qrFullscreenOverlay">
+        <button class="qr-close-full" id="qrCloseFull"><i class="fas fa-times"></i></button>
+        <div id="qr-reader-full"></div>
+        <div class="qr-hint"><i class="fas fa-camera"></i> Position QR code in the center · Hold steady</div>
+    </div>
+
+    <!-- PIN Modal -->
+    <div class="pin-modal" id="pinModal">
+        <div class="pin-card">
+            <h3><i class="fas fa-lock"></i> Enter PIN</h3>
+            <p style="color:#5b6e8c; font-size:0.9rem;">XXXX</p><input type="password" id="pinInput"
+                maxlength="6" placeholder="• • • •" inputmode="numeric">
+            <div id="pinBalanceDisplay" class="balance-display" style="display:none;"></div>
+            <div class="pin-actions"><button class="pin-cancel" id="pinCancelBtn">Cancel</button><button
+                    class="pin-confirm" id="pinConfirmBtn">Verify</button></div>
         </div>
-      </div>
     </div>
-    <div class="txn-card">
-      <div class="txn-row">
-        <span class="txn-label">Date & Time</span>
-        <span class="txn-value" id="succDateTime">--</span>
-      </div>
-      <div class="ref-row-custom">
-        <span class="txn-label">Reference ID</span>
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <span class="txn-value" id="succRefNo">----</span>
-          <span class="copy-ref-btn" id="copyRefButton"><i class="far fa-copy"></i> Copy</span>
+
+    <!-- SUCCESS PAGE -->
+    <div id="successFullscreen" class="success-fullscreen">
+        <div class="paytm-success-card">
+            <div class="success-header-area">
+                <div class="nav-row">
+                    <div class="back-icon" id="closeSuccessPage"><i class="fas fa-arrow-left"></i></div>
+                    <div class="paytm-logo"><img src="https://i.postimg.cc/5y2M8pyk/Screenshot-2026-06-06-172311.png"
+                            alt="Paytm Logo"></div>
+                    <div class="dots-menu"><i class="fas fa-ellipsis-v"></i></div>
+                </div>
+                <div class="receiver-block">
+                    <div class="receiver-name" id="succReceiverName">Adarsh Shukla</div>
+                    <div class="upi-id-light" id="succUpiId">shuklaadarsh@paytm</div>
+                </div>
+                <div class="amount-verified-wrapper"><span class="big-amount" id="succAmount">₹0</span>
+                    <div class="verified-chip-large" id="verifiedChip"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+            <div class="txn-card">
+                <div class="txn-row"><span class="txn-label">Date & Time</span><span class="txn-value"
+                        id="succDateTime">--</span></div>
+                <div class="ref-row-custom"><span class="txn-label">Reference ID</span>
+                    <div style="display:flex;gap:12px;align-items:center;"><span class="txn-value"
+                            id="succRefNo">----</span><span class="copy-ref-btn" id="copyRefButton"><i
+                                class="far fa-copy"></i> Copy</span></div>
+                </div>
+            </div>
+            <div class="action-grid"><button class="action-pill" id="checkBalanceAction"><i class="fas fa-wallet"></i>
+                    Balance</button><button class="action-pill" id="payAgainAction"><i class="fas fa-redo-alt"></i> Pay
+                    Again</button><button class="action-pill" id="whatsShareAction"><i class="fab fa-whatsapp"></i>
+                    Share</button></div>
+            <div class="divider-light"></div>
+            <div class="reminder-area">
+                <div class="reminder-title">Now pay on time.<br>Every time.</div><button class="reminder-btn"
+                    id="reminderBtn">Set Reminders →</button>
+                <div class="mock-phone"><i class="fas fa-mobile-alt" style="font-size:38px;"></i> <span>UPI Payment
+                        Ready</span></div>
+            </div>
+            <div class="bottom-tab-bar">
+                <div class="tab-item"><i class="fas fa-home"></i><span>Home</span></div>
+                <div class="tab-item"><i class="fas fa-qrcode"></i><span>Scan</span></div>
+                <div class="tab-item active"><i class="fas fa-tag"></i><span>Offers</span></div>
+            </div>
         </div>
-      </div>
     </div>
-    <div class="action-grid">
-      <button class="action-pill" id="checkBalanceAction"><i class="fas fa-wallet"></i> Balance</button>
-      <button class="action-pill" id="payAgainAction"><i class="fas fa-redo-alt"></i> Pay Again</button>
-      <button class="action-pill" id="whatsShareAction"><i class="fab fa-whatsapp"></i> Share</button>
-    </div>
-    <div class="divider-light"></div>
-    <div class="reminder-area">
-      <div class="reminder-title">Now pay on time.<br>Every time.</div>
-      <button class="reminder-btn" id="reminderBtn">Set Reminders →</button>
-      <div class="mock-phone"><i class="fas fa-mobile-alt" style="font-size: 38px;"></i> <span>UPI Payment Ready</span></div>
-    </div>
-    <div class="bottom-tab-bar">
-      <div class="tab-item"><i class="fas fa-home"></i><span>Home</span></div>
-      <div class="tab-item"><i class="fas fa-qrcode"></i><span>Scan</span></div>
-      <div class="tab-item active"><i class="fas fa-tag"></i><span>Offers</span></div>
-    </div>
-  </div>
-</div>
 
-<!-- ========== NEW TRANSACTION DETAIL MODAL (no changes to existing code) ========== -->
-<div id="transactionDetailModal" class="detail-modal-overlay">
-  <div class="detail-modal-card">
-    <div class="detail-header">
-      <div class="detail-icon-circle"><i class="fas fa-receipt"></i></div>
-      <h4 id="detailTxnReceiver">Transaction</h4>
-      <div class="detail-amount-badge" id="detailTxnAmount">₹0</div>
-    </div>
-    <div class="detail-info-list">
-      <div class="info-row">
-        <span class="info-label"><i class="far fa-calendar-alt"></i> Date & Time</span>
-        <span class="info-value" id="detailTxnDateTime">--</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label"><i class="fas fa-tag"></i> Category</span>
-        <span class="info-value" id="detailTxnCategory">--</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label"><i class="fas fa-university"></i> Bank Account</span>
-        <span class="info-value" id="detailTxnBank">--</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label"><i class="fas fa-fingerprint"></i> UTR / Ref ID</span>
-        <div class="info-value utr-copy">
-          <span id="detailTxnUTR">--</span>
-          <span class="copy-detail-ref" id="copyDetailUTR"><i class="far fa-copy"></i> Copy</span>
+    <!-- TRANSACTION DETAIL MODAL -->
+    <div id="transactionDetailModal" class="detail-modal-overlay">
+        <div class="detail-modal-card">
+            <div class="detail-header">
+                <div class="detail-icon-circle"><i class="fas fa-receipt"></i></div>
+                <h4 id="detailTxnReceiver">Transaction</h4>
+                <div class="detail-amount-badge" id="detailTxnAmount">₹0</div>
+            </div>
+            <div class="detail-info-list">
+                <div class="info-row"><span class="info-label"><i class="far fa-calendar-alt"></i> Date &
+                        Time</span><span class="info-value" id="detailTxnDateTime">--</span></div>
+                <div class="info-row"><span class="info-label"><i class="fas fa-tag"></i> Category</span><span
+                        class="info-value" id="detailTxnCategory">--</span></div>
+                <div class="info-row"><span class="info-label"><i class="fas fa-university"></i> Bank
+                        Account</span><span class="info-value" id="detailTxnBank">--</span></div>
+                <div class="info-row"><span class="info-label"><i class="fas fa-fingerprint"></i> UTR / Ref ID</span>
+                    <div class="info-value utr-copy"><span id="detailTxnUTR">--</span><span class="copy-detail-ref"
+                            id="copyDetailUTR"><i class="far fa-copy"></i> Copy</span></div>
+                </div>
+            </div>
+            <div class="detail-footer-close"><button class="close-detail-btn" id="closeDetailModalBtn">Close</button>
+            </div>
         </div>
-      </div>
     </div>
-    <div class="detail-footer-close">
-      <button class="close-detail-btn" id="closeDetailModalBtn">Close</button>
-    </div>
-  </div>
-</div>
 
-<audio id="successSound" preload="auto">
-  <source src="https://www.image2url.com/r2/default/audio/1780748863455-197ee552-4642-42c9-9893-a97054543876.mp3" type="audio/mpeg">
-</audio>
+    <audio id="successSound" preload="auto">
+        <source src="https://www.image2url.com/r2/default/audio/1780748863455-197ee552-4642-42c9-9893-a97054543876.mp3"
+            type="audio/mpeg">
+    </audio>
 
-<script>
-  (function(){
-    let transactions = [];
-    let currentFilter = "all";
-    let searchKeyword = "";
-    let lastTxnForSuccess = null;
+    <script>
+        (function () {
+            // ----- DATA -----
+            let bankBalances = { "HDFC Bank - 7753": 1153.00, "Uttar Pradesh Gramin Bank - 1842": 245.50 };
+            const PIN_CODE = "1234";
+            let transactions = [];
+            let currentFilter = "all";
+            let searchKeyword = "";
+            let lastTxnForSuccess = null;
+            let pendingBalanceCheckBank = null;
+            let qrScannerInstance = null;
+            let qrScanActive = false;
 
-    function generateUTR() { return 'PF' + Date.now().toString().slice(-6) + Math.floor(Math.random() * 10000); }
-    function playSuccessBeep() { const audio = document.getElementById("successSound"); if(audio) { audio.currentTime = 0; audio.play().catch(e=>console.log); } }
-    function saveToStorage() { localStorage.setItem("payflow_pro_adv", JSON.stringify(transactions)); }
-    
-    function loadData() {
-      const stored = localStorage.getItem("payflow_pro_adv");
-      if(stored) { transactions = JSON.parse(stored); transactions.sort((a,b)=>new Date(b.datetime)-new Date(a.datetime)); }
-      else {
-        const now = new Date(); const yesterday = new Date(now); yesterday.setDate(now.getDate()-1);
-        const formatDT = (d)=>d.toISOString().slice(0,16);
-        transactions = [
-          { id: Date.now()+101, receiver: "Rajesh Sharma", amount: 1890, category: "Shopping", datetime: formatDT(now), bankAccount: "HDFC Bank - 7753", utr: generateUTR() },
-          { id: Date.now()+102, receiver: "Dr. Anita Clinic", amount: 750, category: "Medical & Healthcare", datetime: formatDT(yesterday), bankAccount: "Uttar Pradesh Gramin Bank - 1842", utr: generateUTR() },
-          { id: Date.now()+103, receiver: "Metro Grocery", amount: 430, category: "Food & Dining", datetime: formatDT(yesterday), bankAccount: "HDFC Bank - 7753", utr: generateUTR() }
-        ];
-        transactions.sort((a,b)=>new Date(b.datetime)-new Date(a.datetime));
-        saveToStorage();
-      }
-    }
+            // helpers
+            function generateUTR() { return 'PF' + Date.now().toString().slice(-6) + Math.floor(Math.random() * 10000); }
+            function playSuccessBeep() { const audio = document.getElementById("successSound"); if (audio) { audio.currentTime = 0; audio.play().catch(e => console.log); } }
+            function saveToStorage() { localStorage.setItem("payflow_pro_adv", JSON.stringify(transactions)); localStorage.setItem("payflow_balances", JSON.stringify(bankBalances)); }
+            function loadData() {
+                const stored = localStorage.getItem("payflow_pro_adv");
+                const storedBal = localStorage.getItem("payflow_balances");
+                if (storedBal) { try { bankBalances = JSON.parse(storedBal); } catch (e) { } }
+                if (stored) { transactions = JSON.parse(stored); transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime)); }
+                else {
+                    const now = new Date(); const yesterday = new Date(now); yesterday.setDate(now.getDate() - 1);
+                    const formatDT = (d) => d.toISOString().slice(0, 16);
+                    transactions = [
+                        { id: Date.now() + 101, receiver: "Rajesh Sharma", amount: 1890, category: "Shopping", datetime: formatDT(now), bankAccount: "HDFC Bank - 7753", utr: generateUTR() },
+                        { id: Date.now() + 102, receiver: "Dr. Anita Clinic", amount: 750, category: "Medical & Healthcare", datetime: formatDT(yesterday), bankAccount: "Uttar Pradesh Gramin Bank - 1842", utr: generateUTR() },
+                        { id: Date.now() + 103, receiver: "Metro Grocery", amount: 430, category: "Food & Dining", datetime: formatDT(yesterday), bankAccount: "HDFC Bank - 7753", utr: generateUTR() }
+                    ];
+                    transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+                    saveToStorage();
+                }
+            }
+            function formatDateTime(dtStr) { if (!dtStr) return "Just now"; let d = new Date(dtStr); return `${d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })} · ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`; }
+            function formatForDetail(dtStr) { if (!dtStr) return "—"; let d = new Date(dtStr); return `${d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })} at ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`; }
+            function getFiltered() { let filtered = [...transactions]; if (currentFilter !== "all") filtered = filtered.filter(t => t.bankAccount === currentFilter); if (searchKeyword.trim()) { let kw = searchKeyword.toLowerCase(); filtered = filtered.filter(t => t.receiver.toLowerCase().includes(kw) || t.category.toLowerCase().includes(kw)); } filtered.sort((a, b) => new Date(b.datetime) - new Date(a.datetime)); return filtered; }
+            function updateTotalUI() { const filtered = getFiltered(); const sum = filtered.reduce((acc, t) => acc + t.amount, 0); document.getElementById('totalSpentLabel').innerHTML = `Total ₹${sum.toLocaleString()}`; }
+            function renderTransactions() {
+                const container = document.getElementById('transactionList'); const filtered = getFiltered();
+                if (filtered.length === 0) { container.innerHTML = `<div style="text-align:center; padding:60px 20px;"><i class="fas fa-receipt" style="font-size:2.6rem; color:#cbd5e1;"></i><p style="margin-top:12px;">No transactions</p></div>`; updateTotalUI(); return; }
+                let html = '';
+                filtered.forEach(txn => {
+                    let initials = txn.receiver.substring(0, 2).toUpperCase(); let bankShort = txn.bankAccount.includes("HDFC") ? "HDFC" : "UPGB";
+                    html += `<div class="txn-item" data-txn-id="${txn.id}"><div class="txn-avatar">${escapeHtml(initials)}</div><div class="txn-details"><div class="txn-name">${escapeHtml(txn.receiver)}</div><div class="txn-time">${formatDateTime(txn.datetime)}</div><div class="txn-cat">${escapeHtml(txn.category)}</div></div><div class="txn-amount">-₹${txn.amount.toLocaleString()}<div style="font-size:0.55rem;">${bankShort}</div></div><button class="delete-btn" data-id="${txn.id}"><i class="fas fa-trash-alt"></i></button></div>`;
+                });
+                container.innerHTML = html;
+                document.querySelectorAll('.delete-btn').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const id = parseInt(btn.getAttribute('data-id')); if (confirm("Delete?")) { transactions = transactions.filter(t => t.id !== id); saveToStorage(); renderTransactions(); updateChipActive(); } }); });
+                document.querySelectorAll('.txn-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        if (e.target.closest('.delete-btn')) return;
+                        const txnId = parseInt(item.getAttribute('data-txn-id'));
+                        const txn = transactions.find(t => t.id === txnId);
+                        if (txn) showTransactionDetail(txn);
+                    });
+                });
+                updateTotalUI();
+            }
+            function showTransactionDetail(txn) {
+                if (!txn) return;
+                document.getElementById('detailTxnReceiver').innerText = txn.receiver;
+                document.getElementById('detailTxnAmount').innerHTML = `₹${txn.amount.toLocaleString()}`;
+                document.getElementById('detailTxnDateTime').innerText = formatForDetail(txn.datetime);
+                document.getElementById('detailTxnCategory').innerText = txn.category;
+                let bankDisplay = txn.bankAccount.includes("HDFC") ? "HDFC Bank - 7753" : txn.bankAccount.includes("Uttar Pradesh") ? "UP Gramin Bank - 1842" : txn.bankAccount;
+                document.getElementById('detailTxnBank').innerText = bankDisplay;
+                const utrCode = txn.utr || generateUTR();
+                if (!txn.utr) { txn.utr = utrCode; saveToStorage(); }
+                document.getElementById('detailTxnUTR').innerText = utrCode;
+                document.getElementById('transactionDetailModal').classList.add('active');
+                const copyBtn = document.getElementById('copyDetailUTR');
+                const newCopyBtn = copyBtn.cloneNode(true);
+                copyBtn.parentNode.replaceChild(newCopyBtn, copyBtn);
+                newCopyBtn.addEventListener('click', (e) => { e.stopPropagation(); const utrSpan = document.getElementById('detailTxnUTR').innerText; navigator.clipboard.writeText(utrSpan); const toastDiv = document.createElement('div'); toastDiv.className = 'custom-toast'; toastDiv.innerHTML = `<i class="far fa-copy"></i> UTR copied`; document.body.appendChild(toastDiv); setTimeout(() => toastDiv.remove(), 1500); });
+            }
+            function closeDetailModal() { document.getElementById('transactionDetailModal').classList.remove('active'); }
+            function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function (m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
+            function updateChipActive() { document.querySelectorAll('.chip').forEach(chip => { const val = chip.getAttribute('data-filter'); if ((val === 'all' && currentFilter === 'all') || (val !== 'all' && currentFilter === val)) chip.classList.add('active'); else chip.classList.remove('active'); }); renderTransactions(); }
+            function toTitleCase(str) { if (!str) return ''; return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); }
 
-    function formatDateTime(dtStr) { if(!dtStr) return "Just now"; let d=new Date(dtStr); return `${d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})} · ${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`; }
-    function formatForDetail(dtStr) { if(!dtStr) return "—"; let d=new Date(dtStr); return `${d.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})} at ${d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`; }
-    function getFiltered() { let filtered = [...transactions]; if(currentFilter!=="all") filtered=filtered.filter(t=>t.bankAccount===currentFilter); if(searchKeyword.trim()){ let kw=searchKeyword.toLowerCase(); filtered=filtered.filter(t=>t.receiver.toLowerCase().includes(kw)||t.category.toLowerCase().includes(kw)); } filtered.sort((a,b)=>new Date(b.datetime)-new Date(a.datetime)); return filtered; }
-    function updateTotalUI(){ const filtered=getFiltered(); const sum=filtered.reduce((acc,t)=>acc+t.amount,0); document.getElementById('totalSpentLabel').innerHTML=`Total ₹${sum.toLocaleString()}`; }
-    
-    function renderTransactions() {
-      const container=document.getElementById('transactionList'); const filtered=getFiltered();
-      if(filtered.length===0){ container.innerHTML=`<div style="text-align:center; padding:60px 20px;"><i class="fas fa-receipt" style="font-size:2.6rem; color:#cbd5e1;"></i><p style="margin-top:12px;">No transactions</p></div>`; updateTotalUI(); return; }
-      let html='';
-      filtered.forEach(txn=>{ let initials=txn.receiver.substring(0,2).toUpperCase(); let bankShort=txn.bankAccount.includes("HDFC")?"HDFC":"UPGB";
-        html+=`<div class="txn-item" data-txn-id="${txn.id}"><div class="txn-avatar">${escapeHtml(initials)}</div><div class="txn-details"><div class="txn-name">${escapeHtml(txn.receiver)}</div><div class="txn-time">${formatDateTime(txn.datetime)}</div><div class="txn-cat">${escapeHtml(txn.category)}</div></div><div class="txn-amount">-₹${txn.amount.toLocaleString()}<div style="font-size:0.55rem;">${bankShort}</div></div><button class="delete-btn" data-id="${txn.id}"><i class="fas fa-trash-alt"></i></button></div>`;
-      });
-      container.innerHTML=html;
-      document.querySelectorAll('.delete-btn').forEach(btn=>{ btn.addEventListener('click',(e)=>{ e.stopPropagation(); const id=parseInt(btn.getAttribute('data-id')); if(confirm("Delete?")){ transactions=transactions.filter(t=>t.id!==id); saveToStorage(); renderTransactions(); updateChipActive(); } }); });
-      // NEW: Add click listener to each transaction item to open detail modal (preserving previous delete functionality)
-      document.querySelectorAll('.txn-item').forEach(item=>{
-        item.addEventListener('click',(e)=>{ 
-          if(e.target.closest('.delete-btn')) return; 
-          const txnId=parseInt(item.getAttribute('data-txn-id')); 
-          const txn=transactions.find(t=>t.id===txnId); 
-          if(txn) showTransactionDetail(txn);
-        }); 
-      });
-      updateTotalUI();
-    }
-    
-    // New function to display transaction detail modal
-    function showTransactionDetail(txn) {
-      if(!txn) return;
-      document.getElementById('detailTxnReceiver').innerText = txn.receiver;
-      document.getElementById('detailTxnAmount').innerHTML = `₹${txn.amount.toLocaleString()}`;
-      document.getElementById('detailTxnDateTime').innerText = formatForDetail(txn.datetime);
-      document.getElementById('detailTxnCategory').innerText = txn.category;
-      let bankDisplay = txn.bankAccount.includes("HDFC") ? "HDFC Bank - 7753" : txn.bankAccount.includes("Uttar Pradesh") ? "UP Gramin Bank - 1842" : txn.bankAccount;
-      document.getElementById('detailTxnBank').innerText = bankDisplay;
-      const utrCode = txn.utr || generateUTR();
-      if(!txn.utr) { txn.utr = utrCode; saveToStorage(); }
-      document.getElementById('detailTxnUTR').innerText = utrCode;
-      document.getElementById('transactionDetailModal').classList.add('active');
-      // attach copy UTR inside modal
-      const copyBtn = document.getElementById('copyDetailUTR');
-      const newCopyBtn = copyBtn.cloneNode(true);
-      copyBtn.parentNode.replaceChild(newCopyBtn, copyBtn);
-      newCopyBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const utrSpan = document.getElementById('detailTxnUTR').innerText;
-        navigator.clipboard.writeText(utrSpan);
-        const toastDiv=document.createElement('div'); toastDiv.className='custom-toast'; toastDiv.innerHTML=`<i class="far fa-copy"></i> UTR copied`; document.body.appendChild(toastDiv); setTimeout(()=>toastDiv.remove(),1500);
-      });
-    }
-    
-    function closeDetailModal() { document.getElementById('transactionDetailModal').classList.remove('active'); }
-    
-    function escapeHtml(str){ if(!str) return ''; return str.replace(/[&<>]/g,function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-    function updateChipActive(){ document.querySelectorAll('.chip').forEach(chip=>{ const val=chip.getAttribute('data-filter'); if((val==='all'&&currentFilter==='all')||(val!=='all'&&currentFilter===val)) chip.classList.add('active'); else chip.classList.remove('active'); }); renderTransactions(); }
-    
-    function toTitleCase(str) {
-      if(!str) return '';
-      return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    }
-    
-    function addAndShowSuccess(receiver, amount, category, datetime, bankAccount) {
-      if(!receiver || amount<=0 || !datetime) return false;
-      const formattedReceiver = toTitleCase(receiver.trim());
-      const newTxn={ id:Date.now(), receiver:formattedReceiver, amount:parseFloat(amount), category, datetime, bankAccount, utr:generateUTR() };
-      transactions.unshift(newTxn); transactions.sort((a,b)=>new Date(b.datetime)-new Date(a.datetime)); saveToStorage(); renderTransactions(); playSuccessBeep();
-      lastTxnForSuccess = { recName: formattedReceiver, upiId: `${formattedReceiver.replace(/\s/g,'').toLowerCase()}@paytm`, amountVal: amount, datetimeRaw: datetime, bankAccount };
-      openSuccessModal(newTxn);
-      const toastDiv=document.createElement('div'); toastDiv.className='custom-toast'; toastDiv.innerHTML=`<i class="fas fa-check-circle"></i> ₹${amount} sent to ${formattedReceiver} · UTR: ${newTxn.utr}`; document.body.appendChild(toastDiv); setTimeout(()=>toastDiv.remove(),2500);
-      return true;
-    }
-    
-    function formatDateTimePrettyForSuccess(datetimeISO){
-      if(!datetimeISO) return "Just now";
-      let d=new Date(datetimeISO);
-      let day=d.getDate(); let month=d.toLocaleString('en',{month:'short'}); let hours=d.getHours(); let minutes=d.getMinutes().toString().padStart(2,'0'); let ampm=hours>=12?'PM':'AM'; hours=hours%12||12;
-      return `${day} ${month}, ${hours}:${minutes} ${ampm}`;
-    }
-    function openSuccessModal(txn){
-      const successDiv=document.getElementById('successFullscreen');
-      document.getElementById('succReceiverName').innerText = txn.receiver;
-      document.getElementById('succUpiId').innerText = `${txn.receiver.replace(/\s/g,'').toLowerCase()}@paytm`;
-      document.getElementById('succAmount').innerHTML = `₹${txn.amount.toLocaleString()}`;
-      document.getElementById('succDateTime').innerText = formatDateTimePrettyForSuccess(txn.datetime);
-      const refNum = txn.utr || generateUTR();
-      document.getElementById('succRefNo').innerText = refNum;
-      if(!txn.utr){ txn.utr=refNum; saveToStorage(); }
-      lastTxnForSuccess={...txn, refNo:refNum};
-      successDiv.classList.add('active');
-      const chipDiv=document.getElementById('verifiedChip'); chipDiv.style.transform='scale(1.05)'; setTimeout(()=>chipDiv.style.transform='',300);
-    }
-    
-    function closeSuccessPage(){ document.getElementById('successFullscreen').classList.remove('active'); }
-    function showBalanceToast(){ let bal=Math.floor(Math.random()*55000)+1500; alert(`💰 Available Balance: ₹${bal.toLocaleString('en-IN')}`); }
-    function shareWhatsApp(){ if(lastTxnForSuccess){ let msg=`✅ Payment Successful!\n₹${lastTxnForSuccess.amount} sent to ${lastTxnForSuccess.receiver}\nRef: ${lastTxnForSuccess.utr || 'NA'}\nvia PayFlow Pro`; window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank'); } else alert("No recent transaction"); }
-    function payAgain(){ closeSuccessPage(); document.getElementById('addModal').classList.add('active'); if(lastTxnForSuccess){ document.getElementById('receiverName').value=lastTxnForSuccess.receiver||''; document.getElementById('amountValue').value=lastTxnForSuccess.amount||''; } }
-    
-    // Listeners
-    document.getElementById('openAddBtn').addEventListener('click',()=>{ document.getElementById('addModal').classList.add('active'); const now=new Date(); now.setMinutes(now.getMinutes()-now.getTimezoneOffset()); document.getElementById('txnDatetime').value=now.toISOString().slice(0,16); });
-    document.getElementById('cancelModalBtn').addEventListener('click',()=>document.getElementById('addModal').classList.remove('active'));
-    document.getElementById('confirmAddBtn').addEventListener('click',()=>{
-      const receiver=document.getElementById('receiverName').value.trim(); const amount=document.getElementById('amountValue').value; const category=document.getElementById('categorySelect').value; let datetime=document.getElementById('txnDatetime').value; const bankAccount=document.getElementById('bankSelect').value;
-      if(!receiver){ alert("Beneficiary name required"); return; }
-      if(!amount||parseFloat(amount)<=0){ alert("Valid amount required"); return; }
-      if(!datetime) datetime=new Date().toISOString().slice(0,16);
-      addAndShowSuccess(receiver, parseFloat(amount), category, datetime, bankAccount);
-      document.getElementById('receiverName').value=''; document.getElementById('amountValue').value='';
-      document.getElementById('addModal').classList.remove('active');
-    });
-    document.getElementById('searchHistory').addEventListener('click',()=>{ let kw=prompt("Search by name or category:",searchKeyword); if(kw!==null){ searchKeyword=kw; renderTransactions(); } });
-    document.getElementById('clearFilters').addEventListener('click',()=>{ currentFilter="all"; searchKeyword=""; updateChipActive(); });
-    document.getElementById('exportData').addEventListener('click',()=>{ const dataStr=JSON.stringify(transactions,null,2); const blob=new Blob([dataStr],{type:"application/json"}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`payflow_export_${Date.now()}.json`; a.click(); URL.revokeObjectURL(a.href); });
-    document.querySelectorAll('.balance-btn').forEach(btn=>{ btn.addEventListener('click',(e)=>{ e.stopPropagation(); alert(`Available Balance: ₹${btn.getAttribute('data-balance')}`); }); });
-    document.getElementById('backArrow').addEventListener('click',()=>alert("Dashboard overview • Secure environment"));
-    const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"]; const curDate=new Date(); document.getElementById('currentMonthDisplay').innerText=`${monthNames[curDate.getMonth()]} ${curDate.getFullYear()}`;
-    
-    document.getElementById('closeSuccessPage').addEventListener('click',closeSuccessPage);
-    document.getElementById('copyRefButton').addEventListener('click',()=>{ let refTxt=document.getElementById('succRefNo').innerText; navigator.clipboard.writeText(refTxt); alert("Reference ID copied"); });
-    document.getElementById('checkBalanceAction').addEventListener('click',showBalanceToast);
-    document.getElementById('payAgainAction').addEventListener('click',payAgain);
-    document.getElementById('whatsShareAction').addEventListener('click',shareWhatsApp);
-    document.getElementById('reminderBtn').addEventListener('click',()=>alert("🔔 Reminder set for future payments!"));
-    
-    // detail modal close events
-    document.getElementById('closeDetailModalBtn').addEventListener('click', closeDetailModal);
-    document.getElementById('transactionDetailModal').addEventListener('click', (e) => { if(e.target === document.getElementById('transactionDetailModal')) closeDetailModal(); });
-    
-    loadData(); renderTransactions(); function bindFilters(){ document.querySelectorAll('.chip').forEach(chip=>{ chip.addEventListener('click',()=>{ currentFilter=chip.getAttribute('data-filter'); updateChipActive(); }); }); } bindFilters(); currentFilter="all"; updateChipActive();
-  })();
-</script>
+            // ----- ADD TXN WITH BALANCE DEDUCTION -----
+            function addAndShowSuccess(receiver, amount, category, datetime, bankAccount) {
+                if (!receiver || amount <= 0 || !datetime) return false;
+                let currentBalance = bankBalances[bankAccount] || 0;
+                if (amount > currentBalance) { alert(`Insufficient balance! Available: ₹${currentBalance.toLocaleString()}`); return false; }
+                bankBalances[bankAccount] = currentBalance - amount;
+                saveToStorage();
+                const formattedReceiver = toTitleCase(receiver.trim());
+                const newTxn = { id: Date.now(), receiver: formattedReceiver, amount: parseFloat(amount), category, datetime, bankAccount, utr: generateUTR() };
+                transactions.unshift(newTxn); transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime)); saveToStorage(); renderTransactions(); playSuccessBeep();
+                lastTxnForSuccess = { recName: formattedReceiver, upiId: `${formattedReceiver.replace(/\s/g, '').toLowerCase()}@paytm`, amountVal: amount, datetimeRaw: datetime, bankAccount };
+                openSuccessModal(newTxn);
+                const toastDiv = document.createElement('div'); toastDiv.className = 'custom-toast'; toastDiv.innerHTML = `<i class="fas fa-check-circle"></i> ₹${amount} sent to ${formattedReceiver} · UTR: ${newTxn.utr}`; document.body.appendChild(toastDiv); setTimeout(() => toastDiv.remove(), 2500);
+                return true;
+            }
+            function formatDateTimePrettyForSuccess(datetimeISO) {
+                if (!datetimeISO) return "Just now";
+                let d = new Date(datetimeISO);
+                let day = d.getDate(); let month = d.toLocaleString('en', { month: 'short' }); let hours = d.getHours(); let minutes = d.getMinutes().toString().padStart(2, '0'); let ampm = hours >= 12 ? 'PM' : 'AM'; hours = hours % 12 || 12;
+                return `${day} ${month}, ${hours}:${minutes} ${ampm}`;
+            }
+            function openSuccessModal(txn) {
+                const successDiv = document.getElementById('successFullscreen');
+                document.getElementById('succReceiverName').innerText = txn.receiver;
+                document.getElementById('succUpiId').innerText = `${txn.receiver.replace(/\s/g, '').toLowerCase()}@paytm`;
+                document.getElementById('succAmount').innerHTML = `₹${txn.amount.toLocaleString()}`;
+                document.getElementById('succDateTime').innerText = formatDateTimePrettyForSuccess(txn.datetime);
+                const refNum = txn.utr || generateUTR();
+                document.getElementById('succRefNo').innerText = refNum;
+                if (!txn.utr) { txn.utr = refNum; saveToStorage(); }
+                lastTxnForSuccess = { ...txn, refNo: refNum };
+                successDiv.classList.add('active');
+                document.getElementById('verifiedChip').style.transform = 'scale(1.05)'; setTimeout(() => document.getElementById('verifiedChip').style.transform = '', 300);
+            }
+            function closeSuccessPage() { document.getElementById('successFullscreen').classList.remove('active'); }
+            function shareWhatsApp() { if (lastTxnForSuccess) { let msg = `✅ Payment Successful!\n₹${lastTxnForSuccess.amount} sent to ${lastTxnForSuccess.receiver}\nRef: ${lastTxnForSuccess.utr || 'NA'}\nvia PayFlow Pro`; window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank'); } else alert("No recent transaction"); }
+            function payAgain() { closeSuccessPage(); document.getElementById('addModal').classList.add('active'); if (lastTxnForSuccess) { document.getElementById('receiverName').value = lastTxnForSuccess.receiver || ''; document.getElementById('amountValue').value = lastTxnForSuccess.amount || ''; } }
+
+            // ----- PIN MODAL -----
+            function showPinModal(bankKey) { pendingBalanceCheckBank = bankKey; document.getElementById('pinInput').value = ''; document.getElementById('pinBalanceDisplay').style.display = 'none'; document.getElementById('pinModal').classList.add('active'); }
+            function verifyPin() { const entered = document.getElementById('pinInput').value; if (entered === PIN_CODE) { if (pendingBalanceCheckBank) { const bal = bankBalances[pendingBalanceCheckBank] || 0; document.getElementById('pinBalanceDisplay').style.display = 'block'; document.getElementById('pinBalanceDisplay').innerHTML = `₹${bal.toLocaleString()}`; setTimeout(() => { document.getElementById('pinModal').classList.remove('active'); document.getElementById('pinBalanceDisplay').style.display = 'none'; }, 3000); } } else { alert('Incorrect PIN. Try again.'); document.getElementById('pinInput').value = ''; document.getElementById('pinBalanceDisplay').style.display = 'none'; } }
+
+            // ----- FULLSCREEN QR SCANNER -----
+            let fullScannerInstance = null;
+            function startFullscreenQr() {
+                const overlay = document.getElementById('qrFullscreenOverlay');
+                overlay.classList.add('active');
+                const readerDiv = document.getElementById('qr-reader-full');
+                readerDiv.innerHTML = ''; // clear previous
+                if (fullScannerInstance) {
+                    fullScannerInstance.clear().catch(() => { });
+                    fullScannerInstance = null;
+                }
+                fullScannerInstance = new Html5Qrcode("qr-reader-full");
+                const config = { fps: 20, qrbox: { width: 300, height: 300 } };
+                fullScannerInstance.start({ facingMode: "environment" }, config, onFullScanSuccess, onFullScanError);
+            }
+
+            function onFullScanSuccess(decodedText, decodedResult) {
+                try {
+                    let name = "";
+                    if (decodedText.includes("upi://")) {
+                        const url = new URL(decodedText);
+                        const params = new URLSearchParams(url.search);
+                        name = params.get('pn') || "";
+                    } else {
+                        name = decodedText.substring(0, 30);
+                    }
+                    if (name) document.getElementById('receiverName').value = name;
+                    else document.getElementById('receiverName').value = decodedText.substring(0, 30);
+                    // close fullscreen scanner
+                    stopFullscreenQr();
+                    const toast = document.createElement('div'); toast.className = 'custom-toast'; toast.innerHTML = `<i class="fas fa-check"></i> QR scanned: ${name || 'Beneficiary'}`; document.body.appendChild(toast); setTimeout(() => toast.remove(), 2000);
+                } catch (e) {
+                    document.getElementById('receiverName').value = decodedText.substring(0, 30);
+                    stopFullscreenQr();
+                }
+            }
+
+            function onFullScanError(err) { /* ignore */ }
+
+            function stopFullscreenQr() {
+                if (fullScannerInstance) {
+                    fullScannerInstance.stop().then(() => {
+                        fullScannerInstance.clear();
+                        document.getElementById('qrFullscreenOverlay').classList.remove('active');
+                        fullScannerInstance = null;
+                    }).catch(() => {
+                        document.getElementById('qrFullscreenOverlay').classList.remove('active');
+                        fullScannerInstance = null;
+                    });
+                } else {
+                    document.getElementById('qrFullscreenOverlay').classList.remove('active');
+                }
+            }
+
+            // ----- EVENT BINDINGS -----
+            document.getElementById('openAddBtn').addEventListener('click', () => { document.getElementById('addModal').classList.add('active'); const now = new Date(); now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); document.getElementById('txnDatetime').value = now.toISOString().slice(0, 16); });
+            document.getElementById('cancelModalBtn').addEventListener('click', () => { document.getElementById('addModal').classList.remove('active'); stopFullscreenQr(); });
+            document.getElementById('confirmAddBtn').addEventListener('click', () => {
+                const receiver = document.getElementById('receiverName').value.trim();
+                const amount = document.getElementById('amountValue').value;
+                const category = document.getElementById('categorySelect').value;
+                let datetime = document.getElementById('txnDatetime').value;
+                const bankAccount = document.getElementById('bankSelect').value;
+                if (!receiver) { alert("Beneficiary name required"); return; }
+                if (!amount || parseFloat(amount) <= 0) { alert("Valid amount required"); return; }
+                if (!datetime) datetime = new Date().toISOString().slice(0, 16);
+                const success = addAndShowSuccess(receiver, parseFloat(amount), category, datetime, bankAccount);
+                if (success) { document.getElementById('receiverName').value = ''; document.getElementById('amountValue').value = ''; document.getElementById('addModal').classList.remove('active'); stopFullscreenQr(); }
+            });
+            // SCAN QR button opens FULLSCREEN overlay
+            document.getElementById('scanQrBtn').addEventListener('click', startFullscreenQr);
+            document.getElementById('qrCloseFull').addEventListener('click', stopFullscreenQr);
+            // close fullscreen if overlay background clicked (optional)
+            document.getElementById('qrFullscreenOverlay').addEventListener('click', function (e) {
+                if (e.target === this) stopFullscreenQr();
+            });
+
+            document.getElementById('backArrow').addEventListener('click', () => alert("Dashboard overview • Secure environment"));
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; const curDate = new Date(); document.getElementById('currentMonthDisplay').innerText = `${monthNames[curDate.getMonth()]} ${curDate.getFullYear()}`;
+            document.getElementById('hdfcBalanceBtn').addEventListener('click', (e) => { e.stopPropagation(); showPinModal("HDFC Bank - 7753"); });
+            document.getElementById('upgbBalanceBtn').addEventListener('click', (e) => { e.stopPropagation(); showPinModal("Uttar Pradesh Gramin Bank - 1842"); });
+            document.getElementById('pinCancelBtn').addEventListener('click', () => { document.getElementById('pinModal').classList.remove('active'); document.getElementById('pinBalanceDisplay').style.display = 'none'; });
+            document.getElementById('pinConfirmBtn').addEventListener('click', verifyPin);
+            document.getElementById('pinInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') verifyPin(); });
+            document.getElementById('closeSuccessPage').addEventListener('click', closeSuccessPage);
+            document.getElementById('copyRefButton').addEventListener('click', () => { let refTxt = document.getElementById('succRefNo').innerText; navigator.clipboard.writeText(refTxt); alert("Reference ID copied"); });
+            document.getElementById('checkBalanceAction').addEventListener('click', () => { if (lastTxnForSuccess) { showPinModal(lastTxnForSuccess.bankAccount); } else alert("No account selected"); });
+            document.getElementById('payAgainAction').addEventListener('click', payAgain);
+            document.getElementById('whatsShareAction').addEventListener('click', shareWhatsApp);
+            document.getElementById('reminderBtn').addEventListener('click', () => alert("🔔 Reminder set for future payments!"));
+            document.getElementById('closeDetailModalBtn').addEventListener('click', closeDetailModal);
+            document.getElementById('transactionDetailModal').addEventListener('click', (e) => { if (e.target === document.getElementById('transactionDetailModal')) closeDetailModal(); });
+            document.getElementById('searchHistory').addEventListener('click', () => { let kw = prompt("Search by name or category:", searchKeyword); if (kw !== null) { searchKeyword = kw; renderTransactions(); } });
+            document.getElementById('clearFilters').addEventListener('click', () => { currentFilter = "all"; searchKeyword = ""; updateChipActive(); });
+            document.getElementById('exportData').addEventListener('click', () => { const dataStr = JSON.stringify(transactions, null, 2); const blob = new Blob([dataStr], { type: "application/json" }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `payflow_export_${Date.now()}.json`; a.click(); URL.revokeObjectURL(a.href); });
+
+            // Filters
+            document.querySelectorAll('.chip').forEach(chip => { chip.addEventListener('click', () => { currentFilter = chip.getAttribute('data-filter'); updateChipActive(); }); });
+
+            loadData(); renderTransactions(); currentFilter = "all"; updateChipActive();
+        })();
+    </script>
 </body>
+
 </html>
