@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- QR Scanner Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js">
+    </script>
     <style>
         * {
             margin: 0;
@@ -138,11 +139,11 @@
             box-shadow: var(--shadow-lg);
         }
 
-        .bank-card.hdfc {
+        .bank-card.bandhan {
             border-left: 4px solid var(--primary-blue);
         }
 
-        .bank-card.upgb {
+        .bank-card.canara {
             border-left: 4px solid var(--accent-gold);
         }
 
@@ -509,7 +510,6 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -814,52 +814,41 @@
             .paytm-logo img {
                 width: 80px;
             }
-
             .receiver-name {
                 font-size: 24px;
             }
-
             .upi-id-light {
                 font-size: 14px;
             }
-
             .big-amount {
                 font-size: 52px;
             }
-
             .verified-chip-large i {
                 font-size: 40px;
             }
-
             .amount-verified-wrapper {
                 gap: 8px;
             }
-
             .action-pill {
                 min-width: 110px;
                 height: 48px;
                 font-size: 15px;
             }
-
             .reminder-title {
                 font-size: 32px;
             }
-
             .reminder-btn {
                 width: 260px;
                 height: 56px;
                 font-size: 22px;
             }
-
             .bottom-tab-bar {
                 width: 280px;
                 height: 60px;
             }
-
             .tab-item {
                 font-size: 10px;
             }
-
             .tab-item i {
                 font-size: 20px;
             }
@@ -902,7 +891,6 @@
                 opacity: 0;
                 transform: scale(0.96) translateY(12px);
             }
-
             to {
                 opacity: 1;
                 transform: scale(1) translateY(0);
@@ -1098,7 +1086,6 @@
             margin: 10px 0;
         }
 
-        /* QR scanner overlay style - FULLSCREEN */
         .qr-fullscreen-overlay {
             position: fixed;
             top: 0;
@@ -1175,101 +1162,94 @@
                 font-size: 24px;
                 padding: 8px 16px;
             }
-
             .qr-hint {
                 font-size: 0.85rem;
             }
         }
 
-       /* Simple QR Wrapper */
-.qr-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    margin: 10px 0 16px 0;
-}
+        .qr-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin: 10px 0 16px 0;
+        }
 
-.qr-wrapper .qr-scan-btn {
-    background: var(--primary-blue);
-    color: white;
-    border: none;
-    padding: 14px 28px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(10, 60, 191, 0.2);
-    width: 100%;
-    justify-content: center;
-}
+        .qr-wrapper .qr-scan-btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(10, 60, 191, 0.2);
+            width: 100%;
+            justify-content: center;
+        }
 
-.qr-wrapper .qr-scan-btn:active {
-    transform: scale(0.97);
-    box-shadow: 0 2px 6px rgba(10, 60, 191, 0.15);
-}
+        .qr-wrapper .qr-scan-btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 2px 6px rgba(10, 60, 191, 0.15);
+        }
 
-.qr-wrapper .qr-scan-btn i {
-    font-size: 1.1rem;
-}
+        .qr-wrapper .qr-scan-btn i {
+            font-size: 1.1rem;
+        }
 
-/* QR Reader */
-#qr-reader {
-    width: 100%;
-    max-width: 360px;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    border: 2px solid #e2e8f0;
-    background: #f8fafd;
-    display: none;
-}
+        #qr-reader {
+            width: 100%;
+            max-width: 360px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border: 2px solid #e2e8f0;
+            background: #f8fafd;
+            display: none;
+        }
 
-#qr-reader.show {
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
+        #qr-reader.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
 
-#qr-reader video {
-    width: 100% !important;
-    height: auto !important;
-    display: block;
-}
+        #qr-reader video {
+            width: 100% !important;
+            height: auto !important;
+            display: block;
+        }
 
-/* Small hint text */
-.qr-hint {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-top: 2px;
-}
+        .qr-hint {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
 
-/* Animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-/* Mobile */
-@media (max-width: 480px) {
-    .qr-wrapper .qr-scan-btn {
-        padding: 12px 20px;
-        font-size: 0.9rem;
-    }
-    
-    #qr-reader {
-        max-width: 300px;
-    }
-}
+        @media (max-width: 480px) {
+            .qr-wrapper .qr-scan-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            #qr-reader {
+                max-width: 300px;
+            }
+        }
     </style>
 </head>
 
@@ -1282,19 +1262,21 @@
     <main class="main-container">
         <div class="section-title"><i class="fas fa-wallet"></i> <span>Linked Accounts</span></div>
         <div class="accounts-scroll">
-            <div class="bank-card hdfc" id="hdfcCard">
+            <!-- Bandhan Bank -->
+            <div class="bank-card bandhan" id="bandhanCard">
                 <div class="bank-info">
-                    <h4>HDFC Bank</h4>
-                    <div class="bank-acct">XXXX XXXX 7753</div><button class="balance-btn" id="hdfcBalanceBtn"><i
-                            class="fas fa-eye"></i> Check Balance</button>
+                    <h4>Bandhan Bank</h4>
+                    <div class="bank-acct">XXXX XXXX 5543</div>
+                    <button class="balance-btn" id="bandhanBalanceBtn"><i class="fas fa-eye"></i> Check Balance</button>
                 </div>
                 <div class="bank-icon"><i class="fas fa-university"></i></div>
             </div>
-            <div class="bank-card upgb" id="upgbCard">
+            <!-- Canara Bank -->
+            <div class="bank-card canara" id="canaraCard">
                 <div class="bank-info">
-                    <h4>UP Gramin Bank</h4>
-                    <div class="bank-acct">XXXX XXXX 1842</div><button class="balance-btn" id="upgbBalanceBtn"><i
-                            class="fas fa-eye"></i> Check Balance</button>
+                    <h4>Canara Bank</h4>
+                    <div class="bank-acct">XXXX XXXX 0552</div>
+                    <button class="balance-btn" id="canaraBalanceBtn"><i class="fas fa-eye"></i> Check Balance</button>
                 </div>
                 <div class="bank-icon"><i class="fas fa-landmark"></i></div>
             </div>
@@ -1312,8 +1294,8 @@
             </div>
             <div class="filter-chips" id="filterChipsContainer">
                 <div class="chip active" data-filter="all">All Accounts</div>
-                <div class="chip" data-filter="HDFC Bank - 7753">HDFC Bank</div>
-                <div class="chip" data-filter="Uttar Pradesh Gramin Bank - 1842">UP Gramin Bank</div>
+                <div class="chip" data-filter="Bandhan Bank - 5543">Bandhan Bank</div>
+                <div class="chip" data-filter="Canara Bank - 0552">Canara Bank</div>
             </div>
             <div class="summary-row"><span id="currentMonthDisplay">June 2026</span><span class="total-badge"
                     id="totalSpentLabel">Total ₹0</span></div>
@@ -1327,15 +1309,15 @@
         <div class="modal-card">
             <h3><i class="fas fa-paper-plane"></i> New Transfer</h3>
             <div class="qr-wrapper">
-    <button class="qr-scan-btn" id="scanQrBtn">
-        <i class="fas fa-qrcode"></i> Scan QR
-    </button>
-    <div id="qr-reader" style="display:none;"></div>
-    <div class="qr-hint-text">
-        <i class="fas fa-camera"></i> 
-        <span>Scan any UPI QR code </span>
-    </div>
-</div>
+                <button class="qr-scan-btn" id="scanQrBtn">
+                    <i class="fas fa-qrcode"></i> Scan QR
+                </button>
+                <div id="qr-reader" style="display:none;"></div>
+                <div class="qr-hint-text">
+                    <i class="fas fa-camera"></i>
+                    <span>Scan any UPI QR code </span>
+                </div>
+            </div>
             <input type="text" id="receiverName" placeholder="Beneficiary Name (auto-filled)" autocomplete="off">
             <input type="number" id="amountValue" placeholder="Amount (INR)" autocomplete="off">
             <select id="categorySelect">
@@ -1347,8 +1329,8 @@
             </select>
             <input type="datetime-local" id="txnDatetime">
             <select id="bankSelect">
-                <option value="HDFC Bank - 7753">HDFC Bank - 7753</option>
-                <option value="Uttar Pradesh Gramin Bank - 1842">UP Gramin Bank - 1842</option>
+                <option value="Bandhan Bank - 5543">Bandhan Bank - 5543</option>
+                <option value="Canara Bank - 0552">Canara Bank - 0552</option>
             </select>
             <div class="modal-actions">
                 <button class="cancel-modal-btn" id="cancelModalBtn">Cancel</button>
@@ -1453,9 +1435,9 @@
     </audio>
 
     <script>
-        (function () {
-            // ----- DATA -----
-            let bankBalances = { "Bandhan Bank - 4456": 13153.00, "Punjab Sindh Bank - 0155": 6245.50 };
+        (function() {
+            // ----- DATA WITH CORRECT BALANCES -----
+            let bankBalances = { "Bandhan Bank - 5543": 15153.00, "Canara Bank - 0552": 5443.50 };
             const PIN_CODE = "4753";
             let transactions = [];
             let currentFilter = "all";
@@ -1467,39 +1449,86 @@
 
             // helpers
             function generateUTR() { return 'PF' + Date.now().toString().slice(-6) + Math.floor(Math.random() * 10000); }
-            function playSuccessBeep() { const audio = document.getElementById("successSound"); if (audio) { audio.currentTime = 0; audio.play().catch(e => console.log); } }
-            function saveToStorage() { localStorage.setItem("payflow_pro_adv", JSON.stringify(transactions)); localStorage.setItem("payflow_balances", JSON.stringify(bankBalances)); }
-            function loadData() {
-                const stored = localStorage.getItem("payflow_pro_adv");
-                const storedBal = localStorage.getItem("payflow_balances");
-                if (storedBal) { try { bankBalances = JSON.parse(storedBal); } catch (e) { } }
-                if (stored) { transactions = JSON.parse(stored); transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime)); }
-                else {
-                    const now = new Date(); const yesterday = new Date(now); yesterday.setDate(now.getDate() - 1);
-                    const formatDT = (d) => d.toISOString().slice(0, 16);
-                    transactions = [
-                        { id: Date.now() + 101, receiver: "Rajesh Sharma", amount: 1890, category: "Shopping", datetime: formatDT(now), bankAccount: "HDFC Bank - 7753", utr: generateUTR() },
-                        { id: Date.now() + 102, receiver: "Dr. Anita Clinic", amount: 750, category: "Medical & Healthcare", datetime: formatDT(yesterday), bankAccount: "Uttar Pradesh Gramin Bank - 1842", utr: generateUTR() },
-                        { id: Date.now() + 103, receiver: "Metro Grocery", amount: 430, category: "Food & Dining", datetime: formatDT(yesterday), bankAccount: "HDFC Bank - 7753", utr: generateUTR() }
-                    ];
-                    transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
-                    saveToStorage();
-                }
+
+            function playSuccessBeep() { const audio = document.getElementById("successSound"); if (audio) { audio
+                        .currentTime = 0; audio.play().catch(e => console.log); } }
+
+            function saveToStorage() { localStorage.setItem("payflow_pro_adv", JSON.stringify(transactions));
+                localStorage.setItem("payflow_balances", JSON.stringify(bankBalances)); }
+
+       function loadData() {
+    const stored = localStorage.getItem("payflow_pro_adv");
+    const storedBal = localStorage.getItem("payflow_balances");
+    
+    if (storedBal) { 
+        try { 
+            let parsedBal = JSON.parse(storedBal);
+            // सुधार: अगर लोकल स्टोरेज का बैलेंस कोड वाले बैलेंस से अलग है, तो कोड वाला नया बैलेंस ही लोड करो
+            if (JSON.stringify(Object.keys(parsedBal)) === JSON.stringify(Object.keys(bankBalances))) {
+                // यह लाइन यह सुनिश्चित करेगी कि आप कोड में जो भी बदलाव करेंगे, वो तुरंत लागू हो जाएगा
+                bankBalances = { "Bandhan Bank - 5543": 15153.00, "Canara Bank - 0552": 5443.50 };
+                saveToStorage();
+            } else {
+                bankBalances = parsedBal;
             }
+        } catch (e) {
+            saveToStorage();
+        } 
+    } else {
+        // अगर पहली बार रन हो रहा है तो कोड का बैलेंस सेव करो
+        saveToStorage();
+    }
+    
+    if (stored) { 
+        transactions = JSON.parse(stored); 
+        transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime)); 
+    } else {
+        const now = new Date();
+        const yesterday = new Date(now);
+        yesterday.setDate(now.getDate() - 1);
+        const formatDT = (d) => d.toISOString().slice(0, 16);
+        transactions = [
+            { id: Date.now() + 101, receiver: "Rajesh Sharma", amount: 1890, category: "Shopping", datetime: formatDT(now), bankAccount: "Bandhan Bank - 5543", utr: generateUTR() },
+            { id: Date.now() + 102, receiver: "Dr. Anita Clinic", amount: 750, category: "Medical & Healthcare", datetime: formatDT(yesterday), bankAccount: "Canara Bank - 0552", utr: generateUTR() },
+            { id: Date.now() + 103, receiver: "Metro Grocery", amount: 430, category: "Food & Dining", datetime: formatDT(yesterday), bankAccount: "Bandhan Bank - 5543", utr: generateUTR() }
+        ];
+        transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+        saveToStorage();
+    }
+}
+
             function formatDateTime(dtStr) { if (!dtStr) return "Just now"; let d = new Date(dtStr); return `${d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })} · ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`; }
+
             function formatForDetail(dtStr) { if (!dtStr) return "—"; let d = new Date(dtStr); return `${d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })} at ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`; }
-            function getFiltered() { let filtered = [...transactions]; if (currentFilter !== "all") filtered = filtered.filter(t => t.bankAccount === currentFilter); if (searchKeyword.trim()) { let kw = searchKeyword.toLowerCase(); filtered = filtered.filter(t => t.receiver.toLowerCase().includes(kw) || t.category.toLowerCase().includes(kw)); } filtered.sort((a, b) => new Date(b.datetime) - new Date(a.datetime)); return filtered; }
-            function updateTotalUI() { const filtered = getFiltered(); const sum = filtered.reduce((acc, t) => acc + t.amount, 0); document.getElementById('totalSpentLabel').innerHTML = `Total ₹${sum.toLocaleString()}`; }
+
+            function getFiltered() { let filtered = [...transactions]; if (currentFilter !== "all") filtered = filtered
+                    .filter(t => t.bankAccount === currentFilter); if (searchKeyword.trim()) { let kw = searchKeyword
+                        .toLowerCase(); filtered = filtered.filter(t => t.receiver.toLowerCase().includes(kw) || t
+                        .category.toLowerCase().includes(kw)); } filtered.sort((a, b) => new Date(b.datetime) - new Date(
+                    a.datetime)); return filtered; }
+
+            function updateTotalUI() { const filtered = getFiltered(); const sum = filtered.reduce((acc, t) => acc + t
+                    .amount, 0); document.getElementById('totalSpentLabel').innerHTML =
+                `Total ₹${sum.toLocaleString()}`; }
+
             function renderTransactions() {
-                const container = document.getElementById('transactionList'); const filtered = getFiltered();
-                if (filtered.length === 0) { container.innerHTML = `<div style="text-align:center; padding:60px 20px;"><i class="fas fa-receipt" style="font-size:2.6rem; color:#cbd5e1;"></i><p style="margin-top:12px;">No transactions</p></div>`; updateTotalUI(); return; }
+                const container = document.getElementById('transactionList');
+                const filtered = getFiltered();
+                if (filtered.length === 0) { container.innerHTML =
+                        `<div style="text-align:center; padding:60px 20px;"><i class="fas fa-receipt" style="font-size:2.6rem; color:#cbd5e1;"></i><p style="margin-top:12px;">No transactions</p></div>`;
+                    updateTotalUI(); return; }
                 let html = '';
                 filtered.forEach(txn => {
-                    let initials = txn.receiver.substring(0, 2).toUpperCase(); let bankShort = txn.bankAccount.includes("HDFC") ? "HDFC" : "UPGB";
-                    html += `<div class="txn-item" data-txn-id="${txn.id}"><div class="txn-avatar">${escapeHtml(initials)}</div><div class="txn-details"><div class="txn-name">${escapeHtml(txn.receiver)}</div><div class="txn-time">${formatDateTime(txn.datetime)}</div><div class="txn-cat">${escapeHtml(txn.category)}</div></div><div class="txn-amount">-₹${txn.amount.toLocaleString()}<div style="font-size:0.55rem;">${bankShort}</div></div><button class="delete-btn" data-id="${txn.id}"><i class="fas fa-trash-alt"></i></button></div>`;
+                    let initials = txn.receiver.substring(0, 2).toUpperCase();
+                    let bankShort = txn.bankAccount.includes("Bandhan") ? "BDB" : "CNB";
+                    html +=
+                        `<div class="txn-item" data-txn-id="${txn.id}"><div class="txn-avatar">${escapeHtml(initials)}</div><div class="txn-details"><div class="txn-name">${escapeHtml(txn.receiver)}</div><div class="txn-time">${formatDateTime(txn.datetime)}</div><div class="txn-cat">${escapeHtml(txn.category)}</div></div><div class="txn-amount">-₹${txn.amount.toLocaleString()}<div style="font-size:0.55rem;">${bankShort}</div></div><button class="delete-btn" data-id="${txn.id}"><i class="fas fa-trash-alt"></i></button></div>`;
                 });
                 container.innerHTML = html;
-                document.querySelectorAll('.delete-btn').forEach(btn => { btn.addEventListener('click', (e) => { e.stopPropagation(); const id = parseInt(btn.getAttribute('data-id')); if (confirm("Delete?")) { transactions = transactions.filter(t => t.id !== id); saveToStorage(); renderTransactions(); updateChipActive(); } }); });
+                document.querySelectorAll('.delete-btn').forEach(btn => { btn.addEventListener('click', (e) => { e
+                            .stopPropagation(); const id = parseInt(btn.getAttribute('data-id')); if (confirm(
+                                "Delete?")) { transactions = transactions.filter(t => t.id !== id);
+                            saveToStorage(); renderTransactions(); updateChipActive(); } }); });
                 document.querySelectorAll('.txn-item').forEach(item => {
                     item.addEventListener('click', (e) => {
                         if (e.target.closest('.delete-btn')) return;
@@ -1510,84 +1539,145 @@
                 });
                 updateTotalUI();
             }
+
             function showTransactionDetail(txn) {
                 if (!txn) return;
                 document.getElementById('detailTxnReceiver').innerText = txn.receiver;
                 document.getElementById('detailTxnAmount').innerHTML = `₹${txn.amount.toLocaleString()}`;
                 document.getElementById('detailTxnDateTime').innerText = formatForDetail(txn.datetime);
                 document.getElementById('detailTxnCategory').innerText = txn.category;
-                let bankDisplay = txn.bankAccount.includes("HDFC") ? "HDFC Bank - 7753" : txn.bankAccount.includes("Uttar Pradesh") ? "UP Gramin Bank - 1842" : txn.bankAccount;
+                let bankDisplay = txn.bankAccount.includes("Bandhan") ? "Bandhan Bank - 5543" : txn.bankAccount.includes(
+                    "Canara") ? "Canara Bank - 0552" : txn.bankAccount;
                 document.getElementById('detailTxnBank').innerText = bankDisplay;
                 const utrCode = txn.utr || generateUTR();
-                if (!txn.utr) { txn.utr = utrCode; saveToStorage(); }
+                if (!txn.utr) { txn.utr = utrCode;
+                    saveToStorage(); }
                 document.getElementById('detailTxnUTR').innerText = utrCode;
                 document.getElementById('transactionDetailModal').classList.add('active');
                 const copyBtn = document.getElementById('copyDetailUTR');
                 const newCopyBtn = copyBtn.cloneNode(true);
                 copyBtn.parentNode.replaceChild(newCopyBtn, copyBtn);
-                newCopyBtn.addEventListener('click', (e) => { e.stopPropagation(); const utrSpan = document.getElementById('detailTxnUTR').innerText; navigator.clipboard.writeText(utrSpan); const toastDiv = document.createElement('div'); toastDiv.className = 'custom-toast'; toastDiv.innerHTML = `<i class="far fa-copy"></i> UTR copied`; document.body.appendChild(toastDiv); setTimeout(() => toastDiv.remove(), 1500); });
+                newCopyBtn.addEventListener('click', (e) => { e.stopPropagation(); const utrSpan = document
+                        .getElementById('detailTxnUTR').innerText; navigator.clipboard.writeText(utrSpan); const
+                        toastDiv = document.createElement('div'); toastDiv.className = 'custom-toast';
+                    toastDiv.innerHTML = `<i class="far fa-copy"></i> UTR copied`; document.body.appendChild(
+                        toastDiv); setTimeout(() => toastDiv.remove(), 1500); });
             }
-            function closeDetailModal() { document.getElementById('transactionDetailModal').classList.remove('active'); }
-            function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function (m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
-            function updateChipActive() { document.querySelectorAll('.chip').forEach(chip => { const val = chip.getAttribute('data-filter'); if ((val === 'all' && currentFilter === 'all') || (val !== 'all' && currentFilter === val)) chip.classList.add('active'); else chip.classList.remove('active'); }); renderTransactions(); }
-            function toTitleCase(str) { if (!str) return ''; return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); }
+
+            function closeDetailModal() { document.getElementById('transactionDetailModal').classList.remove(
+                'active'); }
+
+            function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function(m) { if (m ===
+                        '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
+
+            function updateChipActive() { document.querySelectorAll('.chip').forEach(chip => { const val = chip
+                        .getAttribute('data-filter'); if ((val === 'all' && currentFilter === 'all') || (val !==
+                            'all' && currentFilter === val)) chip.classList.add('active'); else chip.classList
+                        .remove('active'); }); renderTransactions(); }
+
+            function toTitleCase(str) { if (!str) return ''; return str.toLowerCase().split(' ').map(word => word
+                    .charAt(0).toUpperCase() + word.slice(1)).join(' '); }
 
             // ----- ADD TXN WITH BALANCE DEDUCTION -----
             function addAndShowSuccess(receiver, amount, category, datetime, bankAccount) {
                 if (!receiver || amount <= 0 || !datetime) return false;
                 let currentBalance = bankBalances[bankAccount] || 0;
-                if (amount > currentBalance) { alert(`Insufficient balance! Available: ₹${currentBalance.toLocaleString()}`); return false; }
+                if (amount > currentBalance) { alert(
+                        `Insufficient balance! Available: ₹${currentBalance.toLocaleString()}`); return false; }
                 bankBalances[bankAccount] = currentBalance - amount;
                 saveToStorage();
                 const formattedReceiver = toTitleCase(receiver.trim());
-                const newTxn = { id: Date.now(), receiver: formattedReceiver, amount: parseFloat(amount), category, datetime, bankAccount, utr: generateUTR() };
-                transactions.unshift(newTxn); transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime)); saveToStorage(); renderTransactions(); playSuccessBeep();
-                lastTxnForSuccess = { recName: formattedReceiver, upiId: `${formattedReceiver.replace(/\s/g, '').toLowerCase()}@paytm`, amountVal: amount, datetimeRaw: datetime, bankAccount };
+                const newTxn = { id: Date.now(), receiver: formattedReceiver, amount: parseFloat(amount), category,
+                    datetime, bankAccount, utr: generateUTR() };
+                transactions.unshift(newTxn);
+                transactions.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+                saveToStorage();
+                renderTransactions();
+                playSuccessBeep();
+                lastTxnForSuccess = { recName: formattedReceiver, upiId: `${formattedReceiver.replace(/\s/g, '').toLowerCase()}@paytm`,
+                    amountVal: amount, datetimeRaw: datetime, bankAccount };
                 openSuccessModal(newTxn);
-                const toastDiv = document.createElement('div'); toastDiv.className = 'custom-toast'; toastDiv.innerHTML = `<i class="fas fa-check-circle"></i> ₹${amount} sent to ${formattedReceiver} · UTR: ${newTxn.utr}`; document.body.appendChild(toastDiv); setTimeout(() => toastDiv.remove(), 2500);
+                const toastDiv = document.createElement('div');
+                toastDiv.className = 'custom-toast';
+                toastDiv.innerHTML =
+                    `<i class="fas fa-check-circle"></i> ₹${amount} sent to ${formattedReceiver} · UTR: ${newTxn.utr}`;
+                document.body.appendChild(toastDiv);
+                setTimeout(() => toastDiv.remove(), 2500);
                 return true;
             }
+
             function formatDateTimePrettyForSuccess(datetimeISO) {
                 if (!datetimeISO) return "Just now";
                 let d = new Date(datetimeISO);
-                let day = d.getDate(); let month = d.toLocaleString('en', { month: 'short' }); let hours = d.getHours(); let minutes = d.getMinutes().toString().padStart(2, '0'); let ampm = hours >= 12 ? 'PM' : 'AM'; hours = hours % 12 || 12;
+                let day = d.getDate();
+                let month = d.toLocaleString('en', { month: 'short' });
+                let hours = d.getHours();
+                let minutes = d.getMinutes().toString().padStart(2, '0');
+                let ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12 || 12;
                 return `${day} ${month}, ${hours}:${minutes} ${ampm}`;
             }
+
             function openSuccessModal(txn) {
                 const successDiv = document.getElementById('successFullscreen');
                 document.getElementById('succReceiverName').innerText = txn.receiver;
-                document.getElementById('succUpiId').innerText = `${txn.receiver.replace(/\s/g, '').toLowerCase()}@paytm`;
+                document.getElementById('succUpiId').innerText =
+                    `${txn.receiver.replace(/\s/g, '').toLowerCase()}@paytm`;
                 document.getElementById('succAmount').innerHTML = `₹${txn.amount.toLocaleString()}`;
                 document.getElementById('succDateTime').innerText = formatDateTimePrettyForSuccess(txn.datetime);
                 const refNum = txn.utr || generateUTR();
                 document.getElementById('succRefNo').innerText = refNum;
-                if (!txn.utr) { txn.utr = refNum; saveToStorage(); }
+                if (!txn.utr) { txn.utr = refNum;
+                    saveToStorage(); }
                 lastTxnForSuccess = { ...txn, refNo: refNum };
                 successDiv.classList.add('active');
-                document.getElementById('verifiedChip').style.transform = 'scale(1.05)'; setTimeout(() => document.getElementById('verifiedChip').style.transform = '', 300);
+                document.getElementById('verifiedChip').style.transform = 'scale(1.05)';
+                setTimeout(() => document.getElementById('verifiedChip').style.transform = '', 300);
             }
+
             function closeSuccessPage() { document.getElementById('successFullscreen').classList.remove('active'); }
-            function shareWhatsApp() { if (lastTxnForSuccess) { let msg = `✅ Payment Successful!\n₹${lastTxnForSuccess.amount} sent to ${lastTxnForSuccess.receiver}\nRef: ${lastTxnForSuccess.utr || 'NA'}\nvia PayFlow Pro`; window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank'); } else alert("No recent transaction"); }
-            function payAgain() { closeSuccessPage(); document.getElementById('addModal').classList.add('active'); if (lastTxnForSuccess) { document.getElementById('receiverName').value = lastTxnForSuccess.receiver || ''; document.getElementById('amountValue').value = lastTxnForSuccess.amount || ''; } }
+
+            function shareWhatsApp() { if (lastTxnForSuccess) { let msg =
+                    `✅ Payment Successful!\n₹${lastTxnForSuccess.amount} sent to ${lastTxnForSuccess.receiver}\nRef: ${lastTxnForSuccess.utr || 'NA'}\nvia PayFlow Pro`;
+                window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank'); } else alert(
+                    "No recent transaction"); }
+
+            function payAgain() { closeSuccessPage(); document.getElementById('addModal').classList.add('active');
+                if (lastTxnForSuccess) { document.getElementById('receiverName').value = lastTxnForSuccess
+                        .receiver || ''; document.getElementById('amountValue').value = lastTxnForSuccess
+                        .amount || ''; } }
 
             // ----- PIN MODAL -----
-            function showPinModal(bankKey) { pendingBalanceCheckBank = bankKey; document.getElementById('pinInput').value = ''; document.getElementById('pinBalanceDisplay').style.display = 'none'; document.getElementById('pinModal').classList.add('active'); }
-            function verifyPin() { const entered = document.getElementById('pinInput').value; if (entered === PIN_CODE) { if (pendingBalanceCheckBank) { const bal = bankBalances[pendingBalanceCheckBank] || 0; document.getElementById('pinBalanceDisplay').style.display = 'block'; document.getElementById('pinBalanceDisplay').innerHTML = `₹${bal.toLocaleString()}`; setTimeout(() => { document.getElementById('pinModal').classList.remove('active'); document.getElementById('pinBalanceDisplay').style.display = 'none'; }, 3000); } } else { alert('Incorrect PIN. Try again.'); document.getElementById('pinInput').value = ''; document.getElementById('pinBalanceDisplay').style.display = 'none'; } }
+            function showPinModal(bankKey) { pendingBalanceCheckBank = bankKey; document.getElementById('pinInput')
+                    .value = ''; document.getElementById('pinBalanceDisplay').style.display = 'none'; document
+                    .getElementById('pinModal').classList.add('active'); }
+
+            function verifyPin() { const entered = document.getElementById('pinInput').value; if (entered ===
+                    PIN_CODE) { if (pendingBalanceCheckBank) { const bal = bankBalances[
+                        pendingBalanceCheckBank] || 0; document.getElementById('pinBalanceDisplay').style
+                        .display = 'block'; document.getElementById('pinBalanceDisplay').innerHTML =
+                        `₹${bal.toLocaleString()}`; setTimeout(() => { document.getElementById('pinModal')
+                            .classList.remove('active'); document.getElementById('pinBalanceDisplay')
+                            .style.display = 'none'; }, 3000); } } else { alert('Incorrect PIN. Try again.');
+                    document.getElementById('pinInput').value = ''; document.getElementById(
+                    'pinBalanceDisplay').style.display = 'none'; } }
 
             // ----- FULLSCREEN QR SCANNER -----
             let fullScannerInstance = null;
+
             function startFullscreenQr() {
                 const overlay = document.getElementById('qrFullscreenOverlay');
                 overlay.classList.add('active');
                 const readerDiv = document.getElementById('qr-reader-full');
-                readerDiv.innerHTML = ''; // clear previous
+                readerDiv.innerHTML = '';
                 if (fullScannerInstance) {
-                    fullScannerInstance.clear().catch(() => { });
+                    fullScannerInstance.clear().catch(() => {});
                     fullScannerInstance = null;
                 }
                 fullScannerInstance = new Html5Qrcode("qr-reader-full");
                 const config = { fps: 20, qrbox: { width: 300, height: 300 } };
-                fullScannerInstance.start({ facingMode: "environment" }, config, onFullScanSuccess, onFullScanError);
+                fullScannerInstance.start({ facingMode: "environment" }, config, onFullScanSuccess,
+                onFullScanError);
             }
 
             function onFullScanSuccess(decodedText, decodedResult) {
@@ -1602,9 +1692,12 @@
                     }
                     if (name) document.getElementById('receiverName').value = name;
                     else document.getElementById('receiverName').value = decodedText.substring(0, 30);
-                    // close fullscreen scanner
                     stopFullscreenQr();
-                    const toast = document.createElement('div'); toast.className = 'custom-toast'; toast.innerHTML = `<i class="fas fa-check"></i> QR scanned: ${name || 'Beneficiary'}`; document.body.appendChild(toast); setTimeout(() => toast.remove(), 2000);
+                    const toast = document.createElement('div');
+                    toast.className = 'custom-toast';
+                    toast.innerHTML = `<i class="fas fa-check"></i> QR scanned: ${name || 'Beneficiary'}`;
+                    document.body.appendChild(toast);
+                    setTimeout(() => toast.remove(), 2000);
                 } catch (e) {
                     document.getElementById('receiverName').value = decodedText.substring(0, 30);
                     stopFullscreenQr();
@@ -1629,8 +1722,12 @@
             }
 
             // ----- EVENT BINDINGS -----
-            document.getElementById('openAddBtn').addEventListener('click', () => { document.getElementById('addModal').classList.add('active'); const now = new Date(); now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); document.getElementById('txnDatetime').value = now.toISOString().slice(0, 16); });
-            document.getElementById('cancelModalBtn').addEventListener('click', () => { document.getElementById('addModal').classList.remove('active'); stopFullscreenQr(); });
+            document.getElementById('openAddBtn').addEventListener('click', () => { document.getElementById(
+                    'addModal').classList.add('active'); const now = new Date(); now.setMinutes(now.getMinutes() -
+                    now.getTimezoneOffset()); document.getElementById('txnDatetime').value = now.toISOString()
+                    .slice(0, 16); });
+            document.getElementById('cancelModalBtn').addEventListener('click', () => { document.getElementById(
+                    'addModal').classList.remove('active'); stopFullscreenQr(); });
             document.getElementById('confirmAddBtn').addEventListener('click', () => {
                 const receiver = document.getElementById('receiverName').value.trim();
                 const amount = document.getElementById('amountValue').value;
@@ -1641,39 +1738,69 @@
                 if (!amount || parseFloat(amount) <= 0) { alert("Valid amount required"); return; }
                 if (!datetime) datetime = new Date().toISOString().slice(0, 16);
                 const success = addAndShowSuccess(receiver, parseFloat(amount), category, datetime, bankAccount);
-                if (success) { document.getElementById('receiverName').value = ''; document.getElementById('amountValue').value = ''; document.getElementById('addModal').classList.remove('active'); stopFullscreenQr(); }
+                if (success) { document.getElementById('receiverName').value = ''; document.getElementById(
+                        'amountValue').value = ''; document.getElementById('addModal').classList.remove(
+                        'active'); stopFullscreenQr(); }
             });
-            // SCAN QR button opens FULLSCREEN overlay
             document.getElementById('scanQrBtn').addEventListener('click', startFullscreenQr);
             document.getElementById('qrCloseFull').addEventListener('click', stopFullscreenQr);
-            // close fullscreen if overlay background clicked (optional)
-            document.getElementById('qrFullscreenOverlay').addEventListener('click', function (e) {
+            document.getElementById('qrFullscreenOverlay').addEventListener('click', function(e) {
                 if (e.target === this) stopFullscreenQr();
             });
 
-            document.getElementById('backArrow').addEventListener('click', () => alert("Dashboard overview • Secure environment"));
-            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; const curDate = new Date(); document.getElementById('currentMonthDisplay').innerText = `${monthNames[curDate.getMonth()]} ${curDate.getFullYear()}`;
-            document.getElementById('hdfcBalanceBtn').addEventListener('click', (e) => { e.stopPropagation(); showPinModal("HDFC Bank - 7753"); });
-            document.getElementById('upgbBalanceBtn').addEventListener('click', (e) => { e.stopPropagation(); showPinModal("Uttar Pradesh Gramin Bank - 1842"); });
-            document.getElementById('pinCancelBtn').addEventListener('click', () => { document.getElementById('pinModal').classList.remove('active'); document.getElementById('pinBalanceDisplay').style.display = 'none'; });
+            document.getElementById('backArrow').addEventListener('click', () => alert(
+                "Dashboard overview • Secure environment"));
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
+                "October", "November", "December"
+            ];
+            const curDate = new Date();
+            document.getElementById('currentMonthDisplay').innerText =
+                `${monthNames[curDate.getMonth()]} ${curDate.getFullYear()}`;
+
+            document.getElementById('bandhanBalanceBtn').addEventListener('click', (e) => { e.stopPropagation();
+                showPinModal("Bandhan Bank - 5543"); });
+            document.getElementById('canaraBalanceBtn').addEventListener('click', (e) => { e.stopPropagation();
+                showPinModal("Canara Bank - 0552"); });
+
+            document.getElementById('pinCancelBtn').addEventListener('click', () => { document.getElementById(
+                    'pinModal').classList.remove('active'); document.getElementById('pinBalanceDisplay')
+                    .style.display = 'none'; });
             document.getElementById('pinConfirmBtn').addEventListener('click', verifyPin);
-            document.getElementById('pinInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') verifyPin(); });
+            document.getElementById('pinInput').addEventListener('keydown', (e) => { if (e.key === 'Enter')
+                    verifyPin(); });
             document.getElementById('closeSuccessPage').addEventListener('click', closeSuccessPage);
-            document.getElementById('copyRefButton').addEventListener('click', () => { let refTxt = document.getElementById('succRefNo').innerText; navigator.clipboard.writeText(refTxt); alert("Reference ID copied"); });
-            document.getElementById('checkBalanceAction').addEventListener('click', () => { if (lastTxnForSuccess) { showPinModal(lastTxnForSuccess.bankAccount); } else alert("No account selected"); });
+            document.getElementById('copyRefButton').addEventListener('click', () => { let refTxt = document
+                    .getElementById('succRefNo').innerText; navigator.clipboard.writeText(refTxt);
+                alert("Reference ID copied"); });
+            document.getElementById('checkBalanceAction').addEventListener('click', () => { if (
+                    lastTxnForSuccess) { showPinModal(lastTxnForSuccess.bankAccount); } else alert(
+                    "No account selected"); });
             document.getElementById('payAgainAction').addEventListener('click', payAgain);
             document.getElementById('whatsShareAction').addEventListener('click', shareWhatsApp);
-            document.getElementById('reminderBtn').addEventListener('click', () => alert("🔔 Reminder set for future payments!"));
+            document.getElementById('reminderBtn').addEventListener('click', () => alert(
+                "🔔 Reminder set for future payments!"));
             document.getElementById('closeDetailModalBtn').addEventListener('click', closeDetailModal);
-            document.getElementById('transactionDetailModal').addEventListener('click', (e) => { if (e.target === document.getElementById('transactionDetailModal')) closeDetailModal(); });
-            document.getElementById('searchHistory').addEventListener('click', () => { let kw = prompt("Search by name or category:", searchKeyword); if (kw !== null) { searchKeyword = kw; renderTransactions(); } });
-            document.getElementById('clearFilters').addEventListener('click', () => { currentFilter = "all"; searchKeyword = ""; updateChipActive(); });
-            document.getElementById('exportData').addEventListener('click', () => { const dataStr = JSON.stringify(transactions, null, 2); const blob = new Blob([dataStr], { type: "application/json" }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `payflow_export_${Date.now()}.json`; a.click(); URL.revokeObjectURL(a.href); });
+            document.getElementById('transactionDetailModal').addEventListener('click', (e) => { if (e.target ===
+                    document.getElementById('transactionDetailModal')) closeDetailModal(); });
+            document.getElementById('searchHistory').addEventListener('click', () => { let kw = prompt(
+                    "Search by name or category:", searchKeyword); if (kw !== null) { searchKeyword = kw;
+                    renderTransactions(); } });
+            document.getElementById('clearFilters').addEventListener('click', () => { currentFilter = "all";
+                searchKeyword = ""; updateChipActive(); });
+            document.getElementById('exportData').addEventListener('click', () => { const dataStr = JSON
+                    .stringify(transactions, null, 2); const blob = new Blob([dataStr], { type: "application/json" });
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download =
+                    `payflow_export_${Date.now()}.json`; a.click(); URL.revokeObjectURL(a.href); });
 
-            // Filters
-            document.querySelectorAll('.chip').forEach(chip => { chip.addEventListener('click', () => { currentFilter = chip.getAttribute('data-filter'); updateChipActive(); }); });
+            document.querySelectorAll('.chip').forEach(chip => { chip.addEventListener('click', () => {
+                    currentFilter = chip.getAttribute('data-filter');
+                    updateChipActive();
+                }); });
 
-            loadData(); renderTransactions(); currentFilter = "all"; updateChipActive();
+            loadData();
+            renderTransactions();
+            currentFilter = "all";
+            updateChipActive();
         })();
     </script>
 </body>
